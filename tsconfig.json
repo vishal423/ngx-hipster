@@ -17,7 +17,15 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "ngx-jhipster": [
+        "dist/ngx-jhipster"
+      ],
+      "ngx-jhipster/*": [
+        "dist/ngx-jhipster/*"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
