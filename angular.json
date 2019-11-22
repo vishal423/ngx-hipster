@@ -3,40 +3,39 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ngx-jhipster": {
+    "ngx-hipster": {
       "projectType": "library",
-      "root": "projects/ngx-jhipster",
-      "sourceRoot": "projects/ngx-jhipster/src",
+      "root": "projects/ngx-hipster",
+      "sourceRoot": "projects/ngx-hipster/src",
       "prefix": "hip",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {
-            "tsConfig": "projects/ngx-jhipster/tsconfig.lib.json",
-            "project": "projects/ngx-jhipster/ng-package.json"
+            "tsConfig": "projects/ngx-hipster/tsconfig.lib.json",
+            "project": "projects/ngx-hipster/ng-package.json"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/ngx-jhipster/src/test.ts",
-            "tsConfig": "projects/ngx-jhipster/tsconfig.spec.json",
-            "karmaConfig": "projects/ngx-jhipster/karma.conf.js"
+            "main": "projects/ngx-hipster/src/test.ts",
+            "tsConfig": "projects/ngx-hipster/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-hipster/karma.conf.js"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "projects/ngx-jhipster/tsconfig.lib.json",
-              "projects/ngx-jhipster/tsconfig.spec.json"
+              "projects/ngx-hipster/tsconfig.lib.json",
+              "projects/ngx-hipster/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
-    }},
-  "defaultProject": "ngx-jhipster"
+    }
+  },
+  "defaultProject": "ngx-hipster"
 }

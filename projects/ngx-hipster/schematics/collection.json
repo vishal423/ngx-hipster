@@ -1,0 +1,20 @@
+{
+  "$schema": "../../../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "schematics": {
+    "ng-add": {
+      "description": "Configures an existing angular cli project with default ngx-hipster configurations",
+      "factory": "./ng-add/index#ngAdd",
+      "schema": "./ng-add/schema.json"
+    },
+    "jest": {
+      "description": "Configures an existing angular cli project to use Jest alongside karma",
+      "factory": "./jest/index#jest",
+      "schema": "./jest/schema.json"
+    },
+    "prettier": {
+      "description": "Configures an existing angular cli project to use prettier",
+      "factory": "./prettier/index#prettier",
+      "schema": "./prettier/schema.json"
+    }
+  }
+}

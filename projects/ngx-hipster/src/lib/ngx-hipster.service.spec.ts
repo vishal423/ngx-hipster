@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { NgxJhipsterService } from './ngx-jhipster.service';
+import { NgxHipsterService } from './ngx-hipster.service';
 
-describe('NgxJhipsterService', () => {
+describe('NgxHipsterService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: NgxJhipsterService = TestBed.get(NgxJhipsterService);
+    const service: NgxHipsterService = TestBed.get(NgxHipsterService);
     expect(service).toBeTruthy();
   });
 });

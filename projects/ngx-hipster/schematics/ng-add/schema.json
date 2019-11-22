@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "id": "ngx-hipster-ng-add",
+  "title": "NGX Hipster ng-add schematic",
+  "type": "object",
+  "properties": {
+    "project": {
+      "type": "string",
+      "description": "Name of the project.",
+      "$default": {
+        "$source": "projectName"
+      }
+    },
+    "configureNgx": {
+      "type": "boolean",
+      "description": "Configure project with ngx-hipster recommended configurations",
+      "default": "no",
+      "x-prompt": "Would you like to configure your project with ngx-hipster recommended configurations?"
+    }
+  }
+}

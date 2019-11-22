@@ -1,5 +1,5 @@
 {
-  "name": "ngx-jhipster",
+  "name": "ngx-hipster",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -45,6 +45,15 @@
     "ts-node": "~7.0.0",
     "tsickle": "^0.37.0",
     "tslint": "~5.15.0",
-    "typescript": "~3.5.3"
+    "typescript": "~3.5.3",
+    "husky": "3.0.9",
+    "prettier": "1.19.1",
+    "pretty-quick": "2.0.1",
+    "tslint-config-prettier": "1.18.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
   }
 }
