@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "id": "ngx-hipster-jest",
-  "title": "Configure Jest into an angular cli project",
+  "id": "ngx-hipster-proxy",
+  "title": "Configure proxy to backend server into an angular cli project",
   "type": "object",
   "properties": {
     "project": {
@@ -11,11 +11,11 @@
         "$source": "projectName"
       }
     },
-    "configureJest": {
+    "configureProxy": {
       "type": "boolean",
-      "description": "Configure project to use Jest library for unit testing",
+      "description": "Configure project with backend server proxy",
       "default": "yes",
-      "x-prompt": "Would you like to configure your application to use Jest for unit testing?"
+      "x-prompt": "Would you like to configure your project to proxy backend calls?"
     }
   }
 }

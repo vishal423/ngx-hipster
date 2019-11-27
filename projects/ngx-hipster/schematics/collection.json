@@ -16,10 +16,25 @@
       "factory": "./prettier/index#prettier",
       "schema": "./prettier/schema.json"
     },
+    "proxy-confirm": {
+      "description": "Configures an angular cli project to proxy backend requests",
+      "factory": "./proxy-confirm/index#proxy",
+      "schema": "./proxy-confirm/schema.json"
+    },
+    "proxy": {
+      "description": "Configures an angular cli project to proxy backend requests",
+      "factory": "./proxy/index#proxy",
+      "schema": "./proxy/schema.json"
+    },
     "material-layout": {
       "description": "Configures an angular cli project to use angular material layout",
       "factory": "./material-layout/index#materialLayout",
       "schema": "./material-layout/schema.json"
+    },
+    "app-shell": {
+      "description": "Scaffolds shell application",
+      "factory": "./app-shell/index#appShell",
+      "schema": "./app-shell/schema.json"
     }
   }
 }

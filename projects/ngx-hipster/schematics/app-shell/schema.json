@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "id": "ngx-hipster-jest",
+  "title": "Scaffolds shell application",
+  "type": "object",
+  "properties": {
+    "project": {
+      "type": "string",
+      "description": "Name of the project.",
+      "$default": {
+        "$source": "projectName"
+      }
+    }
+  }
+}

@@ -9,8 +9,6 @@ export function updateTsLintConfigurations(
   if (!json.hasOwnProperty('extends')) {
     json.extends = [];
   }
-  console.log(json.extends);
-
   if (Array.isArray(json.extends)) {
     json.extends = json.extends.filter(
       (type: string) => type !== 'tslint-config-prettier'
@@ -20,8 +18,6 @@ export function updateTsLintConfigurations(
   }
 
   json.extends = [...json.extends, 'tslint-config-prettier'];
-
-  console.log(json.extends);
 
   if (!json.rules) {
     json.rules = {};

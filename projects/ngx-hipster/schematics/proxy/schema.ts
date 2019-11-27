@@ -1,4 +1,5 @@
 export interface Schema {
   project?: string;
-  configureJest: boolean;
+  serverUrl: string;
+  proxyPath: string;
 }

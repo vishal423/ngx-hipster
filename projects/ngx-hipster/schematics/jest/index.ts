@@ -19,54 +19,58 @@ import { normalize } from '@angular-devkit/core';
 
 export function jest(options: Schema): Rule {
   return (tree: Tree, context: SchematicContext) => {
-    const project = getProject(tree, options);
+    if (options.configureJest) {
+      const project = getProject(tree, options);
 
-    const path = `${project.root}`;
+      const path = `${project.root}`;
 
-    const pkgOptions = { ...options, path };
-    const packageManager = getPackageManager(tree, pkgOptions);
+      const pkgOptions = { ...options, path };
+      const packageManager = getPackageManager(tree, pkgOptions);
 
-    const scriptCmd =
-      packageManager !== 'yarn' ? `${packageManager} run ` : packageManager;
-    const scriptParamPrefix = packageManager !== 'yarn' ? `--` : '';
+      const scriptCmd =
+        packageManager !== 'yarn' ? `${packageManager} run ` : packageManager;
+      const scriptParamPrefix = packageManager !== 'yarn' ? `--` : '';
 
-    addDevDependency(tree, 'jest', '24.9.0', pkgOptions);
-    addDevDependency(tree, '@types/jest', '24.0.18', pkgOptions);
-    addDevDependency(tree, 'jest-preset-angular', '8.0.0', pkgOptions);
+      addDevDependency(tree, 'jest', '24.9.0', pkgOptions);
+      addDevDependency(tree, '@types/jest', '24.0.18', pkgOptions);
+      addDevDependency(tree, 'jest-preset-angular', '8.0.0', pkgOptions);
 
-    addScript(tree, 'test', 'jest --config src/jest.conf.js', pkgOptions);
-    addScript(
-      tree,
-      'test:watch',
-      `${scriptCmd} test ${scriptParamPrefix} --watch`,
-      pkgOptions
-    );
-    addScript(
-      tree,
-      'test:ci',
-      `${scriptCmd} test ${scriptParamPrefix} --runInBand`,
-      pkgOptions
-    );
-    addScript(
-      tree,
-      'test:coverage',
-      `${scriptCmd} test ${scriptParamPrefix} --coverage`,
-      pkgOptions
-    );
+      addScript(tree, 'test', 'jest --config src/jest.conf.js', pkgOptions);
+      addScript(
+        tree,
+        'test:watch',
+        `${scriptCmd} test ${scriptParamPrefix} --watch`,
+        pkgOptions
+      );
+      addScript(
+        tree,
+        'test:ci',
+        `${scriptCmd} test ${scriptParamPrefix} --runInBand`,
+        pkgOptions
+      );
+      addScript(
+        tree,
+        'test:coverage',
+        `${scriptCmd} test ${scriptParamPrefix} --coverage`,
+        pkgOptions
+      );
 
-    updateTsConfigToSupportJest(tree, { path });
+      updateTsConfigToSupportJest(tree, { path });
 
-    context.addTask(new NodePackageInstallTask());
+      context.addTask(new NodePackageInstallTask());
 
-    const templatePath = path + '/src';
+      const templatePath = path + '/src';
 
-    const templateSource = apply(url('./files'), [
-      applyTemplates({ dot: '.' }),
-      move(normalize(templatePath))
-    ]);
+      const templateSource = apply(url('./files'), [
+        applyTemplates({ dot: '.' }),
+        move(normalize(templatePath))
+      ]);
 
-    context.addTask(new NodePackageInstallTask());
+      context.addTask(new NodePackageInstallTask());
 
-    return chain([mergeWith(templateSource)]);
+      return chain([mergeWith(templateSource)]);
+    }
+
+    return tree;
   };
 }

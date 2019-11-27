@@ -92,9 +92,7 @@ function getHtmlChildElementByTagName(
 
   while (childNodes.length) {
     const node = childNodes.shift() as DefaultTreeElement;
-    console.log(node);
     if (node.nodeName.toLowerCase() === tagName) {
-      console.log(node);
       return node;
     } else if (node.childNodes) {
       childNodes.push(...node.childNodes);

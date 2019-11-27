@@ -1,0 +1,11 @@
+const PROXY_CONFIG = [
+    {
+        context: [
+            "<%= proxyPath %>"
+        ],
+        target: "<%= serverUrl %>",
+        secure: false
+    }
+]
+
+module.exports = PROXY_CONFIG;

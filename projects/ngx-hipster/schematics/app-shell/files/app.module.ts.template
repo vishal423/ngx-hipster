@@ -1,0 +1,31 @@
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { HomeComponent } from './layout/home/home.component';
+import { HeaderComponent } from './layout/header/header.component';
+import { MaterialModule } from './material/material.module';
+import { PageNotFoundComponent } from './layout/error/page-not-found/page-not-found.component';
+import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material';
+
+@NgModule({
+	declarations: [
+		HeaderComponent,
+		HomeComponent,
+		AppComponent,
+		PageNotFoundComponent
+	],
+	imports: [
+		BrowserModule,
+		AppRoutingModule,
+		MaterialModule,
+		HttpClientModule
+	],
+	providers: [
+		{ provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 2000 } }
+	],
+	bootstrap: [AppComponent]
+})
+export class AppModule {}
