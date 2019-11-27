@@ -3,5 +3,6 @@
   "dest": "../../dist/ngx-hipster",
   "lib": {
     "entryFile": "src/public-api.ts"
-  }
+  },
+  "whitelistedNonPeerDependencies": ["parse5"]
 }

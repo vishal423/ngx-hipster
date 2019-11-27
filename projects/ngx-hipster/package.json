@@ -5,12 +5,18 @@
   "scripts": {
     "build": "../../node_modules/.bin/tsc -p tsconfig.schematics.json",
     "copy:schemas": "cp --parents schematics/*/schema.json ../../dist/ngx-hipster/",
-    "copy:files": "cp --parents -p schematics/*/files/** ../../dist/ngx-hipster/",
+    "copy:files": "cp --parents -p schematics/*/files/**/* ../../dist/ngx-hipster/",
     "copy:collection": "cp schematics/collection.json ../../dist/ngx-hipster/schematics/collection.json",
     "postbuild": "yarn copy:schemas && yarn copy:files && yarn copy:collection"
   },
   "peerDependencies": {
     "@angular/common": "^8.2.14",
     "@angular/core": "^8.2.14"
+  },
+  "dependencies": {
+    "parse5": "^5.0.2"
+  },
+  "devDependencies": {
+    "@types/parse5": "^5.0.2"
   }
 }

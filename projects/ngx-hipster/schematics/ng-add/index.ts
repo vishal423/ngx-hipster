@@ -32,6 +32,7 @@ export function ngAdd(options: Schema): Rule {
       return chain([
         schematic('jest', { project: options.project }),
         schematic('prettier', { project: options.project }),
+        schematic('material-layout', { project: options.project }),
         mergeWith(templateSource)
       ]);
     } else {

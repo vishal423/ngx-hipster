@@ -9,15 +9,46 @@ export function addDevDependency(
   version: string,
   options: { path: string }
 ): Tree {
+  return addPackageDependency(
+    tree,
+    packageName,
+    version,
+    'devDependencies',
+    options
+  );
+}
+
+export function addDependency(
+  tree: Tree,
+  packageName: string,
+  version: string,
+  options: { path: string }
+): Tree {
+  return addPackageDependency(
+    tree,
+    packageName,
+    version,
+    'dependencies',
+    options
+  );
+}
+
+function addPackageDependency(
+  tree: Tree,
+  packageName: string,
+  version: string,
+  collection: string,
+  options: { path: string }
+): Tree {
   const json = getPackageJson(tree, options);
 
-  if (!json.devDependencies) {
-    json.devDependencies = {};
+  if (!json[collection]) {
+    json[collection] = {};
   }
 
-  if (!json.devDependencies[packageName]) {
-    json.devDependencies[packageName] = version;
-    json.devDependencies = sortObjectByKeys(json.devDependencies);
+  if (!json[collection][packageName]) {
+    json[collection][packageName] = version;
+    json[collection] = sortObjectByKeys(json[collection]);
   }
 
   return updateJsonInTree(tree, jsonFileName, json, options);

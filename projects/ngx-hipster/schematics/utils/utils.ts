@@ -1,5 +1,6 @@
 import { SchematicsException, Tree } from '@angular-devkit/schematics';
 import { getWorkspace } from '@schematics/angular/utility/config';
+import { experimental } from '@angular-devkit/core';
 
 export function updateJsonInTree(
   tree: Tree,
@@ -18,7 +19,10 @@ export function getBasePath(options: { path: string }) {
   return options.path.trim() === '' ? '' : options.path + '/';
 }
 
-export function getProject(tree: Tree, options: { project?: string }) {
+export function getProject(
+  tree: Tree,
+  options: { project?: string }
+): experimental.workspace.WorkspaceProject {
   const workspace = getWorkspace(tree);
 
   if (!options.project) {
@@ -26,7 +30,8 @@ export function getProject(tree: Tree, options: { project?: string }) {
   }
 
   const projectName = options.project as string;
-  const project = workspace.projects[projectName];
+  const project: experimental.workspace.WorkspaceProject =
+    workspace.projects[projectName];
 
   if (!project) {
     throw new SchematicsException(
@@ -60,13 +65,18 @@ export function getJson(
   tree: Tree,
   options: { filename: string; path: string }
 ) {
-  const json = tree.read(
+  const json = readFile(
+    tree,
     `${getBasePath({ path: options.path })}${options.filename}`
   );
-
-  if (!json) {
-    throw new SchematicsException(`Could not find ${options.filename}`);
-  }
-
   return JSON.parse(json.toString('utf-8'));
+}
+
+export function readFile(tree: Tree, filePath: string) {
+  const file = tree.read(filePath);
+
+  if (!file) {
+    throw new SchematicsException(`Could not find file ${filePath}`);
+  }
+  return file;
 }
