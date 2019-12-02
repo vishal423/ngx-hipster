@@ -1,6 +1,19 @@
 {
   "name": "ngx-hipster",
-  "version": "0.0.1",
+  "version": "0.1.0",
+  "description": "Angular schematics to scaffold angular material applications",
+  "homepage": "https://github.com/vishal423/ngx-hipster",
+  "author": {
+    "name": "Vishal Mahajan",
+    "email": "vishal423@gmail.com",
+    "url": "https://twitter.com/vishal423"
+  },
+  "keywords": [
+    "angular",
+    "schematics"
+  ],
+  "repository": "vishal423/ngx-hipster",
+  "license": "MIT",
   "schematics": "./schematics/collection.json",
   "scripts": {
     "build": "../../node_modules/.bin/tsc -p tsconfig.schematics.json",
