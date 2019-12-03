@@ -6,35 +6,35 @@ import { map } from 'rxjs/operators';
 import { <%= classify(name) %> } from './<%= dasherize(name) %>';
 
 @Injectable({
-	providedIn: 'root'
+  providedIn: 'root'
 })
 export class <%= classify(name) %>Service {
 
-	private resourceUrl = 'api/<%= dasherize(name) %>';
+  private resourceUrl = 'api/<%= dasherize(name) %>';
 
-	constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {}
 
-	query(): Observable<<%= classify(name) %>[]> {
-		return this.http
-			.get<<%= classify(name) %>[]>(this.resourceUrl);
-	}
+  query(): Observable<<%= classify(name) %>[]> {
+    return this.http
+      .get<<%= classify(name) %>[]>(this.resourceUrl);
+  }
 
-	getById(id: number): Observable<<%= classify(name) %>> {
-		return this.http.get<<%= classify(name) %>>(`${this.resourceUrl}/${id}`);
-	}
+  getById(id: number): Observable<<%= classify(name) %>> {
+    return this.http.get<<%= classify(name) %>>(`${this.resourceUrl}/${id}`);
+  }
 
-	create(<%= camelize(name) %>: <%= classify(name) %>): Observable<<%= classify(name) %>> {
-		return this.http.post<<%= classify(name) %>>(this.resourceUrl, <%= camelize(name) %>);
-	}
+  create(<%= camelize(name) %>: <%= classify(name) %>): Observable<<%= classify(name) %>> {
+    return this.http.post<<%= classify(name) %>>(this.resourceUrl, <%= camelize(name) %>);
+  }
 
-	update(<%= camelize(name) %>: <%= classify(name) %>): Observable<<%= classify(name) %>> {
-		return this.http.put<<%= classify(name) %>>(
-			`${this.resourceUrl}/${<%= camelize(name) %>.id}`,
-			<%= camelize(name) %>
-		);
-	}
+  update(<%= camelize(name) %>: <%= classify(name) %>): Observable<<%= classify(name) %>> {
+    return this.http.put<<%= classify(name) %>>(
+      `${this.resourceUrl}/${<%= camelize(name) %>.id}`,
+      <%= camelize(name) %>
+    );
+  }
 
-	delete(id: number) {
-		return this.http.delete<any>(`${this.resourceUrl}/${id}`);
-	}
+  delete(id: number) {
+    return this.http.delete<any>(`${this.resourceUrl}/${id}`);
+  }
 }

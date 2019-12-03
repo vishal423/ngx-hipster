@@ -10,14 +10,14 @@ import { <%= classify(name) %>Service } from './<%= dasherize(name) %>.service';
 })
 export class <%= classify(name) %>Resolver implements Resolve<<%= classify(name) %>> {
 
-	constructor(private service: <%= classify(name) %>Service) {}
+  constructor(private service: <%= classify(name) %>Service) {}
 
-	resolve(route: ActivatedRouteSnapshot): Observable<<%= classify(name) %>> {
-		const idParam = 'id';
-		const id = route.params[idParam];
-		if (id) {
-			return this.service.getById(id);
-		}
-		return of(undefined);
-	}
+  resolve(route: ActivatedRouteSnapshot): Observable<<%= classify(name) %>> {
+    const idParam = 'id';
+    const id = route.params[idParam];
+    if (id) {
+      return this.service.getById(id);
+    }
+    return of(undefined);
+  }
 }

@@ -4,14 +4,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { <%= classify(name) %>Service } from './<%= dasherize(name) %>.service';
 
 describe('<%= classify(name) %>Service', () => {
-	beforeEach(() =>
-		TestBed.configureTestingModule({
-			imports: [HttpClientModule]
-		})
-	);
+  beforeEach(() =>
+    TestBed.configureTestingModule({
+      imports: [HttpClientModule]
+    })
+  );
 
-	it('should be created', () => {
-		const service: <%= classify(name) %>Service = TestBed.get(<%= classify(name) %>Service);
-		expect(service).toBeTruthy();
-	});
+  it('should be created', () => {
+    const service: <%= classify(name) %>Service = TestBed.get(<%= classify(name) %>Service);
+    expect(service).toBeTruthy();
+  });
 });

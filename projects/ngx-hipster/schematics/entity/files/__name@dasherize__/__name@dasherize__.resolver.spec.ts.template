@@ -4,14 +4,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { <%= classify(name) %>Resolver } from './<%= dasherize(name) %>.resolver';
 
 describe('<%= classify(name) %>ResolveService', () => {
-	beforeEach(() =>
-		TestBed.configureTestingModule({
-			imports: [HttpClientModule]
-		})
-	);
+  beforeEach(() =>
+    TestBed.configureTestingModule({
+      imports: [HttpClientModule]
+    })
+  );
 
-	it('should be created', () => {
-		const service: <%= classify(name) %>Resolver = TestBed.get(<%= classify(name) %>Resolver);
-		expect(service).toBeTruthy();
-	});
+  it('should be created', () => {
+    const service: <%= classify(name) %>Resolver = TestBed.get(<%= classify(name) %>Resolver);
+    expect(service).toBeTruthy();
+  });
 });

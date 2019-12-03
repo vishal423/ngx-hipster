@@ -8,13 +8,13 @@ import { <%= classify(name) %>DetailComponent } from './<%= dasherize(name) %>-d
 import { <%= classify(name) %>DeleteComponent } from './<%= dasherize(name) %>-delete/<%= dasherize(name) %>-delete.component';
 
 @NgModule({
-	declarations: [
-		<%= classify(name) %>ListComponent,
-		<%= classify(name) %>DetailComponent,
-		<%= classify(name) %>DeleteComponent
-	],
-	imports: [SharedModule, RouterModule.forChild(<%= camelize(name) %>Routes)],
-	entryComponents: [<%= classify(name) %>DeleteComponent],
-	exports: []
+  declarations: [
+    <%= classify(name) %>ListComponent,
+    <%= classify(name) %>DetailComponent,
+    <%= classify(name) %>DeleteComponent
+  ],
+  imports: [SharedModule, RouterModule.forChild(<%= camelize(name) %>Routes)],
+  entryComponents: [<%= classify(name) %>DeleteComponent],
+  exports: []
 })
 export class <%= classify(name) %>Module {}

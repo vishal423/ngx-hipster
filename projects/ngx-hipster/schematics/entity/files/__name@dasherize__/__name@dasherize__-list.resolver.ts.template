@@ -6,11 +6,11 @@ import { <%= classify(name) %> } from './<%= dasherize(name) %>';
 import { <%= classify(name) %>Service } from './<%= dasherize(name) %>.service';
 
 @Injectable({
-	providedIn: 'root'
+  providedIn: 'root'
 })
 export class <%= classify(name) %>ListResolver implements Resolve<<%= classify(name) %>[]> {
-	constructor(private service: <%= classify(name) %>Service) {}
-	resolve(route: ActivatedRouteSnapshot): Observable<<%= classify(name) %>[]> {
-		return this.service.query();
-	}
+  constructor(private service: <%= classify(name) %>Service) {}
+  resolve(route: ActivatedRouteSnapshot): Observable<<%= classify(name) %>[]> {
+    return this.service.query();
+  }
 }
