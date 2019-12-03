@@ -1,0 +1,17 @@
+import { TestBed } from '@angular/core/testing';
+import { HttpClientModule } from '@angular/common/http';
+
+import { <%= classify(name) %>ListResolver } from './<%= dasherize(name) %>-list.resolver';
+
+describe('<%= classify(name) %>ListResolver', () => {
+	beforeEach(() =>
+		TestBed.configureTestingModule({ imports: [HttpClientModule] })
+	);
+
+	it('should be created', () => {
+		const service: <%= classify(name) %>ListResolver = TestBed.get(
+			<%= classify(name) %>ListResolver
+		);
+		expect(service).toBeTruthy();
+	});
+});
