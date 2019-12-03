@@ -1,0 +1,3 @@
+export interface <%= classify(name) %> {<% for (let field of entity.fields) { %>
+   <%= field.name %><% if (!field.validation.required) { %>?<% } %>: <% if (field.dataType === 'date') { %>Date<% } else { %><%= field.dataType %><% } %>;<% } %>
+}

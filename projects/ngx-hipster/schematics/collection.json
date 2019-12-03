@@ -35,6 +35,11 @@
       "description": "Scaffolds shell application",
       "factory": "./app-shell/index#appShell",
       "schema": "./app-shell/schema.json"
+    },
+    "entity": {
+      "description": "Scaffolds entity CRUD",
+      "factory": "./entity/index#entity",
+      "schema": "./entity/schema.json"
     }
   }
 }

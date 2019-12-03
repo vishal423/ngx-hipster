@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "id": "ngx-hipster-entity",
+  "title": "Scaffolds entity CRUD screens",
+  "type": "object",
+  "properties": {
+    "project": {
+      "type": "string",
+      "description": "Name of the project.",
+      "$default": {
+        "$source": "projectName"
+      }
+    },
+    "entityJson": {
+      "type": "string",
+      "description": "Path to entity Json file",
+      "default": "entity.json",
+      "x-prompt": "Provide relative path to the entity Json filename"
+    }
+  }
+}
