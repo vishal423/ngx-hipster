@@ -1,0 +1,19 @@
+import { TestBed } from '@angular/core/testing';
+import { FormBuilder } from '@angular/forms';
+
+import { <%= classify(name) %>FormService } from './<%= dasherize(name) %>-form.service';
+
+describe('<%= classify(name) %>FormService', () => {
+  beforeEach(() =>
+    TestBed.configureTestingModule({
+      providers: [FormBuilder]
+    })
+  );
+
+  it('should be created', () => {
+    const service: <%= classify(name) %>FormService = TestBed.get(
+      <%= classify(name) %>FormService
+    );
+    expect(service).toBeTruthy();
+  });
+});

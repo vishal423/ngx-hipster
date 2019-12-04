@@ -6,7 +6,7 @@ import { <%= classify(name) %> } from './<%= dasherize(name) %>';
 import { <%= classify(name) %>Service } from './<%= dasherize(name) %>.service';
 
 @Injectable({
-	providedIn: 'root'
+  providedIn: 'root'
 })
 export class <%= classify(name) %>Resolver implements Resolve<<%= classify(name) %>> {
 
