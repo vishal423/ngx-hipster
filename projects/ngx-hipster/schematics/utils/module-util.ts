@@ -1,6 +1,9 @@
 import { SchematicsException, Tree } from '@angular-devkit/schematics';
-import { InsertChange } from '@schematics/angular/utility/change';
-import { addImportToModule } from '@schematics/angular/utility/ast-utils';
+import { InsertChange, Change } from '@schematics/angular/utility/change';
+import {
+  addImportToModule,
+  addExportToModule
+} from '@schematics/angular/utility/ast-utils';
 import { getAppModulePath } from '@schematics/angular/utility/ng-ast-utils';
 
 import * as ts from '@schematics/angular/third_party/github.com/Microsoft/TypeScript/lib/typescript';
@@ -21,11 +24,30 @@ export function addRootModuleImport(
   addModuleImport(tree, filePath, moduleName, moduleImportPath);
 }
 
+export function addModuleExport(
+  tree: Tree,
+  filePath: string,
+  moduleName: string,
+  moduleImportPath: string
+) {
+  moduleChanges(tree, filePath, moduleName, moduleImportPath, 'export');
+}
+
 export function addModuleImport(
   tree: Tree,
   filePath: string,
   moduleName: string,
   moduleImportPath: string
+) {
+  moduleChanges(tree, filePath, moduleName, moduleImportPath, 'import');
+}
+
+function moduleChanges(
+  tree: Tree,
+  filePath: string,
+  moduleName: string,
+  moduleImportPath: string,
+  changeType: string
 ) {
   const buffer = readFile(tree, filePath);
   const file = ts.createSourceFile(
@@ -35,15 +57,19 @@ export function addModuleImport(
     true
   );
 
-  const changes = addImportToModule(
-    file,
-    filePath,
-    moduleName,
-    moduleImportPath
-  );
+  let changes: Change[] = [];
+  switch (changeType) {
+    case 'import':
+      changes = addImportToModule(file, filePath, moduleName, moduleImportPath);
+      break;
+    case 'export':
+      changes = addExportToModule(file, filePath, moduleName, moduleImportPath);
+      break;
+    default:
+  }
   const recorder = tree.beginUpdate(filePath);
 
-  changes.forEach(change => {
+  changes.forEach((change: Change) => {
     if (change instanceof InsertChange) {
       recorder.insertLeft(change.pos, change.toAdd);
     }

@@ -14,6 +14,7 @@ import { normalize, strings } from '@angular-devkit/core';
 import { getProject } from '../utils/utils';
 import { Schema } from './schema';
 import { Entity } from './entity';
+import { addModuleExport } from '../utils/module-util';
 
 export function entity(options: Schema): Rule {
   return (tree: Tree) => {
@@ -38,6 +39,31 @@ export function entity(options: Schema): Rule {
         `Project type : ${project.projectType} is not supported by this schematic`
       );
     }
+
+    addModuleExport(
+      tree,
+      normalize(`${sourcePath}/material/material.module.ts`),
+      'MatRadioModule',
+      '@angular/material/radio'
+    );
+    addModuleExport(
+      tree,
+      normalize(`${sourcePath}/material/material.module.ts`),
+      'MatDialogModule',
+      '@angular/material/dialog'
+    );
+    addModuleExport(
+      tree,
+      normalize(`${sourcePath}/material/material.module.ts`),
+      'MatProgressSpinnerModule',
+      '@angular/material/progress-spinner'
+    );
+    addModuleExport(
+      tree,
+      normalize(`${sourcePath}/material/material.module.ts`),
+      'MatTooltipModule',
+      '@angular/material/tooltip'
+    );
 
     const templateSource = apply(url('./files'), [
       applyTemplates({
