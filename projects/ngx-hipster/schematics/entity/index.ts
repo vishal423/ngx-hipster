@@ -29,6 +29,7 @@ export function entity(options: Schema): Rule {
 
     const project = getProject(tree, options);
     let sourcePath = `${project.sourceRoot}`;
+    const prefix = `${project.prefix}` || 'hip';
 
     if (project.projectType === 'application') {
       sourcePath = normalize(`${sourcePath}/app`);
@@ -43,6 +44,7 @@ export function entity(options: Schema): Rule {
         dot: '.',
         ...strings,
         entity,
+        prefix,
         name: entity.name
       }),
       move(normalize(sourcePath))

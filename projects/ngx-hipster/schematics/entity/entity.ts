@@ -9,6 +9,7 @@ export interface Field {
   label: string;
   dataType: string;
   controlType: string;
+  format: string;
   validation: Validation;
 }
 
