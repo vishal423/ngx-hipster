@@ -1,0 +1,69 @@
+<form [formGroup]="form" novalidate (ngSubmit)="saveOrUpdate()">
+  <mat-card class="card">
+    <mat-progress-spinner
+      *ngIf="isSaveOrUpdateInProgress"
+      diameter="50"
+      class="form-overlay"
+      color="accent"
+      mode="indeterminate"
+    >
+    </mat-progress-spinner>
+    <mat-card-title><%= name %></mat-card-title>
+    <mat-card-subtitle>{{
+      <%= camelize(name) %>?.id
+        ? 'Update an existing <%= name %>.'
+        : 'Creates a new <%= name %>.'
+    }}</mat-card-subtitle>
+    <div class="error mat-error">
+      {{ error ? error : '&nbsp;' }}
+    </div>
+    <mat-card-content class="content"><%
+      for (let field of entity.fields) {
+        if (field.controlType !== 'radio') { %>
+      <mat-form-field class="full-width">
+        <mat-label><%= field.label %></mat-label><%
+        if (field.controlType === 'textarea') { %>
+        <textarea
+          matInput
+          placeholder="Enter <%= name %> <%= field.label %>"
+          formControlName="<%= field.name %>"
+          <%= field.validation.required ? 'required' : ''%>
+        ></textarea><%
+        } else if (field.controlType === 'text') { %>
+        <input
+          matInput
+          placeholder="Enter <%= name %> <%= field.label %>"
+          formControlName="<%= field.name %>"
+          <%= field.validation.required ? 'required' : ''%>
+        /><%
+        } %>
+      </mat-form-field><%
+      } else if (field.controlType === 'radio') { %>
+      <div class="full-width content--inline-display">
+        <mat-label><%= field.label %></mat-label>
+        <mat-radio-group formControlName="<%= field.name %>"><%
+        for (let option of field.options) { %>
+          <mat-radio-button value="<%= option.name %>"><%= option.label %></mat-radio-button><%
+          } %>
+        </mat-radio-group>
+      </div><%
+        }
+      } %>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button (click)="cancel()">
+        <mat-icon>cancel</mat-icon>
+        <span>Cancel</span>
+      </button>
+      <button
+        mat-raised-button
+        color="accent"
+        [disabled]="form.invalid || isSaveOrUpdateInProgress"
+        type="submit"
+      >
+        <mat-icon>save</mat-icon>
+        <span>{{ <%= camelize(name) %>?.id ? 'Update' : 'Save' }} </span>
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</form>

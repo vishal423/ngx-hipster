@@ -11,6 +11,12 @@ export interface Field {
   controlType: string;
   format: string;
   validation: Validation;
+  options: FieldOption[];
+}
+
+export interface FieldOption {
+  name: string;
+  label: string;
 }
 
 export interface Validation {

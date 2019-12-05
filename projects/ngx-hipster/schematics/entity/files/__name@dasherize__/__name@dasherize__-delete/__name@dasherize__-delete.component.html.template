@@ -1,0 +1,17 @@
+<h2 mat-dialog-title>Delete <%= name %></h2>
+<mat-dialog-content>
+  <div class="content">
+    Are you sure you want to delete <%= name %>
+    <strong>{{ data.id }}</strong> ?
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button mat-dialog-close>
+    <mat-icon>cancel</mat-icon>
+    <span>No</span>
+  </button>
+  <button mat-raised-button color="accent" [mat-dialog-close]="true">
+    <mat-icon>delete</mat-icon>
+    <span>Yes</span>
+  </button>
+</mat-dialog-actions>

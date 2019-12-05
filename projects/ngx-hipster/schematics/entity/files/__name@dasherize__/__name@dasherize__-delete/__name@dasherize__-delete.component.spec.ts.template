@@ -1,0 +1,29 @@
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+
+import { MaterialModule } from 'src/app/material/material.module';
+import { <%= classify(name) %>DeleteComponent } from './<%= dasherize(name) %>-delete.component';
+
+describe('<%= classify(name) %>DeleteComponent', () => {
+  let component: <%= classify(name) %>DeleteComponent;
+  let fixture: ComponentFixture<<%= classify(name) %>DeleteComponent>;
+
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [<%= classify(name) %>DeleteComponent],
+      imports: [NoopAnimationsModule, MaterialModule],
+      providers: [{ provide: MAT_DIALOG_DATA, useValue: {} }]
+    }).compileComponents();
+  }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(<%= classify(name) %>DeleteComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

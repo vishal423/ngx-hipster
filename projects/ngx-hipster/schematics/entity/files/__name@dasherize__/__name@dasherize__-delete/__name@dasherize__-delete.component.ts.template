@@ -1,0 +1,13 @@
+import { Component, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+
+import { <%= classify(name) %> } from '../<%= dasherize(name) %>';
+
+@Component({
+  selector: '<%= prefix %>-<%= dasherize(name) %>-delete',
+  templateUrl: './<%= dasherize(name) %>-delete.component.html',
+  styleUrls: ['./<%= dasherize(name) %>-delete.component.scss']
+})
+export class <%= classify(name) %>DeleteComponent {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: <%= classify(name) %>) {}
+}
