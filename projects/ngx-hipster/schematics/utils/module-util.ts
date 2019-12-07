@@ -2,7 +2,8 @@ import { SchematicsException, Tree } from '@angular-devkit/schematics';
 import { InsertChange, Change } from '@schematics/angular/utility/change';
 import {
   addImportToModule,
-  addExportToModule
+  addExportToModule,
+  insertImport
 } from '@schematics/angular/utility/ast-utils';
 import { getAppModulePath } from '@schematics/angular/utility/ng-ast-utils';
 
@@ -42,6 +43,21 @@ export function addModuleImport(
   moduleChanges(tree, filePath, moduleName, moduleImportPath, 'import');
 }
 
+export function addImportStatement(
+  tree: Tree,
+  filePath: string,
+  moduleName: string,
+  moduleImportPath: string
+) {
+  moduleChanges(
+    tree,
+    filePath,
+    moduleName,
+    moduleImportPath,
+    'importStatement'
+  );
+}
+
 function moduleChanges(
   tree: Tree,
   filePath: string,
@@ -65,8 +81,17 @@ function moduleChanges(
     case 'export':
       changes = addExportToModule(file, filePath, moduleName, moduleImportPath);
       break;
+    case 'importStatement':
+      changes = [
+        insertImport(file, filePath, moduleName, moduleImportPath, false)
+      ];
+      break;
     default:
   }
+  applyChanges(tree, changes, filePath);
+}
+
+export function applyChanges(tree: Tree, changes: Change[], filePath: string) {
   const recorder = tree.beginUpdate(filePath);
 
   changes.forEach((change: Change) => {

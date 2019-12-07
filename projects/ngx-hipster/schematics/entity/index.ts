@@ -9,12 +9,18 @@ import {
   url,
   SchematicsException
 } from '@angular-devkit/schematics';
+import { addRouteDeclarationToModule } from '@schematics/angular/utility/ast-utils';
 import { normalize, strings } from '@angular-devkit/core';
+import * as ts from '@schematics/angular/third_party/github.com/Microsoft/TypeScript/lib/typescript';
 
 import { getProject } from '../utils/utils';
 import { Schema } from './schema';
 import { Entity } from './entity';
-import { addModuleExport } from '../utils/module-util';
+import {
+  addModuleExport,
+  applyChanges,
+  addImportStatement
+} from '../utils/module-util';
 
 export function entity(options: Schema): Rule {
   return (tree: Tree) => {
@@ -39,6 +45,20 @@ export function entity(options: Schema): Rule {
         `Project type : ${project.projectType} is not supported by this schematic`
       );
     }
+
+    addImportStatement(
+      tree,
+      normalize(`${sourcePath}/app-routing.module.ts`),
+      'AuthenticatedUserGuard',
+      './security/authenticated-user.guard'
+    );
+
+    addLazyLoadModuleRoute(
+      tree,
+      entity.name,
+      sourcePath,
+      'app-routing.module.ts'
+    );
 
     addModuleExport(
       tree,
@@ -78,4 +98,42 @@ export function entity(options: Schema): Rule {
 
     return chain([mergeWith(templateSource)]);
   };
+}
+
+function addLazyLoadModuleRoute(
+  tree: Tree,
+  name: string,
+  filePath: string,
+  fileName: string
+) {
+  const moduleContent = tree.read(normalize(`${filePath}/${fileName}`));
+
+  if (!moduleContent) {
+    throw new SchematicsException(
+      `Could not read file ${filePath}/${fileName}`
+    );
+  }
+
+  const source = ts.createSourceFile(
+    normalize(`${filePath}/${fileName}`),
+    moduleContent.toString(),
+    ts.ScriptTarget.Latest,
+    true
+  );
+
+  const change = addRouteDeclarationToModule(
+    source,
+    normalize(`${filePath}/${fileName}`),
+    `{
+    path: '${strings.dasherize(name)}',
+    canActivateChild: [AuthenticatedUserGuard],
+    loadChildren: () => import('./${strings.dasherize(
+      name
+    )}/${strings.dasherize(name)}.module').then(m => m.${strings.classify(
+      name
+    )}Module)
+  }`
+  );
+
+  applyChanges(tree, [change], normalize(`${filePath}/${fileName}`));
 }
