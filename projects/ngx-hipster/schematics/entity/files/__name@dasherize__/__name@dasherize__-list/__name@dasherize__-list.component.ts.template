@@ -12,11 +12,7 @@ import { <%= classify(name) %> } from '../<%= dasherize(name) %>';
   styleUrls: ['./<%= dasherize(name) %>-list.component.scss']
 })
 export class <%= classify(name) %>ListComponent implements OnInit {
-  displayedColumns = [
-    <% for (let fieldIndex = 0; fieldIndex < entity.fields.length; fieldIndex++) {
-        const field = entity.fields[fieldIndex];
-    %>'<%= field.name %>'<%= (fieldIndex === (entity.fields.length - 1)) ? '' : ', ' %><% } %>
-    ];
+  displayedColumns = [<% for (let field of entity.fields) {%>'<%= field.name %>', <% } %>'formActions'];
   routeData$ = this.route.data;
   showLoader = false;
 
