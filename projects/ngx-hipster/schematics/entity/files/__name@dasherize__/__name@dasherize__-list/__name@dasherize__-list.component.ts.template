@@ -26,7 +26,7 @@ export class <%= classify(name) %>ListComponent implements OnInit {
   ngOnInit() {}
 
   delete(id: number, <%= camelize(name) %>: <%= classify(name) %>) {
-	  const dialogRef = this.dialog.open(<%= classify(name) %>DeleteComponent, {
+    const dialogRef = this.dialog.open(<%= classify(name) %>DeleteComponent, {
       data: <%= camelize(name) %>
     });
 

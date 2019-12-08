@@ -1,27 +1,27 @@
 .container {
-	display: flex;
-	height: 100%;
-	align-items: center;
-	justify-content: center;
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
 }
 
 .card {
-	width: 400px;
+  width: 400px;
 }
 
 .title {
-	margin-bottom: 0.5em;
+  margin-bottom: 0.5em;
 }
 
 .error {
-	margin-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .form {
-	display: flex;
-	flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .login-btn {
-	width: 100%;
+  width: 100%;
 }

@@ -4,17 +4,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
 
 describe('AuthenticationGuard', () => {
-	beforeEach(() => {
-		TestBed.configureTestingModule({
-			providers: [AuthenticatedUserGuard],
-			imports: [HttpClientModule, RouterTestingModule]
-		});
-	});
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      providers: [AuthenticatedUserGuard],
+      imports: [HttpClientModule, RouterTestingModule]
+    });
+  });
 
-	it('should ...', inject(
-		[AuthenticatedUserGuard],
-		(guard: AuthenticatedUserGuard) => {
-			expect(guard).toBeTruthy();
-		}
-	));
+  it('should ...', inject(
+    [AuthenticatedUserGuard],
+    (guard: AuthenticatedUserGuard) => {
+      expect(guard).toBeTruthy();
+    }
+  ));
 });

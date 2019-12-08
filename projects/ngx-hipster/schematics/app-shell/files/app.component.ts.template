@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from './security/authentication.service';
 
 @Component({
-	selector: '<%= prefix %>-root',
-	templateUrl: './app.component.html',
-	styleUrls: ['./app.component.scss']
+  selector: '<%= prefix %>-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-	constructor(private authenticationService: AuthenticationService) {}
-	ngOnInit() {
-		this.authenticationService.fetchUserInfo().subscribe();
-	}
+  constructor(private authenticationService: AuthenticationService) {}
+  ngOnInit() {
+    this.authenticationService.fetchUserInfo().subscribe();
+  }
 }

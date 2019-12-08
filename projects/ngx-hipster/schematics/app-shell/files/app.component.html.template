@@ -1,11 +1,11 @@
 <div class="container">
-	<<%= prefix %>-header></<%= prefix %>-header>
-	<div class="body">
-		<div class="content">
-			<router-outlet></router-outlet>
-		</div>
-		<div class="footer">
-			<span>Powered by ngx-hipster &copy;&nbsp;2019</span>
-		</div>
-	</div>
+  <<%= prefix %>-header></<%= prefix %>-header>
+  <div class="body">
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+    <div class="footer">
+      <span>Powered by ngx-hipster &copy;&nbsp;2019</span>
+    </div>
+  </div>
 </div>

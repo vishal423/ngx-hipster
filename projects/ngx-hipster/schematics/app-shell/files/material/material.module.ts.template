@@ -14,27 +14,27 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import {
-	ShowOnDirtyErrorStateMatcher,
-	ErrorStateMatcher
+  ShowOnDirtyErrorStateMatcher,
+  ErrorStateMatcher
 } from '@angular/material/core';
 
 @NgModule({
-	exports: [
-		LayoutModule,
-		MatToolbarModule,
-		MatButtonModule,
-		MatIconModule,
-		MatListModule,
-		MatFormFieldModule,
-		MatInputModule,
-		MatCardModule,
-		MatTableModule,
-		MatMenuModule,
-		MatProgressBarModule,
-		MatSnackBarModule
-	],
-	providers: [
-		{ provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher }
-	]
+  exports: [
+    LayoutModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatIconModule,
+    MatListModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatCardModule,
+    MatTableModule,
+    MatMenuModule,
+    MatProgressBarModule,
+    MatSnackBarModule
+  ],
+  providers: [
+    { provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher }
+  ]
 })
 export class MaterialModule {}

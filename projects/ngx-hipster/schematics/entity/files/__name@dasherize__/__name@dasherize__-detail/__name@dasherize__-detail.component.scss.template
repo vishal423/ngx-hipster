@@ -24,6 +24,7 @@
 
 .mat-radio-button {
   margin: 5px 14px;
+  height: 39px;
 }
 
 .mat-card-subtitle {

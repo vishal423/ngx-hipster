@@ -10,21 +10,21 @@ import { HttpClientModule } from '@angular/common/http';
 class HeaderStubComponent {}
 
 describe('AppComponent', () => {
-	beforeEach(async(() => {
-		TestBed.configureTestingModule({
-			imports: [
-				RouterTestingModule,
-				NoopAnimationsModule,
-				MaterialModule,
-				HttpClientModule
-			],
-			declarations: [AppComponent, HeaderStubComponent]
-		}).compileComponents();
-	}));
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      imports: [
+        RouterTestingModule,
+        NoopAnimationsModule,
+        MaterialModule,
+        HttpClientModule
+      ],
+      declarations: [AppComponent, HeaderStubComponent]
+    }).compileComponents();
+  }));
 
-	it('should create the app', () => {
-		const fixture = TestBed.createComponent(AppComponent);
-		const app = fixture.debugElement.componentInstance;
-		expect(app).toBeTruthy();
-	});
+  it('should create the app', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.debugElement.componentInstance;
+    expect(app).toBeTruthy();
+  });
 });

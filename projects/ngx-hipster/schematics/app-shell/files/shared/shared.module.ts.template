@@ -6,12 +6,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
-	exports: [
-		CommonModule,
-		MaterialModule,
-		RouterModule,
-		ReactiveFormsModule,
-		HttpClientModule
-	]
+  exports: [
+    CommonModule,
+    MaterialModule,
+    RouterModule,
+    ReactiveFormsModule,
+    HttpClientModule
+  ]
 })
 export class SharedModule {}
