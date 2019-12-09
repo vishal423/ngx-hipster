@@ -1,19 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NgxHipsterComponent } from './ngx-hipster.component';
+import { NgxErrorComponent } from './ngx-error.component';
 
-describe('NgxHipsterComponent', () => {
-  let component: NgxHipsterComponent;
-  let fixture: ComponentFixture<NgxHipsterComponent>;
+describe('NgxErrorComponent', () => {
+  let component: NgxErrorComponent;
+  let fixture: ComponentFixture<NgxErrorComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [NgxHipsterComponent]
+      declarations: [NgxErrorComponent],
+      imports: []
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NgxHipsterComponent);
+    fixture = TestBed.createComponent(NgxErrorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

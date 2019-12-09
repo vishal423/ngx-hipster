@@ -17,7 +17,10 @@ export class <%= classify(name) %>FormService {
       <% for (let fieldIndex = 0; fieldIndex < entity.fields.length; fieldIndex++) {
           const field = entity.fields[fieldIndex];
       %><%= field.name %>: this.formBuilder.control(<%= camelize(name) %>.<%= field.name %>, [
-        <% if (field.validation.required) { %>Validators.required<% } %>
+        <% let addSeparator = false; %>
+        <% if (field.validation.required) { %>Validators.required<% addSeparator = true; } %>
+        <% if (field.validation.minlength) { %><%= addSeparator ? ', ' : '' %>Validators.minLength(<%= field.validation.minlength %>)<% } %>
+        <% if (field.validation.maxlength) { %><%= addSeparator ? ', ' : '' %>Validators.maxLength(<%= field.validation.maxlength %>)<% } %>
       ])<%= (fieldIndex === (entity.fields.length - 1)) ? '' : ',' %><% } %>
     });
   }

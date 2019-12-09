@@ -4,6 +4,7 @@ import { MaterialModule } from '../material/material.module';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { NgxHipsterModule } from 'ngx-hipster';
 
 @NgModule({
   exports: [
@@ -11,7 +12,8 @@ import { HttpClientModule } from '@angular/common/http';
     MaterialModule,
     RouterModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxHipsterModule
   ]
 })
 export class SharedModule {}

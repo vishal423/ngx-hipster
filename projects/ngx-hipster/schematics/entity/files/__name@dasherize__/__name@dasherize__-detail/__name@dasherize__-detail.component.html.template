@@ -37,6 +37,7 @@
           <%= field.validation.required ? 'required' : ''%>
         /><%
         } %>
+        <mat-error><hip-ngx-error [control]="form.get('<%= field.name %>')" label="<%= field.label %>"></hip-ngx-error></mat-error>
       </mat-form-field><%
       } else if (field.controlType === 'radio') { %>
       <div class="full-width content--inline-display">

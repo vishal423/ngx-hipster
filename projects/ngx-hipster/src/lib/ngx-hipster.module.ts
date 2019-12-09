@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
-import { NgxHipsterComponent } from './ngx-hipster.component';
+import { CommonModule } from '@angular/common';
+
+import { NgxErrorComponent } from './ngx-error/ngx-error.component';
 
 @NgModule({
-  declarations: [NgxHipsterComponent],
-  imports: [],
-  exports: [NgxHipsterComponent]
+  declarations: [NgxErrorComponent],
+  imports: [CommonModule],
+  exports: [NgxErrorComponent]
 })
 export class NgxHipsterModule {}
