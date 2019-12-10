@@ -17,35 +17,42 @@ import { Component, ViewChild } from '@angular/core';
   `
 })
 class HostStubComponent {
-  form: FormGroup;
+  form = new FormGroup({ test: new FormControl() });
   @ViewChild(NgxErrorComponent, { static: true })
-  public errorComponent: NgxErrorComponent;
-
-  constructor(fb: FormBuilder) {
-    this.form = fb.group({ test: fb.control('', [Validators.required]) });
-  }
+  errorComponent: NgxErrorComponent;
 }
 
 describe('NgxErrorComponent', () => {
   let component: NgxErrorComponent;
   let hostComponent: HostStubComponent;
   let fixture: ComponentFixture<HostStubComponent>;
+  let fb: FormBuilder;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [NgxErrorComponent, HostStubComponent],
-      imports: [CommonModule, ReactiveFormsModule]
+      imports: [CommonModule, ReactiveFormsModule],
+      providers: [FormBuilder]
     }).compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(HostStubComponent);
     hostComponent = fixture.componentInstance;
+    component = hostComponent.errorComponent;
+    fb = fixture.debugElement.injector.get(FormBuilder);
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(hostComponent).toBeTruthy();
-    expect(hostComponent.errorComponent).toBeTruthy();
+  it('should create an error component with no error message', () => {
+    expect(component.control.valid).toBeTruthy();
+  });
+
+  it('should create an error component with required error message', () => {
+    hostComponent.form = fb.group({
+      test: fb.control('', [Validators.required])
+    });
+    fixture.detectChanges();
+    expect(component.control.valid).toBeFalsy();
   });
 });
