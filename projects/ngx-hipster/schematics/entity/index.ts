@@ -21,6 +21,7 @@ import {
   applyChanges,
   addImportStatement
 } from '../utils/module-util';
+import { applyPrettier, applyPrettierOnFile } from '../utils/prettier-util';
 
 export function entity(options: Schema): Rule {
   return (tree: Tree) => {
@@ -96,7 +97,18 @@ export function entity(options: Schema): Rule {
       move(normalize(sourcePath))
     ]);
 
-    return chain([mergeWith(templateSource)]);
+    return chain([
+      mergeWith(templateSource),
+      applyPrettierOnFile({
+        path: normalize(`${sourcePath}/app-routing.module.ts`)
+      }),
+      applyPrettierOnFile({
+        path: normalize(`${sourcePath}/material/material.module.ts`)
+      }),
+      applyPrettier({
+        path: normalize(`${sourcePath}/${strings.dasherize(entity.name)}`)
+      })
+    ]);
   };
 }
 
