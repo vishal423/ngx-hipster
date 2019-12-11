@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { AuthenticationService } from 'src/app/security/authentication.service';
 import {
   Router,
@@ -15,6 +15,7 @@ import { map, filter } from 'rxjs/operators';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
+  @Output() toggleSidenav = new EventEmitter();
   user$ = this.authenticationService.user$;
   loading$ = this.router.events.pipe(
     filter(

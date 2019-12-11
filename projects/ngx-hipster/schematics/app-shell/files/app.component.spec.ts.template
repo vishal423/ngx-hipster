@@ -9,6 +9,9 @@ import { HttpClientModule } from '@angular/common/http';
 @Component({ selector: '<%= prefix %>-header', template: '' })
 class HeaderStubComponent {}
 
+@Component({ selector: '<%= prefix %>-sidenav', template: '' })
+class SidenavStubComponent {}
+
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -18,7 +21,7 @@ describe('AppComponent', () => {
         MaterialModule,
         HttpClientModule
       ],
-      declarations: [AppComponent, HeaderStubComponent]
+      declarations: [AppComponent, HeaderStubComponent, SidenavStubComponent]
     }).compileComponents();
   }));
 

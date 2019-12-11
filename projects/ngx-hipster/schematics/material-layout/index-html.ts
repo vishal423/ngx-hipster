@@ -1,6 +1,6 @@
 import { SchematicsException, Tree } from '@angular-devkit/schematics';
 import { getProject } from '../utils/utils';
-import { DefaultTreeDocument, DefaultTreeElement, parse } from 'parse5';
+import { getHtmlChildElementByTagName } from '../utils/html-util';
 
 export function addMaterialIconsAndFonts(options: { project?: string }) {
   return (tree: Tree) => {
@@ -78,26 +78,4 @@ function addStylesheet(
     .insertRight(endTagOffset, `${linkTag}\n`);
 
   tree.commitUpdate(recordedChange);
-}
-
-function getHtmlChildElementByTagName(
-  tagName: string,
-  htmlContent: string
-): DefaultTreeElement | null {
-  const document = parse(htmlContent, {
-    sourceCodeLocationInfo: true
-  }) as DefaultTreeDocument;
-
-  const childNodes = [...document.childNodes];
-
-  while (childNodes.length) {
-    const node = childNodes.shift() as DefaultTreeElement;
-    if (node.nodeName.toLowerCase() === tagName) {
-      return node;
-    } else if (node.childNodes) {
-      childNodes.push(...node.childNodes);
-    }
-  }
-
-  return null;
 }

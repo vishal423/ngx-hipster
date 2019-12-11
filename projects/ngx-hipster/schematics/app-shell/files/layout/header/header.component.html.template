@@ -10,6 +10,7 @@
   color="primary"
   *ngIf="{ details: user$ | async } as user"
 >
+  <button mat-icon-button *ngIf="!!user.details" (click)="toggleSidenav.emit()" ><mat-icon>menu</mat-icon></button>
   <a class="logo" href="#" routerLink="/">
     <img
       alt="Angular Logo"

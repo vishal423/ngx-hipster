@@ -23,6 +23,7 @@ import {
   addAppRouteDeclaration
 } from '../utils/module-util';
 import { applyPrettier, applyPrettierOnFile } from '../utils/prettier-util';
+import { getHtmlChildElementByTagName } from '../utils/html-util';
 
 export function entity(options: Schema): Rule {
   return (tree: Tree, context: SchematicContext) => {
@@ -61,6 +62,12 @@ export function entity(options: Schema): Rule {
       entity.name,
       sourcePath,
       'app-routing.module.ts'
+    );
+
+    addSidenavLink(
+      tree,
+      normalize(`${sourcePath}/layout/sidenav/sidenav.component.html`),
+      entity
     );
 
     addModuleExport(
@@ -109,6 +116,9 @@ export function entity(options: Schema): Rule {
       }),
       applyPrettier({
         path: normalize(`${sourcePath}/${strings.dasherize(entity.name)}`)
+      }),
+      applyPrettierOnFile({
+        path: normalize(`${sourcePath}/layout/sidenav/sidenav.component.html`)
       })
     ]);
   };
@@ -159,4 +169,46 @@ function addLazyLoadModuleRoute(
   );
 
   applyChanges(tree, [change], normalize(`${filePath}/${fileName}`));
+}
+
+function addSidenavLink(tree: Tree, htmlFilePath: string, entity: any) {
+  const buffer = tree.read(htmlFilePath);
+
+  if (!buffer) {
+    throw new SchematicsException(
+      `Could not read the sidenav html template file ${htmlFilePath}`
+    );
+  }
+
+  const content = buffer.toString('utf-8');
+  const navListTag = getHtmlChildElementByTagName('mat-nav-list', content);
+
+  if (!navListTag) {
+    throw new SchematicsException(
+      `Could not find nav list element in the sidenav html template file: ${htmlFilePath}`
+    );
+  }
+
+  if (!navListTag.sourceCodeLocation) {
+    throw new SchematicsException(
+      `Could not get source code location in the sidenav template AST tree`
+    );
+  }
+
+  const endTagOffset = navListTag.sourceCodeLocation.endTag.startOffset;
+
+  const recordedChange = tree.beginUpdate(htmlFilePath).insertRight(
+    endTagOffset,
+    `
+    <a mat-list-item routerLink="/${strings.dasherize(entity.name)}"
+      class="nav-links__item"
+      routerLinkActive="nav-links__item--active" >
+      <span class="nav-links__item__text">
+        ${strings.classify(entity.pageTitle)}
+      </span>
+    </a>
+    `
+  );
+
+  tree.commitUpdate(recordedChange);
 }
