@@ -7,9 +7,9 @@ import {
   Rule,
   Tree,
   url,
-  SchematicsException
+  SchematicsException,
+  SchematicContext
 } from '@angular-devkit/schematics';
-import { addRouteDeclarationToModule } from '@schematics/angular/utility/ast-utils';
 import { normalize, strings } from '@angular-devkit/core';
 import * as ts from '@schematics/angular/third_party/github.com/Microsoft/TypeScript/lib/typescript';
 
@@ -19,12 +19,13 @@ import { Entity } from './entity';
 import {
   addModuleExport,
   applyChanges,
-  addImportStatement
+  addImportStatement,
+  addAppRouteDeclaration
 } from '../utils/module-util';
 import { applyPrettier, applyPrettierOnFile } from '../utils/prettier-util';
 
 export function entity(options: Schema): Rule {
-  return (tree: Tree) => {
+  return (tree: Tree, context: SchematicContext) => {
     const entityJson = tree.read(options.entityJson);
 
     if (!entityJson) {
@@ -56,6 +57,7 @@ export function entity(options: Schema): Rule {
 
     addLazyLoadModuleRoute(
       tree,
+      context,
       entity.name,
       sourcePath,
       'app-routing.module.ts'
@@ -114,37 +116,46 @@ export function entity(options: Schema): Rule {
 
 function addLazyLoadModuleRoute(
   tree: Tree,
+  context: SchematicContext,
   name: string,
   filePath: string,
   fileName: string
 ) {
-  const moduleContent = tree.read(normalize(`${filePath}/${fileName}`));
+  const buffer = tree.read(normalize(`${filePath}/${fileName}`));
 
-  if (!moduleContent) {
+  if (!buffer) {
     throw new SchematicsException(
       `Could not read file ${filePath}/${fileName}`
     );
   }
 
+  const moduleContent = buffer.toString('utf-8');
+
   const source = ts.createSourceFile(
     normalize(`${filePath}/${fileName}`),
-    moduleContent.toString(),
+    moduleContent,
     ts.ScriptTarget.Latest,
     true
   );
 
-  const change = addRouteDeclarationToModule(
+  if (moduleContent.indexOf(`path: '${strings.dasherize(name)}'`) !== -1) {
+    context.logger.info('Route path already exists.');
+    return;
+  }
+
+  const change = addAppRouteDeclaration(
     source,
     normalize(`${filePath}/${fileName}`),
     `{
-    path: '${strings.dasherize(name)}',
-    canActivateChild: [AuthenticatedUserGuard],
-    loadChildren: () => import('./${strings.dasherize(
-      name
-    )}/${strings.dasherize(name)}.module').then(m => m.${strings.classify(
+      path: '${strings.dasherize(name)}',
+      canActivateChild: [AuthenticatedUserGuard],
+      loadChildren: () => import('./${strings.dasherize(
+        name
+      )}/${strings.dasherize(name)}.module').then(m => m.${strings.classify(
       name
     )}Module)
-  }`
+      },
+    `
   );
 
   applyChanges(tree, [change], normalize(`${filePath}/${fileName}`));
