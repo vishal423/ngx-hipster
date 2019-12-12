@@ -16,6 +16,7 @@ jobs:
         run: yarn global add @angular/cli
       - name: Build ngx-hipster library and include schematics
         run: |
+          export PATH="$(yarn global bin):$PATH"
           ng build
           cd projects/ngx-hipster
           yarn build
