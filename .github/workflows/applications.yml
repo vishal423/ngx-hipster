@@ -8,6 +8,7 @@ jobs:
         os: [ubuntu-latest]
         node-version: [10.x, 12.x]
     steps:
+      - uses: actions/checkout@v1
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
@@ -17,19 +18,24 @@ jobs:
       - name: Build ngx-hipster library and include schematics
         run: |
           export PATH="$(yarn global bin):$PATH"
+          echo $PATH
           ng build
           cd projects/ngx-hipster
           yarn build
           cd ../../dist/ngx-hipster
-          yarn link
-      - name: Generate new application
+          export NGX_PKG_VER=$(cat package.json | grep 'version' | head -1 | awk -F: '{ print $2 }' | sed 's/[",]//g'  | tr -d '[[:space:]]')
+          echo $NGX_PKG_VER
+          yarn pack
+      - name: Generate sample application
         run: |
-          mkdir
+          mkdir -p $HOME/test-app
+          cd $HOME/test-app
+          yarn link 'ngx-hipster'
           ng new sample-app --interactive=false --prefix=hip --style=scss --routing=true
       - name: Add ngx-hipster dependency, generate shell application with prettier, jest configuration
         run: |
           cd sample-app
-          ng add ngx-hipster --configureNgx=true --configureJest=true --configureProxy=false
+          ng add $GITHUB_WORKSPACE/dist/ngx-hipster/ngx-hipster-v$NGX_PKG_VER.tgz --configureNgx=true --configureJest=true --configureProxy=false
       - name: Generate entity create, update and list layouts
         run: |
           echo '{ "name": "movie", "pageTitle": "Movies", "fields": [ { "label": "Title","name": "title", "dataType": "string", "controlType": "text", "validation": { "required": true, "minlength": 2, "maxlength": 20 } }, { "label": "Plot", "name": "plot", "dataType": "string", "controlType": "textarea", "validation": { "minlength": 100 } }, { "label": "Genre", "name": "genre", "dataType": "string", "controlType": "radio", "validation": {}, "options": [ { "name": "adventure", "label": "Adventure" }, { "name": "drama", "label": "Drama" }, { "name": "sci-fi", "label": "Science Fiction" } ] }, { "label": "Release Date", "name": "releaseDate", "dataType": "date", "controlType": "text", "format": "MM/dd/yy", "validation": {} } ] }' > movie.json
