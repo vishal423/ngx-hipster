@@ -4,6 +4,7 @@ jobs:
   build:
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest]
         node-version: [10.x, 12.x]
@@ -42,6 +43,7 @@ jobs:
       - name: Generate entity create, update and list layouts
         run: |
           export PATH="$(yarn global bin):$PATH"
+          cd $HOME/test-app/sample-app
           echo '{ "name": "movie", "pageTitle": "Movies", "fields": [ { "label": "Title","name": "title", "dataType": "string", "controlType": "text", "validation": { "required": true, "minlength": 2, "maxlength": 20 } }, { "label": "Plot", "name": "plot", "dataType": "string", "controlType": "textarea", "validation": { "minlength": 100 } }, { "label": "Genre", "name": "genre", "dataType": "string", "controlType": "radio", "validation": {}, "options": [ { "name": "adventure", "label": "Adventure" }, { "name": "drama", "label": "Drama" }, { "name": "sci-fi", "label": "Science Fiction" } ] }, { "label": "Release Date", "name": "releaseDate", "dataType": "date", "controlType": "text", "format": "MM/dd/yy", "validation": {} } ] }' > movie.json
           ng g ngx-hipster:entity --entityJson=movie.json
       - name: Execute unit tests
