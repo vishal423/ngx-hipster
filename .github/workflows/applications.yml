@@ -15,6 +15,10 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Install Angular CLI
         run: yarn global add @angular/cli
+      - name: Install local packages
+        run: yarn install
+        env:
+          CI: true
       - name: Build ngx-hipster library and include schematics
         run: |
           export PATH="$(yarn global bin):$PATH"
