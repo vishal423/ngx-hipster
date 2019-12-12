@@ -34,7 +34,6 @@ jobs:
         run: |
           mkdir -p $HOME/test-app
           cd $HOME/test-app
-          yarn link 'ngx-hipster'
           ng new sample-app --interactive=false --prefix=hip --style=scss --routing=true
       - name: Add ngx-hipster dependency, generate shell application with prettier, jest configuration
         run: |
