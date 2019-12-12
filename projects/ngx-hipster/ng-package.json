@@ -4,5 +4,5 @@
   "lib": {
     "entryFile": "src/public-api.ts"
   },
-  "whitelistedNonPeerDependencies": ["parse5"]
+  "whitelistedNonPeerDependencies": ["parse5", "prettier"]
 }
