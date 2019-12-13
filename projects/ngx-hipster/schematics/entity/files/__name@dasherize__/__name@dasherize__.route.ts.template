@@ -24,7 +24,7 @@ export const <%= camelize(name) %>Routes: Route[] = [
     path: '',
     component: <%= classify(name) %>ListComponent,
     resolve: {
-      <%= camelize(name) %>: <%= classify(name) %>ListResolver
+      <%= pluralize(camelize(name)) %>: <%= classify(name) %>ListResolver
     },
     runGuardsAndResolvers: 'always'
   }

@@ -5,7 +5,7 @@
       <button
         mat-raised-button
         color="accent"
-        [routerLink]="['/<%= dasherize(name) %>', 'new']"
+        [routerLink]="['/<%= pluralize(dasherize(name)) %>', 'new']"
       >
         <mat-icon>add</mat-icon>
         <span>Create</span>
@@ -21,14 +21,14 @@
       mode="indeterminate"
     >
     </mat-progress-spinner>
-    <div *ngIf="!data.<%= camelize(name) %>?.length">
+    <div *ngIf="!data.<%= pluralize(camelize(name)) %>?.length">
       <span class="table-overlay">No records found</span>
     </div>
     <table
       mat-table
-      [dataSource]="data.<%= camelize(name) %>"
+      [dataSource]="data.<%= pluralize(camelize(name)) %>"
       matSort
-      *ngIf="!!data.<%= camelize(name) %>?.length"
+      *ngIf="!!data.<%= pluralize(camelize(name)) %>?.length"
     ><% for (let field of entity.fields) { %>
       <ng-container matColumnDef="<%= field.name %>">
         <th mat-header-cell *matHeaderCellDef><%= field.label %></th>
@@ -65,7 +65,7 @@
     <button
       mat-menu-item
       aria-label="Edit <%= name %>"
-      [routerLink]="['/<%= dasherize(name) %>', id, 'edit']"
+      [routerLink]="['/<%= pluralize(dasherize(name)) %>', id, 'edit']"
     >
       <mat-icon>edit</mat-icon>
       <span>Edit</span>

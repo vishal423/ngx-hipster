@@ -80,3 +80,33 @@ export function readFile(tree: Tree, filePath: string) {
   }
   return file;
 }
+
+export function pluralize(name: string) {
+  if (name.length > 1) {
+    const tempStr = name.substring(name.length - 2).toLowerCase();
+    if (['ch', 'sh'].findIndex((val: string) => val === tempStr) !== -1) {
+      return name + 'es';
+    } else {
+      if (
+        ['s', 'z', 'x'].findIndex(
+          (val: string) => val === tempStr.charAt(tempStr.length - 1)
+        ) !== -1
+      ) {
+        return name + 'es';
+      }
+      return name + 's';
+    }
+  } else if (name.length == 1) {
+    const tempStr = name.substring(name.length - 1).toLowerCase();
+    if (
+      ['s', 'z', 'x'].findIndex(
+        (val: string) => val === tempStr.charAt(tempStr.length - 1)
+      ) !== -1
+    ) {
+      return name + 'es';
+    }
+    return name + 's';
+  }
+
+  return 's';
+}

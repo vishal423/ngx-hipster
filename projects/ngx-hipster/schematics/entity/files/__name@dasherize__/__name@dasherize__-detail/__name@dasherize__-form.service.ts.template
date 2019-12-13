@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
-import { <%= classify(name) %> } from './<%= dasherize(name) %>';
+import { <%= classify(name) %> } from '../<%= dasherize(name) %>';
 
 @Injectable({
   providedIn: 'root'

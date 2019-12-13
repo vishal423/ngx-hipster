@@ -9,7 +9,7 @@ import { <%= classify(name) %> } from './<%= dasherize(name) %>';
 })
 export class <%= classify(name) %>Service {
 
-  private resourceUrl = 'api/<%= dasherize(name) %>';
+  private resourceUrl = 'api/<%= pluralize(dasherize(name)) %>';
 
   constructor(private http: HttpClient) {}
 

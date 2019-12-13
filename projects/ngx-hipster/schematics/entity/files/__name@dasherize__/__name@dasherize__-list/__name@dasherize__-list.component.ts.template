@@ -34,7 +34,7 @@ export class <%= classify(name) %>ListComponent implements OnInit {
       if (result) {
         this.showLoader = true;
         this.<%= camelize(name) %>Service.delete(id).subscribe({
-          next: () => this.router.navigate(['/<%= dasherize(name) %>']),
+          next: () => this.router.navigate(['/<%= pluralize(dasherize(name)) %>']),
           error: () => (this.showLoader = false),
           complete: () => (this.showLoader = false)
         });

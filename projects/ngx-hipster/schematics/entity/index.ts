@@ -13,7 +13,7 @@ import {
 import { normalize, strings } from '@angular-devkit/core';
 import * as ts from '@schematics/angular/third_party/github.com/Microsoft/TypeScript/lib/typescript';
 
-import { getProject } from '../utils/utils';
+import { getProject, pluralize } from '../utils/utils';
 import { Schema } from './schema';
 import { Entity } from './entity';
 import {
@@ -99,6 +99,7 @@ export function entity(options: Schema): Rule {
       applyTemplates({
         dot: '.',
         ...strings,
+        pluralize,
         entity,
         prefix,
         name: entity.name
@@ -148,7 +149,10 @@ function addLazyLoadModuleRoute(
     true
   );
 
-  if (moduleContent.indexOf(`path: '${strings.dasherize(name)}'`) !== -1) {
+  if (
+    moduleContent.indexOf(`path: '${pluralize(strings.dasherize(name))}'`) !==
+    -1
+  ) {
     context.logger.info('Route path already exists.');
     return;
   }
@@ -157,7 +161,7 @@ function addLazyLoadModuleRoute(
     source,
     normalize(`${filePath}/${fileName}`),
     `{
-      path: '${strings.dasherize(name)}',
+      path: '${pluralize(strings.dasherize(name))}',
       canActivateChild: [AuthenticatedUserGuard],
       loadChildren: () => import('./${strings.dasherize(
         name
@@ -200,7 +204,7 @@ function addSidenavLink(tree: Tree, htmlFilePath: string, entity: any) {
   const recordedChange = tree.beginUpdate(htmlFilePath).insertRight(
     endTagOffset,
     `
-    <a mat-list-item routerLink="/${strings.dasherize(entity.name)}"
+    <a mat-list-item routerLink="/${pluralize(strings.dasherize(entity.name))}"
       class="nav-links__item"
       routerLinkActive="nav-links__item--active" >
       <span class="nav-links__item__text">

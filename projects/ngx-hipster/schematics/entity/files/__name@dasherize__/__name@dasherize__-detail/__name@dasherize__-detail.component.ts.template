@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { <%= classify(name) %>Service } from '../<%= dasherize(name) %>.service';
-import { <%= classify(name) %>FormService } from '../<%= dasherize(name) %>-form.service';
+import { <%= classify(name) %>FormService } from './<%= dasherize(name) %>-form.service';
 import { <%= classify(name) %> } from '../<%= dasherize(name) %>';
 
 @Component({
@@ -54,7 +54,7 @@ export class <%= classify(name) %>DetailComponent implements OnInit {
 
   private subscribeToResponse(result: Observable<<%= classify(name) %>>) {
     result.subscribe({
-      next: () => this.router.navigate(['/<%= dasherize(name) %>']),
+      next: () => this.router.navigate(['/<%= pluralize(dasherize(name)) %>']),
       error: response => {
         this.isSaveOrUpdateInProgress = false;
         this.error = response.error
@@ -68,7 +68,7 @@ export class <%= classify(name) %>DetailComponent implements OnInit {
   }
 
   cancel() {
-    this.router.navigate(['/<%= dasherize(name) %>']);
+    this.router.navigate(['/<%= pluralize(dasherize(name)) %>']);
     return false;
   }
 }
