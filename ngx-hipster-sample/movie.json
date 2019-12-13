@@ -15,7 +15,7 @@
       "validation": {
         "required": true,
         "minlength": 2,
-        "maxlength": 20
+        "maxlength": 200
       }
     },
     {
@@ -24,7 +24,8 @@
       "dataType": "string",
       "controlType": "textarea",
       "validation": {
-        "minlength": 100
+        "minlength": 100,
+        "maxlength": 1000
       }
     },
     {
@@ -32,7 +33,9 @@
       "name": "genre",
       "dataType": "string",
       "controlType": "radio",
-      "validation": {},
+      "validation": {
+        "required": true
+      },
       "options": [
         {
           "name": "Adventure",

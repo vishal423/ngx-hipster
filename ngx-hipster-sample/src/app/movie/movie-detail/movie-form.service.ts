@@ -15,10 +15,13 @@ export class MovieFormService {
       title: this.formBuilder.control(movie.title, [
         Validators.required,
         Validators.minLength(2),
-        Validators.maxLength(20)
+        Validators.maxLength(200)
       ]),
-      plot: this.formBuilder.control(movie.plot, [Validators.minLength(100)]),
-      genre: this.formBuilder.control(movie.genre, [])
+      plot: this.formBuilder.control(movie.plot, [
+        Validators.minLength(100),
+        Validators.maxLength(1000)
+      ]),
+      genre: this.formBuilder.control(movie.genre, [Validators.required])
     });
   }
 
