@@ -71,14 +71,6 @@ ng add ngx-hipster
           "label": "Science Fiction"
         }
       ]
-    },
-    {
-      "label": "Release Date",
-      "name": "releaseDate",
-      "dataType": "date",
-      "controlType": "text",
-      "format": "MM/dd/yy",
-      "validation": {}
     }
   ]
 }

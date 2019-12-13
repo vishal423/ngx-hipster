@@ -37,7 +37,7 @@ export class <%= classify(name) %>DetailComponent implements OnInit {
   saveOrUpdate() {
     this.isSaveOrUpdateInProgress = true;
     this.error = undefined;
-    if (this.form.value.id) {
+    if (this.form.value.<%= primaryKey %>) {
       this.subscribeToResponse(
         this.<%= camelize(name) %>Service.update(
           this.formService.fromFormGroup(this.form)

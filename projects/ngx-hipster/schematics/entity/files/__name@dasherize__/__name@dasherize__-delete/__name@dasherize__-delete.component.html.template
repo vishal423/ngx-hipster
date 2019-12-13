@@ -2,7 +2,7 @@
 <mat-dialog-content>
   <div class="content">
     Are you sure you want to delete <%= name %>
-    <strong>{{ data.id }}</strong> ?
+    <strong>{{ data.<%= primaryKey %> }}</strong> ?
   </div>
 </mat-dialog-content>
 <mat-dialog-actions>

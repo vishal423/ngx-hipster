@@ -18,8 +18,8 @@ export class <%= classify(name) %>Service {
       .get<<%= classify(name) %>[]>(this.resourceUrl);
   }
 
-  getById(id: number): Observable<<%= classify(name) %>> {
-    return this.http.get<<%= classify(name) %>>(`${this.resourceUrl}/${id}`);
+  getById(<%= primaryKey %>: <%= primaryKeyDataType %>): Observable<<%= classify(name) %>> {
+    return this.http.get<<%= classify(name) %>>(`${this.resourceUrl}/${<%= primaryKey %>}`);
   }
 
   create(<%= camelize(name) %>: <%= classify(name) %>): Observable<<%= classify(name) %>> {
@@ -28,12 +28,12 @@ export class <%= classify(name) %>Service {
 
   update(<%= camelize(name) %>: <%= classify(name) %>): Observable<<%= classify(name) %>> {
     return this.http.put<<%= classify(name) %>>(
-      `${this.resourceUrl}/${<%= camelize(name) %>.id}`,
+      `${this.resourceUrl}/${<%= camelize(name) %>.<%= primaryKey %>}`,
       <%= camelize(name) %>
     );
   }
 
-  delete(id: number) {
-    return this.http.delete<any>(`${this.resourceUrl}/${id}`);
+  delete(<%= primaryKey %>: <%= primaryKeyDataType %>) {
+    return this.http.delete<any>(`${this.resourceUrl}/${<%= primaryKey %>}`);
   }
 }

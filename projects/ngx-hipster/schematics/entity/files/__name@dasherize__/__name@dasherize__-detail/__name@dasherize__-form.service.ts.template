@@ -10,10 +10,9 @@ export class <%= classify(name) %>FormService {
   constructor(private formBuilder: FormBuilder) {}
 
   toFormGroup(
-    <%= camelize(name) %>: Partial<<%= classify(name) %>> = {id: undefined}
+    <%= camelize(name) %>: Partial<<%= classify(name) %>> = {}
   ) {
     return this.formBuilder.group({
-      id: this.formBuilder.control(<%= camelize(name) %>.id),
       <% for (let fieldIndex = 0; fieldIndex < entity.fields.length; fieldIndex++) {
           const field = entity.fields[fieldIndex];
       %><%= field.name %>: this.formBuilder.control(<%= camelize(name) %>.<%= field.name %>, [
@@ -27,9 +26,11 @@ export class <%= classify(name) %>FormService {
 
   fromFormGroup(formGroup: FormGroup) {
     return {
-      <% for (let fieldIndex = 0; fieldIndex < entity.fields.length; fieldIndex++) {
-          const field = entity.fields[fieldIndex];
-      %><%= field.name %>: formGroup.get('<%= field.name %>').value<%= (fieldIndex === (entity.fields.length - 1)) ? '' : ',' %>
+      <%
+      const visibleFields = entity.fields.filter(field => entity.pageOptions.edit.hideFields.includes(field.name) === false);
+      for (let fieldIndex = 0; fieldIndex < visibleFields.length; fieldIndex++) {
+          const field = visibleFields[fieldIndex];
+      %><%= field.name %>: formGroup.get('<%= field.name %>').value<%= (fieldIndex === (visibleFields.length - 1)) ? '' : ',' %>
       <% } %>
     };
   }

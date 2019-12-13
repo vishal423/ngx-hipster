@@ -12,7 +12,7 @@ import { <%= classify(name) %> } from '../<%= dasherize(name) %>';
   styleUrls: ['./<%= dasherize(name) %>-list.component.scss']
 })
 export class <%= classify(name) %>ListComponent implements OnInit {
-  displayedColumns = [<% for (let field of entity.fields) {%>'<%= field.name %>', <% } %>'formActions'];
+  displayedColumns = [<% for (let colName of entity.pageOptions.list.displayFields) {%>'<%= colName %>', <% } %>'formActions'];
   routeData$ = this.route.data;
   showLoader = false;
 
@@ -25,7 +25,7 @@ export class <%= classify(name) %>ListComponent implements OnInit {
 
   ngOnInit() {}
 
-  delete(id: number, <%= camelize(name) %>: <%= classify(name) %>) {
+  delete(<%= primaryKey %>: <%= primaryKeyDataType %>, <%= camelize(name) %>: <%= classify(name) %>) {
     const dialogRef = this.dialog.open(<%= classify(name) %>DeleteComponent, {
       data: <%= camelize(name) %>
     });
@@ -33,7 +33,7 @@ export class <%= classify(name) %>ListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.showLoader = true;
-        this.<%= camelize(name) %>Service.delete(id).subscribe({
+        this.<%= camelize(name) %>Service.delete(<%= primaryKey %>).subscribe({
           next: () => this.router.navigate(['/<%= pluralize(dasherize(name)) %>']),
           error: () => (this.showLoader = false),
           complete: () => (this.showLoader = false)

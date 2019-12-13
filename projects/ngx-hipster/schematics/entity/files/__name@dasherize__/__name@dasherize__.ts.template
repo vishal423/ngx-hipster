@@ -1,4 +1,4 @@
 export interface <%= classify(name) %> {
-  id ?:number;<% for (let field of entity.fields) { %>
+  <% for (let field of entity.fields) { %>
   <%= field.name %><% if (!field.validation.required) { %>?<% } %>: <% if (field.dataType === 'date') { %>Date<% } else { %><%= field.dataType %><% } %>;<% } %>
 }

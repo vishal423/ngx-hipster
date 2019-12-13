@@ -1,7 +1,22 @@
 export interface Entity {
   name: string;
   pageTitle: string;
+  primaryField: string;
   fields: Field[];
+  pageOptions?: PageOptions;
+}
+
+export interface PageOptions {
+  edit?: EditPageOptions;
+  list?: ListPageOptions;
+}
+
+export interface EditPageOptions {
+  hideFields: string[];
+}
+
+export interface ListPageOptions {
+  displayFields: string[];
 }
 
 export interface Field {

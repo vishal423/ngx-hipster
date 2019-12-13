@@ -10,7 +10,7 @@
     </mat-progress-spinner>
     <mat-card-title><%= name %></mat-card-title>
     <mat-card-subtitle>{{
-      <%= camelize(name) %>?.id
+      <%= camelize(name) %>?.<%= primaryKey %>
         ? 'Update an existing <%= name %>.'
         : 'Creates a new <%= name %>.'
     }}</mat-card-subtitle>
@@ -18,7 +18,8 @@
       {{ error ? error : '&nbsp;' }}
     </div>
     <mat-card-content class="content"><%
-      for (let field of entity.fields) {
+      const visibleFields = entity.fields.filter(field => entity.pageOptions.edit.hideFields.includes(field.name) === false);
+      for (let field of visibleFields) {
         if (field.controlType !== 'radio') { %>
       <mat-form-field class="full-width">
         <mat-label><%= field.label %></mat-label><%
@@ -63,7 +64,7 @@
         type="submit"
       >
         <mat-icon>save</mat-icon>
-        <span>{{ <%= camelize(name) %>?.id ? 'Update' : 'Save' }} </span>
+        <span>{{ <%= camelize(name) %>?.<%= primaryKey %> ? 'Update' : 'Save' }} </span>
       </button>
     </mat-card-actions>
   </mat-card>

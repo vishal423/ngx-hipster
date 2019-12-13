@@ -15,7 +15,7 @@ import * as ts from '@schematics/angular/third_party/github.com/Microsoft/TypeSc
 
 import { getProject, pluralize } from '../utils/utils';
 import { Schema } from './schema';
-import { Entity } from './entity';
+import { Entity, Field } from './entity';
 import {
   addModuleExport,
   applyChanges,
@@ -48,6 +48,13 @@ export function entity(options: Schema): Rule {
         `Project type : ${project.projectType} is not supported by this schematic`
       );
     }
+
+    if (!entity.primaryField) {
+      entity.primaryField = 'id';
+    }
+
+    handleUnknownPrimaryField(entity);
+    handleUnknownPageOptions(entity);
 
     addImportStatement(
       tree,
@@ -95,6 +102,13 @@ export function entity(options: Schema): Rule {
       '@angular/material/tooltip'
     );
 
+    const primaryKeyField = entity.fields.find(
+      (field: Field) => field.name === entity.primaryField
+    );
+
+    const primaryKeyDataType =
+      primaryKeyField !== undefined ? primaryKeyField.dataType : 'number';
+
     const templateSource = apply(url('./files'), [
       applyTemplates({
         dot: '.',
@@ -102,7 +116,9 @@ export function entity(options: Schema): Rule {
         pluralize,
         entity,
         prefix,
-        name: entity.name
+        name: entity.name,
+        primaryKey: entity.primaryField,
+        primaryKeyDataType
       }),
       move(normalize(sourcePath))
     ]);
@@ -215,4 +231,46 @@ function addSidenavLink(tree: Tree, htmlFilePath: string, entity: any) {
   );
 
   tree.commitUpdate(recordedChange);
+}
+
+function handleUnknownPrimaryField(entity: Entity) {
+  if (!entity.primaryField) {
+    entity.primaryField = 'id';
+  }
+
+  const primaryField = entity.fields.find(
+    (field: Field) => field.name === entity.primaryField
+  );
+  if (!primaryField) {
+    const field: Field = {
+      name: 'id',
+      label: 'id',
+      controlType: 'text',
+      dataType: 'number',
+      validation: {}
+    } as Field;
+    entity.fields.unshift(field);
+  }
+}
+
+function handleUnknownPageOptions(entity: Entity) {
+  if (!entity.pageOptions) {
+    entity.pageOptions = {};
+  }
+
+  if (!entity.pageOptions.list) {
+    entity.pageOptions.list = {
+      displayFields: entity.fields
+        .filter((field: Field) => field.name !== entity.primaryField)
+        .map((field: Field) => field.name)
+    };
+  }
+
+  if (!entity.pageOptions.edit) {
+    entity.pageOptions.edit = {
+      hideFields: entity.fields
+        .filter((field: Field) => field.name === entity.primaryField)
+        .map((field: Field) => field.name)
+    };
+  }
 }
