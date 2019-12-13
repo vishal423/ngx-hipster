@@ -1,0 +1,35 @@
+@import '../../../scss/variables';
+
+.logo {
+  outline: none;
+  display: inline-flex;
+}
+
+.logo-img {
+  height: 40px;
+  padding-left: 0.5em;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.nav-links {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-top: 0;
+}
+
+.nav-links__item {
+  color: $light-text-color;
+}
+
+.nav-links__item--active {
+  color: $accent;
+}
+
+.route-loader {
+  height: 4px;
+  background-color: $primary;
+}

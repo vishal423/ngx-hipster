@@ -1,0 +1,73 @@
+<form [formGroup]="form" novalidate (ngSubmit)="saveOrUpdate()">
+  <mat-card class="card">
+    <mat-progress-spinner
+      *ngIf="isSaveOrUpdateInProgress"
+      diameter="50"
+      class="form-overlay"
+      color="accent"
+      mode="indeterminate"
+    >
+    </mat-progress-spinner>
+    <mat-card-title>movie</mat-card-title>
+    <mat-card-subtitle>{{
+      movie?.id ? 'Update an existing movie.' : 'Creates a new movie.'
+    }}</mat-card-subtitle>
+    <div class="error mat-error">
+      {{ error ? error : '&nbsp;' }}
+    </div>
+    <mat-card-content class="content">
+      <mat-form-field class="full-width">
+        <mat-label>Title</mat-label>
+        <input
+          matInput
+          placeholder="Enter movie Title"
+          formControlName="title"
+          required
+        />
+        <mat-error
+          ><hip-ngx-error
+            [control]="form.get('title')"
+            label="Title"
+          ></hip-ngx-error
+        ></mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <mat-label>Plot</mat-label>
+        <textarea
+          matInput
+          placeholder="Enter movie Plot"
+          formControlName="plot"
+        ></textarea>
+        <mat-error
+          ><hip-ngx-error
+            [control]="form.get('plot')"
+            label="Plot"
+          ></hip-ngx-error
+        ></mat-error>
+      </mat-form-field>
+      <div class="full-width content--inline-display">
+        <mat-label>Genre</mat-label>
+        <mat-radio-group formControlName="genre">
+          <mat-radio-button value="adventure">Adventure</mat-radio-button>
+          <mat-radio-button value="drama">Drama</mat-radio-button>
+          <mat-radio-button value="sci-fi">Science Fiction</mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button (click)="cancel()">
+        <mat-icon>cancel</mat-icon>
+        <span>Cancel</span>
+      </button>
+      <button
+        mat-raised-button
+        color="accent"
+        [disabled]="form.invalid || isSaveOrUpdateInProgress"
+        type="submit"
+      >
+        <mat-icon>save</mat-icon>
+        <span>{{ movie?.id ? 'Update' : 'Save' }} </span>
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</form>

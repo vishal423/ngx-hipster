@@ -1,0 +1,47 @@
+<div class="container">
+  <mat-card class="card" tabindex="0" role="form">
+    <mat-card-title class="title">Sign In</mat-card-title>
+    <div class="error mat-error">
+      {{ loginError ? 'Invalid username or password.' : '&nbsp;' }}
+    </div>
+    <form class="form" [formGroup]="loginForm">
+      <mat-form-field>
+        <mat-label>Username</mat-label>
+        <input
+          matInput
+          placeholder="Enter your username"
+          formControlName="username"
+          required
+        />
+        <mat-error *ngIf="username.invalid"
+          >Username must contain a value</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          type="password"
+          placeholder="Enter your password"
+          formControlName="password"
+          required
+        />
+        <mat-error *ngIf="password.invalid"
+          >Password must contain a value</mat-error
+        >
+      </mat-form-field>
+      <mat-card-actions>
+        <button
+          mat-raised-button
+          color="accent"
+          class="login-btn"
+          [disabled]="loginForm.invalid"
+          (click)="login()"
+        >
+          <mat-icon>exit_to_app</mat-icon>
+          <span>Sign In</span>
+        </button>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+</div>

@@ -1,0 +1,21 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import '~@angular/material/theming';
+@import './scss/variables';
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+mat-icon.mat-icon + span {
+  padding-left: 0.35rem;
+}
+
+@include mat-core();
+$theme: mat-light-theme($primary-palette, $accent-palette, $warn-palette);
+@include angular-material-theme($theme);
