@@ -2,6 +2,12 @@
 
 > Angular schematics to scaffold production ready angular material applications
 
+# Demo
+
+You can try out demo application at https://vishal423.github.io/ngx-hipster/index.html (login with username: `admin` and password: `adm in` to access the protected pages)
+  
+Demo application uses angular in-memory-api to intercept all back-end api calls.
+
 # Pre-requisites
 
 This guide assumes that you have already created a new angular cli application with `SCSS` styles.
