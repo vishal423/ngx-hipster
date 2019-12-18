@@ -33,7 +33,7 @@
         } else if (field.controlType === 'text') { %>
         <input
           matInput
-          placeholder="Enter <%= name %> <%= field.label %>"
+          placeholder="Enter <%= name %> <%= field.label.toLowerCase() %>"
           formControlName="<%= field.name %>"
           <%= field.validation.required ? 'required' : ''%>
         /><%
@@ -43,7 +43,7 @@
       } else if (field.controlType === 'radio') { %>
       <div class="full-width content--inline-display">
         <mat-label><%= field.label %></mat-label>
-        <mat-radio-group formControlName="<%= field.name %>"><%
+        <mat-radio-group formControlName="<%= field.name %>" aria-label="<%= field.label %>" ><%
         for (let option of field.options) { %>
           <mat-radio-button value="<%= option.name %>"><%= option.label %></mat-radio-button><%
           } %>
