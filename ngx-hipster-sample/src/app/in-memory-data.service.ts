@@ -25,42 +25,96 @@ export class InMemoryDataService implements InMemoryDbService {
       {
         id: 1,
         title: 'Star Wars: Episode IV - A New Hope',
-        genre: 'Adventure',
+        rated: 'PG',
+        genres: ['Action', 'Adventure', 'Fantasy'],
+        director: 'George Lucas',
+        writers: ['George Lucas'],
+        actors: [
+          'Mark Hamill',
+          'Harrison Ford',
+          'Carrie Fisher',
+          'Peter Cushing'
+        ],
         plot:
           "Luke Skywalker joins forces with a Jedi Knight, a cocky pilot, a wookiee and two droids to save the universe from the Empire's world-destroying battle-station, while also attempting to rescue Princess Leia from the evil Darth Vader."
       },
       {
         id: 2,
         title: 'Star Wars: Episode V - The Empire Strikes Back',
-        genre: 'Adventure',
+        rated: 'PG',
+        genres: ['Action', 'Adventure', 'Fantasy'],
+        director: 'Irvin Kershner',
+        writers: ['Leigh Brackett', 'Lawrence Kasdan', 'George Lucas'],
+        actors: [
+          'Mark Hamill',
+          'Harrison Ford',
+          'Carrie Fisher',
+          'Billy Dee Williams'
+        ],
         plot:
           'After the rebels have been brutally overpowered by the Empire on their newly established base, Luke Skywalker takes advanced Jedi training with Master Yoda, while his friends are pursued by Darth Vader as part of his plan to capture Luke.'
       },
       {
         id: 3,
         title: 'Star Wars: Episode VI - Return of the Jedi',
-        genre: 'Adventure',
+        rated: 'PG',
+        genres: ['Action', 'Adventure', 'Fantasy'],
+        director: 'Richard Marquand',
+        writers: ['Lawrence Kasdan', 'George Lucas'],
+        actors: [
+          'Mark Hamill',
+          'Harrison Ford',
+          'Carrie Fisher',
+          'Billy Dee Williams'
+        ],
         plot:
           'After rescuing Han Solo from the palace of Jabba the Hutt, the rebels attempt to destroy the second Death Star, while Luke struggles to make Vader return from the dark side of the Force.'
       },
       {
         id: 4,
         title: 'Star Wars: Episode I - The Phantom Menace',
-        genre: 'Adventure',
+        rated: 'PG',
+        genres: ['Action', 'Adventure', 'Fantasy'],
+        director: 'George Lucas',
+        writers: ['George Lucas'],
+        actors: [
+          'Liam Neeson',
+          'Ewan McGregor',
+          'Natalie Portman',
+          'Jake Lloyd'
+        ],
         plot:
           'Two Jedi Knights escape a hostile blockade to find allies and come across a young boy who may bring balance to the Force, but the long dormant Sith resurface to reclaim their old glory.'
       },
       {
         id: 5,
         title: 'Star Wars: Episode III - Revenge of the Sith',
-        genre: 'Adventure',
+        rated: 'PG-13',
+        genres: ['Action', 'Adventure', 'Fantasy'],
+        director: 'George Lucas',
+        writers: ['George Lucas'],
+        actors: [
+          'Ewan McGregor',
+          'Natalie Portman',
+          'Hayden Christensen',
+          'Ian McDiarmid'
+        ],
         plot:
           'Three years after the onset of the Clone Wars; the noble Jedi Knights are spread out across the galaxy leading a massive clone army in the war against the Separatists. After Chancellor ...'
       },
       {
         id: 6,
         title: 'Star Wars: Episode II - Attack of the Clones',
-        genre: 'Adventure',
+        rated: 'PG',
+        genres: ['Action', 'Adventure', 'Fantasy'],
+        director: 'George Lucas',
+        writers: ['George Lucas', 'Jonathan Hales'],
+        actors: [
+          'Ewan McGregor',
+          'Natalie Portman',
+          'Hayden Christensen',
+          'Christopher Lee'
+        ],
         plot:
           'Ten years after initially meeting, Anakin Skywalker shares a forbidden romance with Padmé, while Obi-Wan investigates an assassination attempt on the Senator and discovers a secret clone army crafted for the Jedi.'
       }

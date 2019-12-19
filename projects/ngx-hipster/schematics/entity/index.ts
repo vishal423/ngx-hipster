@@ -73,10 +73,17 @@ export function entity(options: Schema): Rule {
 
     addSidenavLink(
       tree,
+      context,
       normalize(`${sourcePath}/layout/sidenav/sidenav.component.html`),
       entity
     );
 
+    addModuleExport(
+      tree,
+      normalize(`${sourcePath}/material/material.module.ts`),
+      'MatSelectModule',
+      '@angular/material/select'
+    );
     addModuleExport(
       tree,
       normalize(`${sourcePath}/material/material.module.ts`),
@@ -169,7 +176,7 @@ function addLazyLoadModuleRoute(
     moduleContent.indexOf(`path: '${pluralize(strings.dasherize(name))}'`) !==
     -1
   ) {
-    context.logger.info('Route path already exists.');
+    context.logger.info('Skip route addition. Route path already exists.');
     return;
   }
 
@@ -191,7 +198,12 @@ function addLazyLoadModuleRoute(
   applyChanges(tree, [change], normalize(`${filePath}/${fileName}`));
 }
 
-function addSidenavLink(tree: Tree, htmlFilePath: string, entity: any) {
+function addSidenavLink(
+  tree: Tree,
+  context: SchematicContext,
+  htmlFilePath: string,
+  entity: any
+) {
   const buffer = tree.read(htmlFilePath);
 
   if (!buffer) {
@@ -201,6 +213,18 @@ function addSidenavLink(tree: Tree, htmlFilePath: string, entity: any) {
   }
 
   const content = buffer.toString('utf-8');
+
+  if (
+    content.includes(
+      `routerLink="/${pluralize(strings.dasherize(entity.name))}"`
+    )
+  ) {
+    context.logger.info(
+      'Skip navigation element in the sidenav. Navigation element already exists.'
+    );
+    return;
+  }
+
   const navListTag = getHtmlChildElementByTagName('mat-nav-list', content);
 
   if (!navListTag) {

@@ -26,7 +26,7 @@
         if (field.controlType === 'textarea') { %>
         <textarea
           matInput
-          placeholder="Enter <%= name %> <%= field.label %>"
+          placeholder="Enter <%= name %> <%= field.label.toLowerCase() %>"
           formControlName="<%= field.name %>"
           <%= field.validation.required ? 'required' : ''%>
         ></textarea><%
@@ -37,16 +37,19 @@
           formControlName="<%= field.name %>"
           <%= field.validation.required ? 'required' : ''%>
         /><%
+        } else if(field.controlType === 'select') {  %>
+        <mat-select formControlName="<%= field.name %>" <%= field.validation.required ? 'required' : '' %> <%= field.multiple ? 'multiple' : '' %> >
+          <% if(!field.multiple) { %><mat-option>--Select--</mat-option><% } %>
+          <mat-option *ngFor="let <%= camelize(field.name + 'Option') %> of <%= camelize(field.name + 'Options') %>" [value]="<%= camelize(field.name + 'Option') %>.key">{{<%= camelize(field.name + 'Option') %>.value}}</mat-option>
+        </mat-select><%
         } %>
         <mat-error><hip-ngx-error [control]="form.get('<%= field.name %>')" label="<%= field.label %>"></hip-ngx-error></mat-error>
       </mat-form-field><%
       } else if (field.controlType === 'radio') { %>
       <div class="full-width content--inline-display">
         <mat-label><%= field.label %></mat-label>
-        <mat-radio-group formControlName="<%= field.name %>" aria-label="<%= field.label %>" ><%
-        for (let option of field.options) { %>
-          <mat-radio-button value="<%= option.name %>"><%= option.label %></mat-radio-button><%
-          } %>
+        <mat-radio-group formControlName="<%= field.name %>" aria-label="<%= field.label %>" >
+          <mat-radio-button *ngFor="let <%= camelize(field.name + 'Option') %> of <%= camelize(field.name + 'Options') %>" [value]="<%= camelize(field.name + 'Option') %>.key">{{<%= camelize(field.name + 'Option') %>.value}}</mat-radio-button>
         </mat-radio-group>
       </div><%
         }

@@ -21,7 +21,9 @@ export class MovieFormService {
         Validators.minLength(100),
         Validators.maxLength(1000)
       ]),
-      genre: this.formBuilder.control(movie.genre, [Validators.required])
+      rated: this.formBuilder.control(movie.rated, []),
+      genres: this.formBuilder.control(movie.genres, [Validators.required]),
+      director: this.formBuilder.control(movie.director, [Validators.required])
     });
   }
 
@@ -30,7 +32,9 @@ export class MovieFormService {
       id: formGroup.get('id').value,
       title: formGroup.get('title').value,
       plot: formGroup.get('plot').value,
-      genre: formGroup.get('genre').value
+      rated: formGroup.get('rated').value,
+      genres: formGroup.get('genres').value,
+      director: formGroup.get('director').value
     };
   }
 }

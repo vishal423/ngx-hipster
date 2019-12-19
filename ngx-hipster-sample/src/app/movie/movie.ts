@@ -2,5 +2,7 @@ export interface Movie {
   id?: number;
   title: string;
   plot?: string;
-  genre: string;
+  rated?: string;
+  genres: string[];
+  director: string;
 }

@@ -3,7 +3,7 @@
   "pageTitle": "Movies",
   "pageOptions": {
     "list": {
-      "displayFields": ["title", "genre"]
+      "displayFields": ["title", "director"]
     }
   },
   "fields": [
@@ -29,21 +29,66 @@
       }
     },
     {
-      "label": "Genre",
-      "name": "genre",
+      "label": "Rated",
+      "name": "rated",
       "dataType": "string",
       "controlType": "radio",
+      "validation": {},
+      "options": [
+        {
+          "name": "PG",
+          "label": "PG"
+        },
+        {
+          "name": "PG-13",
+          "label": "PG - 13"
+        }
+      ]
+    },
+    {
+      "label": "Genres",
+      "name": "genres",
+      "dataType": "string",
+      "controlType": "select",
       "validation": {
         "required": true
       },
+      "multiple": true,
       "options": [
         {
           "name": "Adventure",
           "label": "Adventure"
         },
         {
-          "name": "Drama",
-          "label": "Drama"
+          "name": "Action",
+          "label": "Action"
+        },
+        {
+          "name": "Fantasy",
+          "label": "Fantasy"
+        }
+      ]
+    },
+    {
+      "label": "Director",
+      "name": "director",
+      "dataType": "string",
+      "controlType": "select",
+      "validation": {
+        "required": true
+      },
+      "options": [
+        {
+          "name": "George Lucas",
+          "label": "George Lucas"
+        },
+        {
+          "name": "Irvin Kershner",
+          "label": "Irvin Kershner"
+        },
+        {
+          "name": "Richard Marquand",
+          "label": "Richard Marquand"
         }
       ]
     }

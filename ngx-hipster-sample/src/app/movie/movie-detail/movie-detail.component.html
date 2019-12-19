@@ -20,7 +20,7 @@
         <mat-label>Title</mat-label>
         <input
           matInput
-          placeholder="Enter movie Title"
+          placeholder="Enter movie title"
           formControlName="title"
           required
         />
@@ -35,7 +35,7 @@
         <mat-label>Plot</mat-label>
         <textarea
           matInput
-          placeholder="Enter movie Plot"
+          placeholder="Enter movie plot"
           formControlName="plot"
         ></textarea>
         <mat-error
@@ -46,12 +46,48 @@
         ></mat-error>
       </mat-form-field>
       <div class="full-width content--inline-display">
-        <mat-label>Genre</mat-label>
-        <mat-radio-group formControlName="genre">
-          <mat-radio-button value="Adventure">Adventure</mat-radio-button>
-          <mat-radio-button value="Drama">Drama</mat-radio-button>
+        <mat-label>Rated</mat-label>
+        <mat-radio-group formControlName="rated" aria-label="Rated">
+          <mat-radio-button
+            *ngFor="let ratedOption of ratedOptions"
+            [value]="ratedOption.key"
+            >{{ ratedOption.value }}</mat-radio-button
+          >
         </mat-radio-group>
       </div>
+      <mat-form-field class="full-width">
+        <mat-label>Genres</mat-label>
+        <mat-select formControlName="genres" required multiple>
+          <mat-option
+            *ngFor="let genresOption of genresOptions"
+            [value]="genresOption.key"
+            >{{ genresOption.value }}</mat-option
+          >
+        </mat-select>
+        <mat-error
+          ><hip-ngx-error
+            [control]="form.get('genres')"
+            label="Genres"
+          ></hip-ngx-error
+        ></mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <mat-label>Director</mat-label>
+        <mat-select formControlName="director" required>
+          <mat-option>--Select--</mat-option>
+          <mat-option
+            *ngFor="let directorOption of directorOptions"
+            [value]="directorOption.key"
+            >{{ directorOption.value }}</mat-option
+          >
+        </mat-select>
+        <mat-error
+          ><hip-ngx-error
+            [control]="form.get('director')"
+            label="Director"
+          ></hip-ngx-error
+        ></mat-error>
+      </mat-form-field>
     </mat-card-content>
     <mat-card-actions>
       <button mat-raised-button (click)="cancel()">

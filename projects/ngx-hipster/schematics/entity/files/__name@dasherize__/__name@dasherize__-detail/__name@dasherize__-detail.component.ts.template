@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';<%
+const fieldContainOptions = entity.fields
+    .filter(field => entity.pageOptions.edit.hideFields.includes(field.name) === false)
+    .filter(field => field.options)
+if(fieldContainOptions) { %>import { KeyValue } from '@angular/common';<% } %>
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -16,7 +20,15 @@ export class <%= classify(name) %>DetailComponent implements OnInit {
 
   <%= camelize(name) %>: <%= classify(name) %>;
   form: FormGroup;
-  isSaveOrUpdateInProgress = false;
+  isSaveOrUpdateInProgress = false; <%
+
+  const visibleFields = entity.fields.filter(field => entity.pageOptions.edit.hideFields.includes(field.name) === false);
+  for (let field of visibleFields) {
+    if(field.options) {
+  %>
+  <%= camelize(field.name + 'Options') %>: KeyValue<string, string>[] = <%= JSON.stringify(field.options.map(fieldOption => ({ "key": fieldOption.name, "value": fieldOption.label }))) %>; <%
+    }
+  } %>
   error: string = undefined;
 
   constructor(

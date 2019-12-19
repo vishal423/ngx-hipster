@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { KeyValue } from '@angular/common';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -16,6 +17,20 @@ export class MovieDetailComponent implements OnInit {
   movie: Movie;
   form: FormGroup;
   isSaveOrUpdateInProgress = false;
+  ratedOptions: KeyValue<string, string>[] = [
+    { key: 'PG', value: 'PG' },
+    { key: 'PG-13', value: 'PG - 13' }
+  ];
+  genresOptions: KeyValue<string, string>[] = [
+    { key: 'Adventure', value: 'Adventure' },
+    { key: 'Action', value: 'Action' },
+    { key: 'Fantasy', value: 'Fantasy' }
+  ];
+  directorOptions: KeyValue<string, string>[] = [
+    { key: 'George Lucas', value: 'George Lucas' },
+    { key: 'Irvin Kershner', value: 'Irvin Kershner' },
+    { key: 'Richard Marquand', value: 'Richard Marquand' }
+  ];
   error: string = undefined;
 
   constructor(

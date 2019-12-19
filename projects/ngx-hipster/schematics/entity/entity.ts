@@ -25,6 +25,7 @@ export interface Field {
   dataType: string;
   controlType: string;
   format: string;
+  multiple: boolean;
   validation: Validation;
   options: FieldOption[];
 }
