@@ -42,6 +42,17 @@
           <% if(!field.multiple) { %><mat-option>--Select--</mat-option><% } %>
           <mat-option *ngFor="let <%= camelize(field.name + 'Option') %> of <%= camelize(field.name + 'Options') %>" [value]="<%= camelize(field.name + 'Option') %>.key">{{<%= camelize(field.name + 'Option') %>.value}}</mat-option>
         </mat-select><%
+        } else if(field.controlType === 'autocomplete') {  %>
+        <input
+          type="text"
+          matInput
+          placeholder="Select <%= name %> <%= field.label.toLowerCase() %>"
+          formControlName="<%= field.name %>"
+          [matAutocomplete]="<%= camelize('auto' + field.name) %>"
+        />
+        <mat-autocomplete #<%= camelize('auto' + field.name) %>="matAutocomplete" autoActiveFirstOption="true">
+          <mat-option *ngFor="let <%= camelize(field.name + 'Option') %> of <%= camelize('filtered' + field.name + 'Options') %> | async" [value]="<%= camelize(field.name + 'Option') %>.key">{{ <%= camelize(field.name + 'Option') %>.value }}</mat-option>
+        </mat-autocomplete><%
         } %>
         <mat-error><hip-ngx-error [control]="form.get('<%= field.name %>')" label="<%= field.label %>"></hip-ngx-error></mat-error>
       </mat-form-field><%

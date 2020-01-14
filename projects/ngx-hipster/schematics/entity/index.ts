@@ -109,6 +109,13 @@ export function entity(options: Schema): Rule {
       '@angular/material/tooltip'
     );
 
+    addModuleExport(
+      tree,
+      normalize(`${sourcePath}/material/material.module.ts`),
+      'MatAutocompleteModule',
+      '@angular/material/autocomplete'
+    );
+
     const primaryKeyField = entity.fields.find(
       (field: Field) => field.name === entity.primaryField
     );

@@ -88,6 +88,32 @@
           ></hip-ngx-error
         ></mat-error>
       </mat-form-field>
+      <mat-form-field class="full-width">
+        <mat-label>Writer</mat-label>
+        <input
+          type="text"
+          matInput
+          placeholder="Select movie writer"
+          formControlName="writer"
+          [matAutocomplete]="autowriter"
+        />
+        <mat-autocomplete
+          #autowriter="matAutocomplete"
+          autoActiveFirstOption="true"
+        >
+          <mat-option
+            *ngFor="let writerOption of filteredwriterOptions | async"
+            [value]="writerOption.key"
+            >{{ writerOption.value }}</mat-option
+          >
+        </mat-autocomplete>
+        <mat-error
+          ><hip-ngx-error
+            [control]="form.get('writer')"
+            label="Writer"
+          ></hip-ngx-error
+        ></mat-error>
+      </mat-form-field>
     </mat-card-content>
     <mat-card-actions>
       <button mat-raised-button (click)="cancel()">

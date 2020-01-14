@@ -5,4 +5,5 @@ export interface Movie {
   rated?: string;
   genres: string[];
   director: string;
+  writer: string;
 }

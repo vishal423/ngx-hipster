@@ -1,3 +1,4 @@
+<% const visibleFields = entity.fields.filter(field => entity.pageOptions.edit.hideFields.includes(field.name) === false); %>
 import { Component, OnInit } from '@angular/core';<%
 const fieldContainOptions = entity.fields
     .filter(field => entity.pageOptions.edit.hideFields.includes(field.name) === false)
@@ -6,6 +7,11 @@ if(fieldContainOptions) { %>import { KeyValue } from '@angular/common';<% } %>
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
+<% const containsAutocomplete = visibleFields.find(field => field.controlType === 'autocomplete');
+if( containsAutocomplete) {
+%>
+import { startWith, map } from 'rxjs/operators';<% 
+} %>
 
 import { <%= classify(name) %>Service } from '../<%= dasherize(name) %>.service';
 import { <%= classify(name) %>FormService } from './<%= dasherize(name) %>-form.service';
@@ -21,12 +27,14 @@ export class <%= classify(name) %>DetailComponent implements OnInit {
   <%= camelize(name) %>: <%= classify(name) %>;
   form: FormGroup;
   isSaveOrUpdateInProgress = false; <%
-
-  const visibleFields = entity.fields.filter(field => entity.pageOptions.edit.hideFields.includes(field.name) === false);
   for (let field of visibleFields) {
     if(field.options) {
   %>
   <%= camelize(field.name + 'Options') %>: KeyValue<string, string>[] = <%= JSON.stringify(field.options.map(fieldOption => ({ "key": fieldOption.name, "value": fieldOption.label }))) %>; <%
+    }
+    if(field.controlType === 'autocomplete') {
+  %>
+  <%= camelize('filtered' + field.name + 'Options') %>: Observable<KeyValue<string, string>[]>;<%
     }
   } %>
   error: string = undefined;
@@ -43,6 +51,16 @@ export class <%= classify(name) %>DetailComponent implements OnInit {
       this.<%= camelize(name) %> = <%= camelize(name) %>;
       this.form = this.formService.toFormGroup(<%= camelize(name) %>);
     });
+    <% 
+    for (let field of visibleFields) {
+      if(field.controlType === 'autocomplete') {
+    %>
+    this.<%= camelize('filtered' + field.name + 'Options') %> = this.form.get('<%= field.name %>').valueChanges.pipe(
+      startWith(null),
+      map((<%= field.name %>: string | null) => <%= field.name %> ? this.<%= camelize('filter' + field.name + 'Options') %>(<%= field.name %>) : this.<%= camelize(field.name + 'Options') %>)
+    );<% 
+    }
+  } %>
     this.error = undefined;
   }
 
@@ -78,6 +96,16 @@ export class <%= classify(name) %>DetailComponent implements OnInit {
       complete: () => (this.isSaveOrUpdateInProgress = false)
     });
   }
+  <% 
+  for (let field of visibleFields) {
+    if(field.controlType === 'autocomplete') {
+  %>
+  private <%= camelize('filter' + field.name + 'Options') %>(<%= field.name %>: string): KeyValue<string, string>[] {
+    return this.<%= camelize(field.name + 'Options') %>
+      .filter(<%= camelize(field.name + 'Option') %> => <%= camelize(field.name + 'Option') %>.value.toLowerCase().indexOf(<%= field.name %>.toLowerCase()) !== -1);
+  }<% 
+    }
+  } %>
 
   cancel() {
     this.router.navigate(['/<%= pluralize(dasherize(name)) %>']);

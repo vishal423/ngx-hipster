@@ -91,6 +91,65 @@
           "label": "Richard Marquand"
         }
       ]
+    },
+    {
+      "label": "Writer",
+      "name": "writer",
+      "dataType": "string",
+      "controlType": "autocomplete",
+      "validation": {
+        "required": true
+      },
+      "options": [
+        {
+          "name": "George Lucas",
+          "label": "George Lucas"
+        },
+        {
+          "name": "Leigh Brackett",
+          "label": "Leigh Brackett"
+        },
+        {
+          "name": "Lawrence Kasdan",
+          "label": "Lawrence Kasdan"
+        },
+        {
+          "name": "Roberto Orci",
+          "label": "Roberto Orci"
+        },
+        {
+          "name": "Gene Roddenberry",
+          "label": "Gene Roddenberry"
+        },
+        {
+          "name": "Rick Berman",
+          "label": "Rick Berman"
+        },
+        {
+          "name": "Brannon Braga",
+          "label": "Brannon Braga"
+        },
+        {
+          "name": "Ronald D. Moore",
+          "label": "Ronald D. Moore"
+        },
+        {
+          "name": "Harve Bennett",
+          "label": "Harve Bennett"
+        },
+        {
+          "name": "Jack B. Sowards",
+          "label": "Jack B. Sowards"
+        },
+        {
+          "name": "Jonathan Hales",
+          "label": "Jonathan Hales"
+        },
+        {
+          "name": "Alex Kurtzman",
+          "label": "Alex Kurtzman"
+        }
+      ]
     }
   ]
 }

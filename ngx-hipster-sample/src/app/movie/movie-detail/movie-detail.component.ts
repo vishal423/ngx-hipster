@@ -4,6 +4,8 @@ import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
+import { startWith, map } from 'rxjs/operators';
+
 import { MovieService } from '../movie.service';
 import { MovieFormService } from './movie-form.service';
 import { Movie } from '../movie';
@@ -31,6 +33,21 @@ export class MovieDetailComponent implements OnInit {
     { key: 'Irvin Kershner', value: 'Irvin Kershner' },
     { key: 'Richard Marquand', value: 'Richard Marquand' }
   ];
+  writerOptions: KeyValue<string, string>[] = [
+    { key: 'George Lucas', value: 'George Lucas' },
+    { key: 'Leigh Brackett', value: 'Leigh Brackett' },
+    { key: 'Lawrence Kasdan', value: 'Lawrence Kasdan' },
+    { key: 'Roberto Orci', value: 'Roberto Orci' },
+    { key: 'Gene Roddenberry', value: 'Gene Roddenberry' },
+    { key: 'Rick Berman', value: 'Rick Berman' },
+    { key: 'Brannon Braga', value: 'Brannon Braga' },
+    { key: 'Ronald D. Moore', value: 'Ronald D. Moore' },
+    { key: 'Harve Bennett', value: 'Harve Bennett' },
+    { key: 'Jack B. Sowards', value: 'Jack B. Sowards' },
+    { key: 'Jonathan Hales', value: 'Jonathan Hales' },
+    { key: 'Alex Kurtzman', value: 'Alex Kurtzman' }
+  ];
+  filteredwriterOptions: Observable<KeyValue<string, string>[]>;
   error: string = undefined;
 
   constructor(
@@ -45,6 +62,13 @@ export class MovieDetailComponent implements OnInit {
       this.movie = movie;
       this.form = this.formService.toFormGroup(movie);
     });
+
+    this.filteredwriterOptions = this.form.get('writer').valueChanges.pipe(
+      startWith(null),
+      map((writer: string | null) =>
+        writer ? this.filterwriterOptions(writer) : this.writerOptions
+      )
+    );
     this.error = undefined;
   }
 
@@ -75,6 +99,13 @@ export class MovieDetailComponent implements OnInit {
       },
       complete: () => (this.isSaveOrUpdateInProgress = false)
     });
+  }
+
+  private filterwriterOptions(writer: string): KeyValue<string, string>[] {
+    return this.writerOptions.filter(
+      writerOption =>
+        writerOption.value.toLowerCase().indexOf(writer.toLowerCase()) !== -1
+    );
   }
 
   cancel() {

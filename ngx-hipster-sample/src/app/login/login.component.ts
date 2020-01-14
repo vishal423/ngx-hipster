@@ -30,8 +30,8 @@ export class LoginComponent implements OnDestroy {
     private snackBar: MatSnackBar
   ) {
     this.loginForm = formBuilder.group({
-      username: formBuilder.control('', [Validators.required]),
-      password: formBuilder.control('', [Validators.required])
+      username: formBuilder.control('admin', [Validators.required]),
+      password: formBuilder.control('admin', [Validators.required])
     });
     this.loginError = false;
   }
