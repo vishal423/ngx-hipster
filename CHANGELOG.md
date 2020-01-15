@@ -4,6 +4,8 @@ All notable changes to the "ngx-hipster" project will be documented in this file
 
 ## [Unreleased]
 
+## [0.4.0] - 2020-01-15
+
 ### Added
 
 - Support `select`, `autocomplete`, and `date` control types
