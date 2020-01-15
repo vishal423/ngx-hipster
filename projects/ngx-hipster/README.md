@@ -4,8 +4,8 @@
 
 # Demo
 
-You can try out demo application at https://vishal423.github.io/ngx-hipster/index.html (login with username: `admin` and password: `adm in` to access the protected pages)
-  
+You can try out demo application at https://vishal423.github.io/ngx-hipster/index.html (login with username: `admin` and password: `admin` to access the protected pages)
+
 Demo application uses angular in-memory-api to intercept all back-end api calls.
 
 # Pre-requisites

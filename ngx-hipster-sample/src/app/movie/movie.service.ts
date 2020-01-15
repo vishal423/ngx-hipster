@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { Movie } from './movie';
 
@@ -13,11 +14,15 @@ export class MovieService {
   constructor(private http: HttpClient) {}
 
   query(): Observable<Movie[]> {
-    return this.http.get<Movie[]>(this.resourceUrl);
+    return this.http
+      .get<Movie[]>(this.resourceUrl)
+      .pipe(map((response: Movie[]) => this.parseArrayResponse(response)));
   }
 
   getById(id: number): Observable<Movie> {
-    return this.http.get<Movie>(`${this.resourceUrl}/${id}`);
+    return this.http
+      .get<Movie>(`${this.resourceUrl}/${id}`)
+      .pipe(map((movie: Movie) => this.parseResponse(movie)));
   }
 
   create(movie: Movie): Observable<Movie> {
@@ -30,5 +35,17 @@ export class MovieService {
 
   delete(id: number) {
     return this.http.delete<any>(`${this.resourceUrl}/${id}`);
+  }
+
+  private parseArrayResponse(response: Movie[]): Movie[] {
+    response.forEach((movie: Movie) => {
+      this.parseResponse(movie);
+    });
+    return response;
+  }
+
+  private parseResponse(movie: Movie): Movie {
+    movie.releaseDate = new Date(movie.releaseDate);
+    return movie;
   }
 }

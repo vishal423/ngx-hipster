@@ -40,6 +40,13 @@
         <td mat-cell *matCellDef="let element">{{ element.director }}</td>
       </ng-container>
 
+      <ng-container matColumnDef="releaseDate">
+        <th mat-header-cell *matHeaderCellDef>Release Date</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.releaseDate | date: 'MM/yyyy' }}
+        </td>
+      </ng-container>
+
       <ng-container matColumnDef="formActions">
         <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let element">

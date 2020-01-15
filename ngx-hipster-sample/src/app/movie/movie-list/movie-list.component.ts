@@ -12,7 +12,7 @@ import { Movie } from '../movie';
   styleUrls: ['./movie-list.component.scss']
 })
 export class MovieListComponent implements OnInit {
-  displayedColumns = ['title', 'director', 'formActions'];
+  displayedColumns = ['title', 'director', 'releaseDate', 'formActions'];
   routeData$ = this.route.data;
   showLoader = false;
 

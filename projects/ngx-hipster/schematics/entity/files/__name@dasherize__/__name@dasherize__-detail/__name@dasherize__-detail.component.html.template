@@ -53,6 +53,16 @@
         <mat-autocomplete #<%= camelize('auto' + classify(field.name)) %>="matAutocomplete" autoActiveFirstOption="true">
           <mat-option *ngFor="let <%= camelize(field.name + 'Option') %> of <%= camelize('filtered' + classify(field.name) + 'Options') %> | async" [value]="<%= camelize(field.name + 'Option') %>.key">{{ <%= camelize(field.name + 'Option') %>.value }}</mat-option>
         </mat-autocomplete><%
+        } else if(field.controlType === 'date') {  %>
+        <input
+          type="text" <%= field.validation.required ? 'required' : '' %>
+          matInput
+          placeholder="Select <%= name %> <%= field.label.toLowerCase() %>"
+          formControlName="<%= field.name %>"
+          [matDatepicker]="<%= camelize(field.name + 'Picker') %>"
+        />
+        <mat-datepicker-toggle matSuffix color="accent" [for]="<%= camelize(field.name + 'Picker') %>"></mat-datepicker-toggle>
+        <mat-datepicker color="accent" #<%= camelize(field.name + 'Picker') %>></mat-datepicker><% 
         } %>
         <mat-error><hip-ngx-error [control]="form.get('<%= field.name %>')" label="<%= field.label %>"></hip-ngx-error></mat-error>
       </mat-form-field><%

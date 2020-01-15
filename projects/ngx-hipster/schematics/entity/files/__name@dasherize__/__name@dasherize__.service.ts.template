@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs';<% 
+  const containsDateField = entity.fields.find(field => field.dataType == 'date') != undefined; 
+  if(containsDateField) {
+%>
+import { map } from 'rxjs/operators';<% 
+  } %>
 
 import { <%= classify(name) %> } from './<%= dasherize(name) %>';
 
@@ -15,11 +20,17 @@ export class <%= classify(name) %>Service {
 
   query(): Observable<<%= classify(name) %>[]> {
     return this.http
-      .get<<%= classify(name) %>[]>(this.resourceUrl);
+      .get<<%= classify(name) %>[]>(this.resourceUrl)<% if(containsDateField) { %>
+      .pipe(
+        map((response: <%= classify(name) %>[]) => this.parseArrayResponse(response))
+      )<% } %>;
   }
 
   getById(<%= primaryKey %>: <%= primaryKeyDataType %>): Observable<<%= classify(name) %>> {
-    return this.http.get<<%= classify(name) %>>(`${this.resourceUrl}/${<%= primaryKey %>}`);
+    return this.http.get<<%= classify(name) %>>(`${this.resourceUrl}/${<%= primaryKey %>}`)<% if(containsDateField) { %>
+      .pipe(
+        map((<%= camelize(name) %>: <%= classify(name) %>) => this.parseResponse(<%= camelize(name) %>))
+      )<% } %>;
   }
 
   create(<%= camelize(name) %>: <%= classify(name) %>): Observable<<%= classify(name) %>> {
@@ -36,4 +47,27 @@ export class <%= classify(name) %>Service {
   delete(<%= primaryKey %>: <%= primaryKeyDataType %>) {
     return this.http.delete<any>(`${this.resourceUrl}/${<%= primaryKey %>}`);
   }
+<% if(containsDateField) { %>
+  private parseArrayResponse(response: <%= classify(name) %>[]): <%= classify(name) %>[] {
+		response.forEach((<%= camelize(name) %>: <%= classify(name) %>) => {
+			this.parseResponse(<%= camelize(name) %>);
+		});
+		return response;
+  }
+  
+  private parseResponse(<%= camelize(name) %>: <%= classify(name) %>): <%= classify(name) %> {<% 
+    entity.fields.forEach(field => { 
+        if(field.dataType == 'date') {
+          if(!field.validation.required) { %>
+    if (<%= camelize(name) %>.<%= field.name %>) {<% 
+          } %>
+    		<%= camelize(name) %>.<%= field.name %> = new Date(<%= camelize(name) %>.<%= field.name %>);<% 
+          if(!field.validation.required) { %>
+    }<% 
+          }
+        }
+      }) %>
+    return <%= camelize(name) %>;
+	}
+<% } %>
 }

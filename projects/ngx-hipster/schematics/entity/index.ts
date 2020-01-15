@@ -78,18 +78,31 @@ export function entity(options: Schema): Rule {
       entity
     );
 
-    addModuleExport(
-      tree,
-      normalize(`${sourcePath}/material/material.module.ts`),
-      'MatSelectModule',
-      '@angular/material/select'
-    );
-    addModuleExport(
-      tree,
-      normalize(`${sourcePath}/material/material.module.ts`),
-      'MatRadioModule',
-      '@angular/material/radio'
-    );
+    const containsSelectField =
+      entity.fields.find((field: Field) => field.controlType === 'select') !==
+      undefined;
+
+    if (containsSelectField) {
+      addModuleExport(
+        tree,
+        normalize(`${sourcePath}/material/material.module.ts`),
+        'MatSelectModule',
+        '@angular/material/select'
+      );
+    }
+
+    const containsRadioField =
+      entity.fields.find((field: Field) => field.controlType === 'radio') !==
+      undefined;
+
+    if (containsRadioField) {
+      addModuleExport(
+        tree,
+        normalize(`${sourcePath}/material/material.module.ts`),
+        'MatRadioModule',
+        '@angular/material/radio'
+      );
+    }
     addModuleExport(
       tree,
       normalize(`${sourcePath}/material/material.module.ts`),
@@ -109,12 +122,39 @@ export function entity(options: Schema): Rule {
       '@angular/material/tooltip'
     );
 
-    addModuleExport(
-      tree,
-      normalize(`${sourcePath}/material/material.module.ts`),
-      'MatAutocompleteModule',
-      '@angular/material/autocomplete'
-    );
+    const containsAutocompleteField =
+      entity.fields.find(
+        (field: Field) => field.controlType === 'autocomplete'
+      ) !== undefined;
+
+    if (containsAutocompleteField) {
+      addModuleExport(
+        tree,
+        normalize(`${sourcePath}/material/material.module.ts`),
+        'MatAutocompleteModule',
+        '@angular/material/autocomplete'
+      );
+    }
+
+    const containsDateField =
+      entity.fields.find((field: Field) => field.dataType === 'date') !==
+      undefined;
+
+    if (containsDateField) {
+      addModuleExport(
+        tree,
+        normalize(`${sourcePath}/material/material.module.ts`),
+        'MatDatepickerModule',
+        '@angular/material/datepicker'
+      );
+
+      addModuleExport(
+        tree,
+        normalize(`${sourcePath}/material/material.module.ts`),
+        'MatNativeDateModule',
+        '@angular/material'
+      );
+    }
 
     const primaryKeyField = entity.fields.find(
       (field: Field) => field.name === entity.primaryField

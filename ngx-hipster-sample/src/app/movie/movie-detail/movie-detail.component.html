@@ -115,6 +115,29 @@
           ></hip-ngx-error
         ></mat-error>
       </mat-form-field>
+      <mat-form-field class="full-width">
+        <mat-label>Release Date</mat-label>
+        <input
+          type="text"
+          required
+          matInput
+          placeholder="Select movie release date"
+          formControlName="releaseDate"
+          [matDatepicker]="releaseDatePicker"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          color="accent"
+          [for]="releaseDatePicker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker color="accent" #releaseDatePicker></mat-datepicker>
+        <mat-error
+          ><hip-ngx-error
+            [control]="form.get('releaseDate')"
+            label="Release Date"
+          ></hip-ngx-error
+        ></mat-error>
+      </mat-form-field>
     </mat-card-content>
     <mat-card-actions>
       <button mat-raised-button (click)="cancel()">

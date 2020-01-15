@@ -29,6 +29,7 @@ export class InMemoryDataService implements InMemoryDbService {
         genres: ['Action', 'Adventure', 'Fantasy'],
         director: 'George Lucas',
         writer: 'George Lucas',
+        releaseDate: '1977-05-25T00:00:00',
         actors: [
           'Mark Hamill',
           'Harrison Ford',
@@ -45,6 +46,7 @@ export class InMemoryDataService implements InMemoryDbService {
         genres: ['Action', 'Adventure', 'Fantasy'],
         director: 'Irvin Kershner',
         writer: 'Leigh Brackett',
+        releaseDate: '1980-05-21T00:00:00',
         actors: [
           'Mark Hamill',
           'Harrison Ford',
@@ -61,6 +63,7 @@ export class InMemoryDataService implements InMemoryDbService {
         genres: ['Action', 'Adventure', 'Fantasy'],
         director: 'Richard Marquand',
         writer: 'Lawrence Kasdan',
+        releaseDate: '1983-05-25T00:00:00',
         actors: [
           'Mark Hamill',
           'Harrison Ford',
@@ -77,6 +80,7 @@ export class InMemoryDataService implements InMemoryDbService {
         genres: ['Action', 'Adventure', 'Fantasy'],
         director: 'George Lucas',
         writer: 'George Lucas',
+        releaseDate: '1999-05-19T00:00:00',
         actors: [
           'Liam Neeson',
           'Ewan McGregor',
@@ -93,6 +97,7 @@ export class InMemoryDataService implements InMemoryDbService {
         genres: ['Action', 'Adventure', 'Fantasy'],
         director: 'George Lucas',
         writer: 'George Lucas',
+        releaseDate: '2002-05-16T00:00:00',
         actors: [
           'Ewan McGregor',
           'Natalie Portman',
@@ -109,6 +114,7 @@ export class InMemoryDataService implements InMemoryDbService {
         genres: ['Action', 'Adventure', 'Fantasy'],
         director: 'George Lucas',
         writer: 'George Lucas',
+        releaseDate: '2005-05-19T00:00:00',
         actors: [
           'Ewan McGregor',
           'Natalie Portman',

@@ -3,7 +3,7 @@
   "pageTitle": "Movies",
   "pageOptions": {
     "list": {
-      "displayFields": ["title", "director"]
+      "displayFields": ["title", "director", "releaseDate"]
     }
   },
   "fields": [
@@ -150,6 +150,16 @@
           "label": "Alex Kurtzman"
         }
       ]
+    },
+    {
+      "label": "Release Date",
+      "name": "releaseDate",
+      "dataType": "date",
+      "controlType": "date",
+      "format": "MM/yyyy",
+      "validation": {
+        "required": true
+      }
     }
   ]
 }

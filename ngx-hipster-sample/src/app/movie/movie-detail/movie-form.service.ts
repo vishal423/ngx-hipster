@@ -24,7 +24,10 @@ export class MovieFormService {
       rated: this.formBuilder.control(movie.rated, []),
       genres: this.formBuilder.control(movie.genres, [Validators.required]),
       director: this.formBuilder.control(movie.director, [Validators.required]),
-      writer: this.formBuilder.control(movie.writer, [Validators.required])
+      writer: this.formBuilder.control(movie.writer, [Validators.required]),
+      releaseDate: this.formBuilder.control(movie.releaseDate, [
+        Validators.required
+      ])
     });
   }
 
@@ -36,7 +39,8 @@ export class MovieFormService {
       rated: formGroup.get('rated').value,
       genres: formGroup.get('genres').value,
       director: formGroup.get('director').value,
-      writer: formGroup.get('writer').value
+      writer: formGroup.get('writer').value,
+      releaseDate: formGroup.get('releaseDate').value
     };
   }
 }
