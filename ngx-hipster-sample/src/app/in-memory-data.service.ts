@@ -28,7 +28,7 @@ export class InMemoryDataService implements InMemoryDbService {
         rated: 'PG',
         genres: ['Action', 'Adventure', 'Fantasy'],
         director: 'George Lucas',
-        writers: ['George Lucas'],
+        writer: 'George Lucas',
         actors: [
           'Mark Hamill',
           'Harrison Ford',
@@ -44,7 +44,7 @@ export class InMemoryDataService implements InMemoryDbService {
         rated: 'PG',
         genres: ['Action', 'Adventure', 'Fantasy'],
         director: 'Irvin Kershner',
-        writers: ['Leigh Brackett', 'Lawrence Kasdan', 'George Lucas'],
+        writer: 'Leigh Brackett',
         actors: [
           'Mark Hamill',
           'Harrison Ford',
@@ -60,7 +60,7 @@ export class InMemoryDataService implements InMemoryDbService {
         rated: 'PG',
         genres: ['Action', 'Adventure', 'Fantasy'],
         director: 'Richard Marquand',
-        writers: ['Lawrence Kasdan', 'George Lucas'],
+        writer: 'Lawrence Kasdan',
         actors: [
           'Mark Hamill',
           'Harrison Ford',
@@ -76,7 +76,7 @@ export class InMemoryDataService implements InMemoryDbService {
         rated: 'PG',
         genres: ['Action', 'Adventure', 'Fantasy'],
         director: 'George Lucas',
-        writers: ['George Lucas'],
+        writer: 'George Lucas',
         actors: [
           'Liam Neeson',
           'Ewan McGregor',
@@ -92,7 +92,7 @@ export class InMemoryDataService implements InMemoryDbService {
         rated: 'PG-13',
         genres: ['Action', 'Adventure', 'Fantasy'],
         director: 'George Lucas',
-        writers: ['George Lucas'],
+        writer: 'George Lucas',
         actors: [
           'Ewan McGregor',
           'Natalie Portman',
@@ -108,7 +108,7 @@ export class InMemoryDataService implements InMemoryDbService {
         rated: 'PG',
         genres: ['Action', 'Adventure', 'Fantasy'],
         director: 'George Lucas',
-        writers: ['George Lucas', 'Jonathan Hales'],
+        writer: 'George Lucas',
         actors: [
           'Ewan McGregor',
           'Natalie Portman',

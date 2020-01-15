@@ -92,17 +92,18 @@
         <mat-label>Writer</mat-label>
         <input
           type="text"
+          required
           matInput
           placeholder="Select movie writer"
           formControlName="writer"
-          [matAutocomplete]="autowriter"
+          [matAutocomplete]="autoWriter"
         />
         <mat-autocomplete
-          #autowriter="matAutocomplete"
+          #autoWriter="matAutocomplete"
           autoActiveFirstOption="true"
         >
           <mat-option
-            *ngFor="let writerOption of filteredwriterOptions | async"
+            *ngFor="let writerOption of filteredWriterOptions | async"
             [value]="writerOption.key"
             >{{ writerOption.value }}</mat-option
           >

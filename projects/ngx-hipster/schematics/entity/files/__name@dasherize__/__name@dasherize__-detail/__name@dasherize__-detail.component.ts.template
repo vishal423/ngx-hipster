@@ -9,8 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 <% const containsAutocomplete = visibleFields.find(field => field.controlType === 'autocomplete');
 if( containsAutocomplete) {
-%>
-import { startWith, map } from 'rxjs/operators';<% 
+%>import { startWith, map } from 'rxjs/operators';<% 
 } %>
 
 import { <%= classify(name) %>Service } from '../<%= dasherize(name) %>.service';
@@ -34,7 +33,7 @@ export class <%= classify(name) %>DetailComponent implements OnInit {
     }
     if(field.controlType === 'autocomplete') {
   %>
-  <%= camelize('filtered' + field.name + 'Options') %>: Observable<KeyValue<string, string>[]>;<%
+  <%= camelize('filtered' + classify(field.name) + 'Options') %>: Observable<KeyValue<string, string>[]>;<%
     }
   } %>
   error: string = undefined;
@@ -55,9 +54,9 @@ export class <%= classify(name) %>DetailComponent implements OnInit {
     for (let field of visibleFields) {
       if(field.controlType === 'autocomplete') {
     %>
-    this.<%= camelize('filtered' + field.name + 'Options') %> = this.form.get('<%= field.name %>').valueChanges.pipe(
+    this.<%= camelize('filtered' + classify(field.name) + 'Options') %> = this.form.get('<%= field.name %>').valueChanges.pipe(
       startWith(null),
-      map((<%= field.name %>: string | null) => <%= field.name %> ? this.<%= camelize('filter' + field.name + 'Options') %>(<%= field.name %>) : this.<%= camelize(field.name + 'Options') %>)
+      map((<%= field.name %>: string | null) => <%= field.name %> ? this.<%= camelize('filter' + classify(field.name) + 'Options') %>(<%= field.name %>) : this.<%= camelize(field.name + 'Options') %>)
     );<% 
     }
   } %>
@@ -100,7 +99,7 @@ export class <%= classify(name) %>DetailComponent implements OnInit {
   for (let field of visibleFields) {
     if(field.controlType === 'autocomplete') {
   %>
-  private <%= camelize('filter' + field.name + 'Options') %>(<%= field.name %>: string): KeyValue<string, string>[] {
+  private <%= camelize('filter' + classify(field.name) + 'Options') %>(<%= field.name %>: string): KeyValue<string, string>[] {
     return this.<%= camelize(field.name + 'Options') %>
       .filter(<%= camelize(field.name + 'Option') %> => <%= camelize(field.name + 'Option') %>.value.toLowerCase().indexOf(<%= field.name %>.toLowerCase()) !== -1);
   }<% 

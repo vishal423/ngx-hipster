@@ -3,7 +3,6 @@ import { KeyValue } from '@angular/common';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-
 import { startWith, map } from 'rxjs/operators';
 
 import { MovieService } from '../movie.service';
@@ -47,7 +46,7 @@ export class MovieDetailComponent implements OnInit {
     { key: 'Jonathan Hales', value: 'Jonathan Hales' },
     { key: 'Alex Kurtzman', value: 'Alex Kurtzman' }
   ];
-  filteredwriterOptions: Observable<KeyValue<string, string>[]>;
+  filteredWriterOptions: Observable<KeyValue<string, string>[]>;
   error: string = undefined;
 
   constructor(
@@ -63,10 +62,10 @@ export class MovieDetailComponent implements OnInit {
       this.form = this.formService.toFormGroup(movie);
     });
 
-    this.filteredwriterOptions = this.form.get('writer').valueChanges.pipe(
+    this.filteredWriterOptions = this.form.get('writer').valueChanges.pipe(
       startWith(null),
       map((writer: string | null) =>
-        writer ? this.filterwriterOptions(writer) : this.writerOptions
+        writer ? this.filterWriterOptions(writer) : this.writerOptions
       )
     );
     this.error = undefined;
@@ -101,7 +100,7 @@ export class MovieDetailComponent implements OnInit {
     });
   }
 
-  private filterwriterOptions(writer: string): KeyValue<string, string>[] {
+  private filterWriterOptions(writer: string): KeyValue<string, string>[] {
     return this.writerOptions.filter(
       writerOption =>
         writerOption.value.toLowerCase().indexOf(writer.toLowerCase()) !== -1
