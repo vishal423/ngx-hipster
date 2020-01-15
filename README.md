@@ -30,7 +30,7 @@ ng add ngx-hipster
 ### Entity Schematic
 
 - Scaffold `Create`, `Update`, and `List` (and `Delete` dialog) screens.
-- Create new `json` file to describe your entity structure and place that in the project root directory. As an example, consider the following `entity.json` that represents the structure of a `movie` entity. For a more elaborate example, refer to the [`movie.json`](./../../ngx-hipster-sample/movie.json) used in the demo application.
+- Create new `json` file to describe your entity structure and place that in the project root directory. As an example, consider the following `entity.json` that represents the structure of a `movie` entity. For a more elaborate example, refer to the [`movie.json`](https://github.com/vishal423/ngx-hipster/blob/master/ngx-hipster-sample/movie.json) used in the demo application.
 
 ```json
 {
