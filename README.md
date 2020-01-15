@@ -3,6 +3,7 @@
 > Angular schematics to scaffold production ready angular material applications
 
 # Demo
+
 You can try out demo application at https://vishal423.github.io/ngx-hipster/index.html (login with username: `admin` and password: `admin` to access the protected pages)
 
 Demo application uses angular in-memory-api to intercept all back-end api calls.
@@ -29,7 +30,7 @@ ng add ngx-hipster
 ### Entity Schematic
 
 - Scaffold `Create`, `Update`, and `List` (and `Delete` dialog) screens.
-- Create new `json` file to describe your entity structure and place that in the project root directory. As an example, consider the following `entity.json` that represents the structure of a `movie` entity.
+- Create new `json` file to describe your entity structure and place that in the project root directory. As an example, consider the following `entity.json` that represents the structure of a `movie` entity. For a more elaborate example, refer to the [`movie.json`](./../../ngx-hipster-sample/movie.json) used in the demo application.
 
 ```json
 {
@@ -76,6 +77,14 @@ ng add ngx-hipster
           "label": "Science Fiction"
         }
       ]
+    },
+    {
+      "label": "Release Date",
+      "name": "releaseDate",
+      "dataType": "date",
+      "controlType": "date",
+      "format": "MM/dd/yy",
+      "validation": {}
     }
   ]
 }
