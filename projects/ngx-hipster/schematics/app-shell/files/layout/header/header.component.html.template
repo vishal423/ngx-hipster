@@ -25,9 +25,13 @@
       mat-list-item
       class="nav-links__item"
       *ngIf="!user.details"
-      href="#"
+      href="#"<% 
+      if(authenticationType === 'session') { %>
       routerLink="/login"
-      routerLinkActive="nav-links__item--active"
+      routerLinkActive="nav-links__item--active"<% 
+      } else if(authenticationType === 'oidc') {  %>
+      (click)="login()"<% 
+      } %>
     >
       <mat-icon>exit_to_app</mat-icon>
       <span>Sign In</span>

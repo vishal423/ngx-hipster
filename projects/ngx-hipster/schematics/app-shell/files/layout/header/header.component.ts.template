@@ -33,10 +33,21 @@ export class HeaderComponent {
     private router: Router
   ) {}
 
+  <% if(authenticationType === 'oidc') { %>
+  login(): boolean {
+    this.authenticationService.login();
+    return false;
+  }
+  <% } %>
+
   logout() {
-    this.authenticationService.logout().subscribe(() => {
+    this.authenticationService.logout().subscribe(
+      <% if(authenticationType === 'session') { %>
+      () => {
       this.router.navigate(['/']);
-    });
+      }
+      <% } %>
+    );
     return false;
   }
 }

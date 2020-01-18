@@ -1,18 +1,19 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { HomeComponent } from './layout/home/home.component';
-import { AnonymousUserGuard } from './security/anonymous-user.guard';
+import { HomeComponent } from './layout/home/home.component';<% 
+if(authenticationType === 'session') { %>
+import { AnonymousUserGuard } from './security/anonymous-user.guard';<% } %>
 import { PageNotFoundComponent } from './layout/error/page-not-found/page-not-found.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/home' },
-  { path: 'home', component: HomeComponent },
+  { path: 'home', component: HomeComponent },<% if(authenticationType === 'session') { %>
   {
     path: 'login',
     canActivate: [AnonymousUserGuard],
     loadChildren: () => import('./login/login.module').then(m => m.LoginModule)
-  },
+  },<% } %>
   {
     path: '**',
     component: PageNotFoundComponent

@@ -32,11 +32,27 @@ export function appShell(options: Schema): Rule {
     deleteGeneratedApplicationFiles(tree, { path: sourcePath });
 
     const templateSource = apply(url('./files'), [
-      applyTemplates({ dot: '.', prefix, ...strings }),
+      applyTemplates({
+        dot: '.',
+        prefix,
+        ...strings,
+        authenticationType: options.authenticationType
+      }),
       move(sourcePath)
     ]);
 
-    return chain([mergeWith(templateSource)]);
+    const templateRules = [mergeWith(templateSource)];
+
+    if (options.authenticationType === 'session') {
+      const sessionAuthenticationTemplateSource = apply(
+        url('./session-files'),
+        [applyTemplates({ dot: '.', prefix, ...strings }), move(sourcePath)]
+      );
+
+      templateRules.push(mergeWith(sessionAuthenticationTemplateSource));
+    }
+
+    return chain(templateRules);
   };
 }
 

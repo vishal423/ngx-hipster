@@ -10,6 +10,26 @@
       "$default": {
         "$source": "projectName"
       }
+    },
+    "authenticationType": {
+      "description": "The user authentication type to consider for the generated application.",
+      "type": "string",
+      "default": "session",
+      "enum": ["session", "oidc"],
+      "x-prompt": {
+        "message": "Which user authentication type would you like to use?",
+        "type": "list",
+        "items": [
+          {
+            "value": "session",
+            "label": "Session"
+          },
+          {
+            "value": "oidc",
+            "label": "OIDC"
+          }
+        ]
+      }
     }
   }
 }

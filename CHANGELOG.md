@@ -4,6 +4,14 @@ All notable changes to the "ngx-hipster" project will be documented in this file
 
 ## [Unreleased]
 
+### Added
+
+- Support the `JHipster` `OIDC` authentication type.
+
+### Changed
+
+- Refactoring of `app-shell` schematic to prompt selection of user authentication type. Defaults to `session`.
+
 ## [0.4.0] - 2020-01-15
 
 ### Added
