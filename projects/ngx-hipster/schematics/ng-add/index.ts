@@ -26,15 +26,9 @@ export function ngAdd(options: Schema): Rule {
 
     if (options.configureNgx) {
       return chain([
-        schematic('jest', {
-          project: options.project,
-          configureJest: options.configureJest
-        }),
+        schematic('jest', { project: options.project }),
         schematic('prettier', { project: options.project }),
-        schematic('proxy-confirm', {
-          project: options.project,
-          configureProxy: options.configureProxy
-        }),
+        schematic('proxy-confirm', { project: options.project }),
         schematic('app-shell', { project: options.project }),
         schematic('material-layout', { project: options.project }),
         applyPrettier({ path: sourcePath })

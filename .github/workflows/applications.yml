@@ -39,7 +39,12 @@ jobs:
           export PATH="$(yarn global bin):$PATH"
           ng new sample-app --interactive=false --prefix=hip --style=scss --routing=true --commit=false
           cd sample-app
-          ng add $GITHUB_WORKSPACE/dist/ngx-hipster/ngx-hipster-v$NGX_PKG_VER.tgz --configureNgx=true --configureJest=true --configureProxy=false
+          ng add $GITHUB_WORKSPACE/dist/ngx-hipster/ngx-hipster-v$NGX_PKG_VER.tgz --configureNgx=false
+          ng g ngx-hipster:jest --configureJest=true
+          ng g ngx-hipster:prettier
+          ng g ngx-hipster:proxy-confirm --configureProxy=false
+          ng g ngx-hipster:app-shell --authenticationType=session
+          ng g ngx-hipster:material-layout
       - name: Generate entity create, update and list layouts
         run: |
           export PATH="$(yarn global bin):$PATH"
