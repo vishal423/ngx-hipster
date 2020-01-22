@@ -8,10 +8,10 @@ import { MovieService } from './movie.service';
 @Injectable({
   providedIn: 'root'
 })
-export class MovieResolver implements Resolve<Movie> {
+export class MovieResolver implements Resolve<Movie | undefined> {
   constructor(private service: MovieService) {}
 
-  resolve(route: ActivatedRouteSnapshot): Observable<Movie> {
+  resolve(route: ActivatedRouteSnapshot): Observable<Movie | undefined> {
     const idParam = 'id';
     const id = route.params[idParam];
     if (id) {

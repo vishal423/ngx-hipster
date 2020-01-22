@@ -13,7 +13,7 @@ export class InMemoryDataService implements InMemoryDbService {
 
   createDb() {
     const authentication = {};
-    const logout = [];
+    const logout: any = [];
 
     const account = {
       login: 'admin',
@@ -212,7 +212,9 @@ export class InMemoryDataService implements InMemoryDbService {
     options: ResponseOptions,
     { headers, url }: RequestInfo
   ) {
-    options.statusText = getStatusText(options.status);
+    if (options.status) {
+      options.statusText = getStatusText(options.status);
+    }
     options.headers = headers;
     options.url = url;
     return options;

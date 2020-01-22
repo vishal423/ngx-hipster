@@ -27,7 +27,7 @@ export class AuthenticationService {
   }
   <% } else if (authenticationType === 'session') { %>
 
-  login(username: string, password: string): Observable<User> {
+  login(username: string, password: string): Observable<User | undefined> {
     const loginRequest = `username=${encodeURIComponent(
 			username
     )}&password=${encodeURIComponent(password)}`;
@@ -78,7 +78,7 @@ export class AuthenticationService {
     return this.principalCache$.asObservable();
   }
 
-  fetchUserInfo(): Observable<User> {
+  fetchUserInfo(): Observable<User | undefined> {
     return this.http.get<User>('api/account').pipe(
       tap(user => {
         this.principalCache$.next(user);

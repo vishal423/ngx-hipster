@@ -47,7 +47,7 @@ export class MovieDetailComponent implements OnInit {
     { key: 'Alex Kurtzman', value: 'Alex Kurtzman' }
   ];
   filteredWriterOptions: Observable<KeyValue<string, string>[]>;
-  error: string = undefined;
+  error: string | undefined = undefined;
 
   constructor(
     private route: ActivatedRoute,
@@ -62,7 +62,7 @@ export class MovieDetailComponent implements OnInit {
       this.form = this.formService.toFormGroup(movie);
     });
 
-    this.filteredWriterOptions = this.form.get('writer').valueChanges.pipe(
+    this.filteredWriterOptions = this.form.get('writer')!.valueChanges.pipe(
       startWith(null),
       map((writer: string | null) =>
         writer ? this.filterWriterOptions(writer) : this.writerOptions

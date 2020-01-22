@@ -36,18 +36,18 @@ export class LoginComponent implements OnDestroy {
     this.loginError = false;
   }
 
-  get username(): AbstractControl {
+  get username(): AbstractControl | null {
     return this.loginForm.get('username');
   }
 
-  get password(): AbstractControl {
+  get password(): AbstractControl | null {
     return this.loginForm.get('password');
   }
 
   login() {
     this.loginError = false;
     this.authenticationService
-      .login(this.username.value, this.password.value)
+      .login(this.username!.value, this.password!.value)
       .pipe(takeUntil(this.componentDestroyed$))
       .subscribe({
         next: (user: User) => {

@@ -30,24 +30,24 @@ export class LoginComponent implements OnDestroy {
     private snackBar: MatSnackBar
   ) {
     this.loginForm = formBuilder.group({
-      username: formBuilder.control('admin', [Validators.required]),
-      password: formBuilder.control('admin', [Validators.required])
+      username: formBuilder.control('', [Validators.required]),
+      password: formBuilder.control('', [Validators.required])
     });
     this.loginError = false;
   }
 
-  get username(): AbstractControl {
+  get username(): AbstractControl | null {
     return this.loginForm.get('username');
   }
 
-  get password(): AbstractControl {
+  get password(): AbstractControl | null {
     return this.loginForm.get('password');
   }
 
   login() {
     this.loginError = false;
     this.authenticationService
-      .login(this.username.value, this.password.value)
+      .login(this.username!.value, this.password!.value)
       .pipe(takeUntil(this.componentDestroyed$))
       .subscribe({
         next: (user: User) => {

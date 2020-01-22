@@ -7,6 +7,15 @@ All notable changes to the "ngx-hipster" project will be documented in this file
 ### Added
 
 - Support the `JHipster` `OIDC` authentication type.
+- Add `typescript` compiler flags to enable `strict` mode as default.
+
+```json
+  "noFallthroughCasesInSwitch": true,
+  "noImplicitAny": true,
+  "noImplicitReturns": true,
+  "noImplicitThis": true,
+  "strictNullChecks": true,
+```
 
 ### Changed
 

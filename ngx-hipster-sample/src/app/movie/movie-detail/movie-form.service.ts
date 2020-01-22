@@ -33,14 +33,14 @@ export class MovieFormService {
 
   fromFormGroup(formGroup: FormGroup) {
     return {
-      id: formGroup.get('id').value,
-      title: formGroup.get('title').value,
-      plot: formGroup.get('plot').value,
-      rated: formGroup.get('rated').value,
-      genres: formGroup.get('genres').value,
-      director: formGroup.get('director').value,
-      writer: formGroup.get('writer').value,
-      releaseDate: formGroup.get('releaseDate').value
+      id: formGroup.get('id')!.value,
+      title: formGroup.get('title')!.value,
+      plot: formGroup.get('plot')!.value,
+      rated: formGroup.get('rated')!.value,
+      genres: formGroup.get('genres')!.value,
+      director: formGroup.get('director')!.value,
+      writer: formGroup.get('writer')!.value,
+      releaseDate: formGroup.get('releaseDate')!.value
     };
   }
 }

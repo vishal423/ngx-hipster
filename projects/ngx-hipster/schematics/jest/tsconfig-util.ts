@@ -6,6 +6,7 @@ import {
 } from '../utils/utils';
 
 const specFileName = 'tsconfig.spec.json';
+const appFileName = 'tsconfig.json';
 
 export function updateTsConfigToSupportJest(
   tree: Tree,
@@ -32,6 +33,24 @@ export function updateTsConfigToSupportJest(
   json.compilerOptions = sortObjectByKeys(json.compilerOptions);
 
   return updateJsonInTree(tree, specFileName, json, { path: options.path });
+}
+
+export function addTsConfigOption(
+  tree: Tree,
+  key: string,
+  value: string | boolean,
+  options: { path: string }
+): Tree {
+  const json = getTsConfigJson(tree, appFileName, { path: options.path });
+
+  if (!json.compilerOptions) {
+    json.compilerOptions = {};
+  }
+
+  json.compilerOptions[key] = value;
+
+  json.compilerOptions = sortObjectByKeys(json.compilerOptions);
+  return updateJsonInTree(tree, appFileName, json, { path: options.path });
 }
 
 function getTsConfigJson(

@@ -13,7 +13,7 @@
           formControlName="username"
           required
         />
-        <mat-error *ngIf="username.invalid"
+        <mat-error *ngIf="username!.invalid"
           >Username must contain a value</mat-error
         >
       </mat-form-field>
@@ -26,7 +26,7 @@
           formControlName="password"
           required
         />
-        <mat-error *ngIf="password.invalid"
+        <mat-error *ngIf="password!.invalid"
           >Password must contain a value</mat-error
         >
       </mat-form-field>

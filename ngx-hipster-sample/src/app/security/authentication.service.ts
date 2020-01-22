@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of, ReplaySubject, throwError, timer } from 'rxjs';
 import {
@@ -18,7 +19,7 @@ export class AuthenticationService {
 
   constructor(private http: HttpClient) {}
 
-  login(username: string, password: string): Observable<User> {
+  login(username: string, password: string): Observable<User | undefined> {
     const loginRequest = `username=${encodeURIComponent(
       username
     )}&password=${encodeURIComponent(password)}`;
@@ -56,7 +57,7 @@ export class AuthenticationService {
     return this.principalCache$.asObservable();
   }
 
-  fetchUserInfo(): Observable<User> {
+  fetchUserInfo(): Observable<User | undefined> {
     return this.http.get<User>('api/account').pipe(
       tap(user => {
         this.principalCache$.next(user);

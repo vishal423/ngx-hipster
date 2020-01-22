@@ -29,7 +29,7 @@ export class <%= classify(name) %>FormService {
       <%
       for (let fieldIndex = 0; fieldIndex < entity.fields.length; fieldIndex++) {
           const field = entity.fields[fieldIndex];
-      %><%= field.name %>: formGroup.get('<%= field.name %>').value<%= (fieldIndex === (entity.fields.length - 1)) ? '' : ',' %>
+      %><%= field.name %>: formGroup.get('<%= field.name %>')!.value<%= (fieldIndex === (entity.fields.length - 1)) ? '' : ',' %>
       <% } %>
     };
   }

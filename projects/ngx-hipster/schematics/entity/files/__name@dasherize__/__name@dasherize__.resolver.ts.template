@@ -8,11 +8,11 @@ import { <%= classify(name) %>Service } from './<%= dasherize(name) %>.service';
 @Injectable({
   providedIn: 'root'
 })
-export class <%= classify(name) %>Resolver implements Resolve<<%= classify(name) %>> {
+export class <%= classify(name) %>Resolver implements Resolve<<%= classify(name) %> | undefined> {
 
   constructor(private service: <%= classify(name) %>Service) {}
 
-  resolve(route: ActivatedRouteSnapshot): Observable<<%= classify(name) %>> {
+  resolve(route: ActivatedRouteSnapshot): Observable<<%= classify(name) %> | undefined> {
     const idParam = 'id';
     const id = route.params[idParam];
     if (id) {

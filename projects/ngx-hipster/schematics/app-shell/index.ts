@@ -13,6 +13,7 @@ import { normalize, strings } from '@angular-devkit/core';
 
 import { getBasePath, getProject } from '../utils/utils';
 import { Schema } from './schema';
+import { addTsConfigOption } from '../jest/tsconfig-util';
 
 export function appShell(options: Schema): Rule {
   return (tree: Tree) => {
@@ -30,6 +31,23 @@ export function appShell(options: Schema): Rule {
     }
 
     deleteGeneratedApplicationFiles(tree, { path: sourcePath });
+
+    // enable strict typescript checks
+    addTsConfigOption(tree, 'noImplicitAny', true, {
+      path: project.root
+    });
+    addTsConfigOption(tree, 'noImplicitReturns', true, {
+      path: project.root
+    });
+    addTsConfigOption(tree, 'noImplicitThis', true, {
+      path: project.root
+    });
+    addTsConfigOption(tree, 'noFallthroughCasesInSwitch', true, {
+      path: project.root
+    });
+    addTsConfigOption(tree, 'strictNullChecks', true, {
+      path: project.root
+    });
 
     const templateSource = apply(url('./files'), [
       applyTemplates({

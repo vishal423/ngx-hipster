@@ -1,18 +1,18 @@
 <ng-container *ngIf="isInvalidControl()">
-  <span *ngIf="control.errors?.required">{{ label }} is required</span>
-  <span *ngIf="control.errors?.minlength"
+  <span *ngIf="control!.errors!.required">{{ label }} is required</span>
+  <span *ngIf="control!.errors!.minlength"
     >{{ label }} value must be at least
-    {{ control.errors.minlength.requiredLength }} characters long</span
+    {{ control!.errors!.minlength.requiredLength }} characters long</span
   >
-  <span *ngIf="control.errors?.maxlength"
+  <span *ngIf="control!.errors!.maxlength"
     >{{ label }} value must be less than
-    {{ control.errors.maxlength.requiredLength }} characters long</span
+    {{ control!.errors!.maxlength.requiredLength }} characters long</span
   >
-  <span *ngIf="control.errors?.min"
-    >{{ label }} value must be greater than {{ control.errors.min.min }}</span
+  <span *ngIf="control!.errors!.min"
+    >{{ label }} value must be greater than {{ control!.errors!.min.min }}</span
   >
-  <span *ngIf="control.errors?.max"
-    >{{ label }} value must be less than {{ control.errors.max.max }}</span
+  <span *ngIf="control!.errors!.max"
+    >{{ label }} value must be less than {{ control!.errors!.max.max }}</span
   >
-  <span *ngIf="control.errors?.pattern">{{ label }} has an invalid value</span>
+  <span *ngIf="control!.errors!.pattern">{{ label }} has an invalid value</span>
 </ng-container>
