@@ -38,22 +38,22 @@ describe('LoginComponent', () => {
   });
 
   it('should create login form controls with empty initial value and invalid state', () => {
-    expect(component.username.value).toEqual('');
-    expect(component.password.value).toEqual('');
+    expect(component.username!.value).toEqual('');
+    expect(component.password!.value).toEqual('');
 
-    expect(component.username.valid).toBeFalsy();
-    expect(component.password.valid).toBeFalsy();
+    expect(component.username!.valid).toBeFalsy();
+    expect(component.password!.valid).toBeFalsy();
 
     expect(component.loginForm.invalid).toBeTruthy();
   });
 
   it('should change login form state to valid after user enters the username and password', () => {
-    component.username.patchValue('test');
-    component.password.patchValue('test');
+    component.username!.patchValue('test');
+    component.password!.patchValue('test');
 
     fixture.detectChanges();
-    expect(component.username.valid).toBeTruthy();
-    expect(component.password.valid).toBeTruthy();
+    expect(component.username!.valid).toBeTruthy();
+    expect(component.password!.valid).toBeTruthy();
     expect(component.loginForm.valid).toBeTruthy();
   });
 
@@ -62,7 +62,7 @@ describe('LoginComponent', () => {
       0
     );
 
-    component.username.markAsDirty();
+    component.username!.markAsDirty();
     fixture.detectChanges();
 
     const errors = fixture.debugElement.queryAll(By.css('mat-error'));

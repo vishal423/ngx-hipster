@@ -8,6 +8,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from 'src/app/material/material.module';
 import { MovieDetailComponent } from './movie-detail.component';
 
+// tslint:disable-next-line
 @Component({ selector: 'hip-ngx-error', template: '' })
 class NgxErrorStubComponent {
   @Input() label: string;

@@ -14,6 +14,7 @@ import { normalize, strings } from '@angular-devkit/core';
 import { getBasePath, getProject } from '../utils/utils';
 import { Schema } from './schema';
 import { addTsConfigOption } from '../jest/tsconfig-util';
+import { addTslintRuleConfig } from '../prettier/tslint-util';
 
 export function appShell(options: Schema): Rule {
   return (tree: Tree) => {
@@ -46,6 +47,10 @@ export function appShell(options: Schema): Rule {
       path: project.root
     });
     addTsConfigOption(tree, 'strictNullChecks', true, {
+      path: project.root
+    });
+
+    addTslintRuleConfig(tree, 'no-non-null-assertion', false, {
       path: project.root
     });
 

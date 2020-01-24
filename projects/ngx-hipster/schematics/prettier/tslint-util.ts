@@ -37,3 +37,14 @@ export function updateTsLintConfigurations(
 
   return updateJsonInTree(tree, 'tslint.json', json, options);
 }
+
+export function addTslintRuleConfig(
+  tree: Tree,
+  key: string,
+  value: string | boolean,
+  options: { path: string }
+) {
+  const json = getJson(tree, { ...options, filename: 'tslint.json' });
+  json.rules[key] = value;
+  return updateJsonInTree(tree, 'tslint.json', json, options);
+}

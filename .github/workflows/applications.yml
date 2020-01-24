@@ -58,6 +58,13 @@ jobs:
           yarn test
         env:
           CI: true
+      - name: Lint generated application code
+        run: |
+          cd $HOME/test-app/sample-app
+          export PATH="$(yarn global bin):$PATH"
+          ng lint
+        env:
+          CI: true
       - name: Create AOT build of generated application
         run: |
           cd $HOME/test-app/sample-app
