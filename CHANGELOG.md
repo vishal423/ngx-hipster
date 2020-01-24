@@ -4,10 +4,12 @@ All notable changes to the "ngx-hipster" project will be documented in this file
 
 ## [Unreleased]
 
+## [0.5.0] - 2020-01-24
+
 ### Added
 
-- Support the `JHipster` `OIDC` authentication type.
-- Add `typescript` compiler flags to enable `strict` mode as default.
+- Support the `JHipster` `OIDC / OAuth 2.0` authentication type.
+- Add `typescript` compiler flags to enable `strict` type-checking mode as default.
 
 ```json
   "noFallthroughCasesInSwitch": true,
@@ -20,6 +22,7 @@ All notable changes to the "ngx-hipster" project will be documented in this file
 ### Changed
 
 - Refactoring of `app-shell` schematic to prompt selection of user authentication type. Defaults to `session`.
+- Disable `no-non-null-assertion` `Tslint` rule to avoid conflicts with typescript `strict` check flags.
 
 ## [0.4.0] - 2020-01-15
 
