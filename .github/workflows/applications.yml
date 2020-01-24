@@ -8,6 +8,7 @@ jobs:
       matrix:
         os: [ubuntu-latest]
         node-version: [10.x, 12.x]
+        app-type: ['session', 'oidc']
     steps:
       - uses: actions/checkout@v1
       - name: Use Node.js ${{ matrix.node-version }}
@@ -43,7 +44,7 @@ jobs:
           ng g ngx-hipster:jest --configureJest=true
           ng g ngx-hipster:prettier
           ng g ngx-hipster:proxy-confirm --configureProxy=false
-          ng g ngx-hipster:app-shell --authenticationType=session
+          ng g ngx-hipster:app-shell --authenticationType=${{ matrix.app-type }}
           ng g ngx-hipster:material-layout
       - name: Generate entity create, update and list layouts
         run: |
