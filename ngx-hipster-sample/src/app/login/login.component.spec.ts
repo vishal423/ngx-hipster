@@ -7,7 +7,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { LoginComponent } from './login.component';
 import { MaterialModule } from '../material/material.module';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
