@@ -11,7 +11,7 @@ describe('MovieService', () => {
   );
 
   it('should be created', () => {
-    const service: MovieService = TestBed.get(MovieService);
+    const service: MovieService = TestBed.inject(MovieService);
     expect(service).toBeTruthy();
   });
 });

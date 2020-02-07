@@ -11,7 +11,7 @@ describe('MovieResolveService', () => {
   );
 
   it('should be created', () => {
-    const service: MovieResolver = TestBed.get(MovieResolver);
+    const service: MovieResolver = TestBed.inject(MovieResolver);
     expect(service).toBeTruthy();
   });
 });

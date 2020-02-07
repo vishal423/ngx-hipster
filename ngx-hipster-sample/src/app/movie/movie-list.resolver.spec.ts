@@ -9,7 +9,7 @@ describe('MovieListResolver', () => {
   );
 
   it('should be created', () => {
-    const service: MovieListResolver = TestBed.get(MovieListResolver);
+    const service: MovieListResolver = TestBed.inject(MovieListResolver);
     expect(service).toBeTruthy();
   });
 });
