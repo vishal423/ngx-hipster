@@ -25,7 +25,7 @@ export function prettier(options: Schema): Rule {
 
     const pkgOptions = { ...options, path };
     // add  dependencies
-    addDevDependency(tree, 'husky', '3.0.9', pkgOptions);
+    addDevDependency(tree, 'husky', '4.2.1', pkgOptions);
     addDevDependency(tree, 'prettier', '1.19.1', pkgOptions);
     addDevDependency(tree, 'pretty-quick', '2.0.1', pkgOptions);
     addDevDependency(tree, 'tslint-config-prettier', '1.18.0', pkgOptions);

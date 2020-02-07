@@ -11,7 +11,7 @@ describe('<%= classify(name) %>FormService', () => {
   );
 
   it('should be created', () => {
-    const service: <%= classify(name) %>FormService = TestBed.get(
+    const service: <%= classify(name) %>FormService = TestBed.inject(
       <%= classify(name) %>FormService
     );
     expect(service).toBeTruthy();

@@ -9,7 +9,7 @@ describe('<%= classify(name) %>ListResolver', () => {
   );
 
   it('should be created', () => {
-    const service: <%= classify(name) %>ListResolver = TestBed.get(
+    const service: <%= classify(name) %>ListResolver = TestBed.inject(
       <%= classify(name) %>ListResolver
     );
     expect(service).toBeTruthy();

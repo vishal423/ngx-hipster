@@ -31,8 +31,8 @@ export function jest(options: Schema): Rule {
         packageManager !== 'yarn' ? `${packageManager} run ` : packageManager;
       const scriptParamPrefix = packageManager !== 'yarn' ? `--` : '';
 
-      addDevDependency(tree, 'jest', '24.9.0', pkgOptions);
-      addDevDependency(tree, '@types/jest', '24.0.18', pkgOptions);
+      addDevDependency(tree, 'jest', '25.1.0', pkgOptions);
+      addDevDependency(tree, '@types/jest', '25.1.2', pkgOptions);
       addDevDependency(tree, 'jest-preset-angular', '8.0.0', pkgOptions);
 
       addScript(tree, 'test', 'jest --config src/jest.conf.js', pkgOptions);

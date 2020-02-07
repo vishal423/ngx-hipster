@@ -152,7 +152,7 @@ export function entity(options: Schema): Rule {
         tree,
         normalize(`${sourcePath}/material/material.module.ts`),
         'MatNativeDateModule',
-        '@angular/material'
+        '@angular/material/core'
       );
     }
 

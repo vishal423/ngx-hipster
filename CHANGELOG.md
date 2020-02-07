@@ -4,6 +4,12 @@ All notable changes to the "ngx-hipster" project will be documented in this file
 
 ## [Unreleased]
 
+### Changed
+
+- Angular Ivy: Templates refactoring to support angular `v9.x`.
+- Upgraded `jest`, `husky`, `angular material` library dependencies.
+- Upgrade demo application to angular cli `v9.0`
+
 ## [0.5.0] - 2020-01-24
 
 ### Added

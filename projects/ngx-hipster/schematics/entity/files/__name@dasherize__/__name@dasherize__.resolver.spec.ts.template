@@ -11,7 +11,7 @@ describe('<%= classify(name) %>ResolveService', () => {
   );
 
   it('should be created', () => {
-    const service: <%= classify(name) %>Resolver = TestBed.get(<%= classify(name) %>Resolver);
+    const service: <%= classify(name) %>Resolver = TestBed.inject(<%= classify(name) %>Resolver);
     expect(service).toBeTruthy();
   });
 });
