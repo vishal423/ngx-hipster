@@ -4,8 +4,11 @@ All notable changes to the "ngx-hipster" project will be documented in this file
 
 ## [Unreleased]
 
+## [0.6.0] - 2020-02-08
+
 ### Changed
 
+- Support `OnPush` as the default change detection strategy.
 - Angular Ivy: Templates refactoring to support angular `v9.x`.
 - Upgraded `jest`, `husky`, `angular material` library dependencies.
 - Upgrade demo application to angular cli `v9.0`
