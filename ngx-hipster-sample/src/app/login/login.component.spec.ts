@@ -62,6 +62,7 @@ describe('LoginComponent', () => {
       0
     );
 
+    component.username!.patchValue('');
     component.username!.markAsDirty();
     fixture.detectChanges();
 
