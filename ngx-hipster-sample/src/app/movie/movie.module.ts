@@ -14,7 +14,6 @@ import { MovieDeleteComponent } from './movie-delete/movie-delete.component';
     MovieDeleteComponent
   ],
   imports: [SharedModule, RouterModule.forChild(movieRoutes)],
-  entryComponents: [MovieDeleteComponent],
   exports: []
 })
 export class MovieModule {}

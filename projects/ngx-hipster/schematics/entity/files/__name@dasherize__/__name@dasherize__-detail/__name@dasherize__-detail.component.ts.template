@@ -1,5 +1,5 @@
 <% const visibleFields = entity.fields.filter(field => entity.pageOptions.edit.hideFields.includes(field.name) === false); %>
-import { Component, OnInit } from '@angular/core';<%
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';<%
 const fieldContainOptions = entity.fields
     .filter(field => entity.pageOptions.edit.hideFields.includes(field.name) === false)
     .filter(field => field.options)
@@ -19,7 +19,8 @@ import { <%= classify(name) %> } from '../<%= dasherize(name) %>';
 @Component({
   selector: '<%= prefix %>-<%= dasherize(name) %>-detail',
   templateUrl: './<%= dasherize(name) %>-detail.component.html',
-  styleUrls: ['./<%= dasherize(name) %>-detail.component.scss']
+  styleUrls: ['./<%= dasherize(name) %>-detail.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class <%= classify(name) %>DetailComponent implements OnInit {
 

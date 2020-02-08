@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 
@@ -9,7 +9,8 @@ import { <%= classify(name) %> } from '../<%= dasherize(name) %>';
 @Component({
   selector: '<%= prefix %>-<%= dasherize(name) %>-list',
   templateUrl: './<%= dasherize(name) %>-list.component.html',
-  styleUrls: ['./<%= dasherize(name) %>-list.component.scss']
+  styleUrls: ['./<%= dasherize(name) %>-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class <%= classify(name) %>ListComponent implements OnInit {
   displayedColumns = [<% for (let colName of entity.pageOptions.list.displayFields) {%>'<%= colName %>', <% } %>'formActions'];

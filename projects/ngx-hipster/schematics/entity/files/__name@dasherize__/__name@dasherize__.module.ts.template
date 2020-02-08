@@ -14,7 +14,6 @@ import { <%= classify(name) %>DeleteComponent } from './<%= dasherize(name) %>-d
     <%= classify(name) %>DeleteComponent
   ],
   imports: [SharedModule, RouterModule.forChild(<%= camelize(name) %>Routes)],
-  entryComponents: [<%= classify(name) %>DeleteComponent],
   exports: []
 })
 export class <%= classify(name) %>Module {}
