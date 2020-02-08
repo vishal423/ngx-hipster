@@ -4,10 +4,10 @@ import { ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { LoginComponent } from './login.component';
 import { MaterialModule } from '../material/material.module';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
