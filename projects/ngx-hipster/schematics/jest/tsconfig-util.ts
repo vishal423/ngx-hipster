@@ -19,7 +19,6 @@ export function updateTsConfigToSupportJest(
   }
 
   json.compilerOptions.emitDecoratorMetadata = true;
-  // json.compilerOptions.module = 'commonjs';
 
   if (json.compilerOptions.types) {
     json.compilerOptions.types = json.compilerOptions.types
