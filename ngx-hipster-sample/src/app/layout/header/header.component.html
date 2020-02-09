@@ -10,7 +10,12 @@
   color="primary"
   *ngIf="{ details: user$ | async } as user"
 >
-  <button mat-icon-button *ngIf="!!user.details" (click)="toggleSidenav.emit()">
+  <button
+    mat-icon-button
+    class="app-menu"
+    *ngIf="!!user.details"
+    (click)="toggleSidenav.emit()"
+  >
     <mat-icon>menu</mat-icon>
   </button>
   <a class="logo" href="#" routerLink="/">
@@ -25,7 +30,7 @@
   <mat-nav-list class="nav-links">
     <a
       mat-list-item
-      class="nav-links__item"
+      class="app-login nav-links__item"
       *ngIf="!user.details"
       href="#"
       routerLink="/login"
@@ -37,13 +42,13 @@
     <button
       *ngIf="!!user.details"
       mat-icon-button
-      class="nav-links__item"
+      class="app-account nav-links__item"
       [matMenuTriggerFor]="userMenu"
     >
       <mat-icon>account_circle</mat-icon>
     </button>
     <mat-menu #userMenu="matMenu">
-      <button mat-menu-item (click)="logout()">
+      <button mat-menu-item class="app-logout" (click)="logout()">
         <mat-icon>logout</mat-icon>
         <span>Sign Out</span>
       </button>

@@ -1,16 +1,32 @@
-import { AppPage } from './app.po';
 import { browser, logging } from 'protractor';
 
+import { HeaderPage } from './po/header.po';
+import { HomePage } from './po/home.po';
+import { FooterPage } from './po/footer.po';
+
 describe('workspace-project App', () => {
-  let page: AppPage;
+  let headerPage: HeaderPage;
+  let homePage: HomePage;
+  let footerPage: FooterPage;
 
   beforeEach(() => {
-    page = new AppPage();
+    headerPage = new HeaderPage();
+    homePage = new HomePage();
+    footerPage = new FooterPage();
   });
 
-  it('should display welcome message', () => {
-    page.navigateTo();
-    expect(page.getTitleText()).toEqual('ngx-hipster-sample app is running!');
+  it('should display ngx-hipster application landing page', async () => {
+    headerPage.navigateTo();
+    expect(await headerPage.getTitleText()).toEqual('Angular Hipster');
+    expect(await headerPage.loginMenu.isDisplayed()).toBeTruthy();
+    expect(await homePage.getWelcomeText()).toEqual('home works!');
+    expect(await footerPage.getFooterText()).toEqual(
+      'Powered by ngx-hipster © 2019-2020'
+    );
+
+    expect(await headerPage.appMenu.isPresent()).toBeFalsy();
+    expect(await headerPage.logoutMenu.isPresent()).toBeFalsy();
+    expect(await headerPage.accountMenu.isPresent()).toBeFalsy();
   });
 
   afterEach(async () => {
