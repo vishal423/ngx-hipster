@@ -31,7 +31,24 @@ export function appShell(options: Schema): Rule {
       );
     }
 
-    deleteGeneratedApplicationFiles(tree, { path: sourcePath });
+    const e2eSourcePath = normalize(`${project.root}/e2e/src`);
+
+    deleteGeneratedApplicationFiles(
+      tree,
+      [
+        'app.component.html',
+        'app.component.scss',
+        'app.component.spec.ts',
+        'app.component.ts',
+        'app.module.ts',
+        'app-routing.module.ts'
+      ],
+      { path: sourcePath }
+    );
+
+    deleteGeneratedApplicationFiles(tree, ['app.po.ts', 'app.e2e-spec.ts'], {
+      path: e2eSourcePath
+    });
 
     // enable strict typescript checks
     addTsConfigOption(tree, 'noImplicitAny', true, {
@@ -64,7 +81,20 @@ export function appShell(options: Schema): Rule {
       move(sourcePath)
     ]);
 
-    const templateRules = [mergeWith(templateSource)];
+    const e2eTemplateSource = apply(url('./e2e-files'), [
+      applyTemplates({
+        dot: '.',
+        prefix,
+        ...strings,
+        authenticationType: options.authenticationType
+      }),
+      move(e2eSourcePath)
+    ]);
+
+    const templateRules = [
+      mergeWith(templateSource),
+      mergeWith(e2eTemplateSource)
+    ];
 
     if (options.authenticationType === 'session') {
       const sessionAuthenticationTemplateSource = apply(
@@ -81,17 +111,9 @@ export function appShell(options: Schema): Rule {
 
 function deleteGeneratedApplicationFiles(
   tree: Tree,
+  files: string[],
   options: { path: string }
 ) {
-  const files = [
-    'app.component.html',
-    'app.component.scss',
-    'app.component.spec.ts',
-    'app.component.ts',
-    'app.module.ts',
-    'app-routing.module.ts'
-  ];
-
   files.forEach(file => {
     if (tree.exists(getAbsolutePath(options, file))) {
       tree.delete(getAbsolutePath(options, file));

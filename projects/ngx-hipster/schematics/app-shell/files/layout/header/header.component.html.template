@@ -10,7 +10,7 @@
   color="primary"
   *ngIf="{ details: user$ | async } as user"
 >
-  <button mat-icon-button *ngIf="!!user.details" (click)="toggleSidenav.emit()" ><mat-icon>menu</mat-icon></button>
+  <button mat-icon-button class="app-menu" *ngIf="!!user.details" (click)="toggleSidenav.emit()" ><mat-icon>menu</mat-icon></button>
   <a class="logo" href="#" routerLink="/">
     <img
       alt="Angular Logo"
@@ -23,14 +23,14 @@
   <mat-nav-list class="nav-links">
     <a
       mat-list-item
-      class="nav-links__item"
+      class="app-login nav-links__item"
       *ngIf="!user.details"
-      href="#"<% 
+      href="#"<%
       if(authenticationType === 'session') { %>
       routerLink="/login"
-      routerLinkActive="nav-links__item--active"<% 
+      routerLinkActive="nav-links__item--active"<%
       } else if(authenticationType === 'oidc') {  %>
-      (click)="login()"<% 
+      (click)="login()"<%
       } %>
     >
       <mat-icon>exit_to_app</mat-icon>
@@ -39,13 +39,13 @@
     <button
       *ngIf="!!user.details"
       mat-icon-button
-      class="nav-links__item"
+      class="app-account nav-links__item"
       [matMenuTriggerFor]="userMenu"
     >
       <mat-icon>account_circle</mat-icon>
     </button>
     <mat-menu #userMenu="matMenu">
-      <button mat-menu-item (click)="logout()">
+      <button mat-menu-item class="app-logout" (click)="logout()">
         <mat-icon>logout</mat-icon>
         <span>Sign Out</span>
       </button>
