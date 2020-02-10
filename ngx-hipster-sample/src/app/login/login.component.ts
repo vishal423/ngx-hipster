@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  ChangeDetectorRef
+} from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -25,6 +30,7 @@ export class LoginComponent implements OnDestroy {
   private componentDestroyed$ = new Subject();
 
   constructor(
+    private ref: ChangeDetectorRef,
     formBuilder: FormBuilder,
     private authenticationService: AuthenticationService,
     private router: Router,
@@ -60,6 +66,7 @@ export class LoginComponent implements OnDestroy {
         },
         error: (err: any) => {
           this.loginError = true;
+          this.ref.detectChanges();
         }
       });
   }
