@@ -102,7 +102,17 @@ export function appShell(options: Schema): Rule {
         [applyTemplates({ dot: '.', prefix, ...strings }), move(sourcePath)]
       );
 
+      const e2eTemplateSource = apply(url('./session-e2e-files'), [
+        applyTemplates({
+          dot: '.',
+          prefix,
+          ...strings
+        }),
+        move(e2eSourcePath)
+      ]);
+
       templateRules.push(mergeWith(sessionAuthenticationTemplateSource));
+      templateRules.push(mergeWith(e2eTemplateSource));
     }
 
     return chain(templateRules);

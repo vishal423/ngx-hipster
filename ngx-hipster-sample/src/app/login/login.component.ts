@@ -1,8 +1,8 @@
 import {
+  ChangeDetectorRef,
   ChangeDetectionStrategy,
   Component,
-  OnDestroy,
-  ChangeDetectorRef
+  OnDestroy
 } from '@angular/core';
 import {
   AbstractControl,
@@ -30,8 +30,8 @@ export class LoginComponent implements OnDestroy {
   private componentDestroyed$ = new Subject();
 
   constructor(
-    private ref: ChangeDetectorRef,
     formBuilder: FormBuilder,
+    private ref: ChangeDetectorRef,
     private authenticationService: AuthenticationService,
     private router: Router,
     private snackBar: MatSnackBar

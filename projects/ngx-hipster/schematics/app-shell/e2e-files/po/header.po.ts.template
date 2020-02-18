@@ -6,7 +6,7 @@ export class HeaderPage {
   loginMenu = this.root.element(by.css('.app-login'));
 
   accountMenu = this.root.element(by.css('.app-account'));
-  logoutMenu = this.root.element(by.css('.mat-menu-panel .app-logout'));
+  logoutMenu = element(by.css('.mat-menu-panel .app-logout'));
 
   navigateTo() {
     return browser.get(browser.baseUrl) as Promise<any>;
