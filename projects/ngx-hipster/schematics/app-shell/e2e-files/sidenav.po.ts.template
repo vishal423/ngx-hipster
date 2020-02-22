@@ -1,0 +1,6 @@
+import { browser, by, element } from 'protractor';
+
+export class SidenavPage {
+  private root = element(by.css('<%= prefix %>-sidenav mat-nav-list'));
+
+}

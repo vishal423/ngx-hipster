@@ -1,8 +1,8 @@
 import { browser, logging } from 'protractor';
 
-import { HeaderPage } from './po/header.po';
-import { HomePage } from './po/home.po';
-import { FooterPage } from './po/footer.po';
+import { HeaderPage } from './header.po';
+import { HomePage } from './home.po';
+import { FooterPage } from './footer.po';
 
 describe('workspace-project App', () => {
   let headerPage: HeaderPage;

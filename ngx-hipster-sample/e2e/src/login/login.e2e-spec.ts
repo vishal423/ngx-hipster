@@ -1,7 +1,8 @@
 import { browser, logging } from 'protractor';
 
-import { HeaderPage } from './po/header.po';
-import { LoginPage } from './po/login.po';
+import { HeaderPage } from '../header.po';
+import { NotificationPage } from '../notification.po';
+import { LoginPage } from './login.po';
 
 describe('login-logout tests', () => {
   let headerPage: HeaderPage;
@@ -53,6 +54,12 @@ describe('login-logout tests', () => {
     expect(await headerPage.loginMenu.isPresent()).toBeFalsy();
     expect(await headerPage.appMenu.isDisplayed()).toBeTruthy();
     expect(await headerPage.accountMenu.isDisplayed()).toBeTruthy();
+
+    const notificationPage = new NotificationPage();
+    expect(await notificationPage.notifications.count()).toEqual(1);
+    expect(await notificationPage.notifications.first().getText()).toEqual(
+      'Welcome admin'
+    );
   });
 
   it('should logout the logged in user', async () => {
