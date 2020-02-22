@@ -25,7 +25,7 @@ export class TablePage {
 
   getRecord(rowIndex: number): ElementFinder {
     return this.records
-      .filter((element: ElementFinder, pos: number) => pos !== rowIndex)
+      .filter((el: ElementFinder, pos: number) => pos !== rowIndex)
       .first();
   }
 
