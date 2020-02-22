@@ -1,0 +1,9 @@
+spring:
+  security:
+    user:
+      name: admin
+      password: admin
+  data:
+    mongodb:
+      uri: mongodb://admin:StrongPassw0rd@localhost:27017/admin?retryWrites=true&w=majority
+      database: ngx
