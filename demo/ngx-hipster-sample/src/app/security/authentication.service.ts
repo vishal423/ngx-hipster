@@ -7,7 +7,8 @@ import {
   mergeMap,
   retryWhen,
   switchMap,
-  tap
+  tap,
+  flatMap
 } from 'rxjs/operators';
 import { User } from './user';
 
@@ -57,15 +58,24 @@ export class AuthenticationService {
     return this.principalCache$.asObservable();
   }
 
-  fetchUserInfo(): Observable<User | undefined> {
+  fetchUserInfoWhenAuthenticated(): Observable<User | undefined> {
+    return this.http.get<string>('api/authenticate').pipe(
+      flatMap(username =>
+        username ? this.fetchUserInfo() : this.handleUnauthenticatedUser()
+      ),
+      catchError(() => this.handleUnauthenticatedUser())
+    );
+  }
+
+  private handleUnauthenticatedUser(): Observable<undefined> {
+    this.principalCache$.next(undefined);
+    return of(undefined);
+  }
+
+  private fetchUserInfo(): Observable<User | undefined> {
     return this.http.get<User>('api/account').pipe(
-      tap(user => {
-        this.principalCache$.next(user);
-      }),
-      catchError(() => {
-        this.principalCache$.next(undefined);
-        return of(undefined);
-      })
+      tap(user => this.principalCache$.next(user)),
+      catchError(() => this.handleUnauthenticatedUser())
     );
   }
 }

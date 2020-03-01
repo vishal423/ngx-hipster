@@ -10,6 +10,6 @@ import { AuthenticationService } from './security/authentication.service';
 export class AppComponent implements OnInit {
   constructor(private authenticationService: AuthenticationService) {}
   ngOnInit() {
-    this.authenticationService.fetchUserInfo().subscribe();
+    this.authenticationService.fetchUserInfoWhenAuthenticated().subscribe();
   }
 }
