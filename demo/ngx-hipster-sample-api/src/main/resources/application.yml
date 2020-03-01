@@ -3,7 +3,15 @@ spring:
     user:
       name: admin
       password: admin
+      roles:
+        - ADMIN
+        - USER
   data:
     mongodb:
       uri: mongodb://admin:StrongPassw0rd@localhost:27017/admin?retryWrites=true&w=majority
       database: ngx
+
+logging:
+  level:
+    io.github.vishal423: DEBUG
+    org.springframework: DEBUG
