@@ -2,6 +2,7 @@ name: Sample applications
 on: [push]
 jobs:
   app-build:
+    needs: api-build
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -94,7 +95,7 @@ jobs:
         run: |
           cd $GITHUB_WORKSPACE/demo/ngx-hipster-sample-api
           ./mvnw -ntp test
-      - name: Build local docker image
+      - name: Build and publish docker image
         run: |
           cd $GITHUB_WORKSPACE/demo/ngx-hipster-sample-api
-          ./mvnw -ntp jib:dockerBuild
+          ./mvnw -ntp jib:build -Djib.to.image=docker.pkg.github.com/vishal423/ngx-hipster/ngx-hipster-sample-api:latest -Djib.to.auth.username="${{ secrets.USERNAME }}" -Djib.to.auth.password="${{ secrets.GITHUB_TOKEN }}"
