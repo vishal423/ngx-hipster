@@ -86,8 +86,14 @@ jobs:
         with:
           java-version: ${{ matrix.java-version }}
       - name: Compile
-        run: $GITHUB_WORKSPACE/demo/ngx-hipster-sample-api/mvnw -ntp clean compile
+        run: |
+          cd $GITHUB_WORKSPACE/demo/ngx-hipster-sample-api
+          ./mvnw -ntp clean compile
       - name: Unit tests
-        run: $GITHUB_WORKSPACE/demo/ngx-hipster-sample-api/mvnw -ntp test
+        run: |
+          cd $GITHUB_WORKSPACE/demo/ngx-hipster-sample-api
+          ./mvnw -ntp test
       - name: Build local docker image
-        run: $GITHUB_WORKSPACE/demo/ngx-hipster-sample-api/mvnw -ntp jib:dockerBuild
+        run: |
+          cd $GITHUB_WORKSPACE/demo/ngx-hipster-sample-api
+          ./mvnw -ntp jib:dockerBuild
