@@ -14,4 +14,4 @@ spring:
 logging:
   level:
     io.github.vishal423: DEBUG
-    org.springframework: DEBUG
+    org.springframework: INFO

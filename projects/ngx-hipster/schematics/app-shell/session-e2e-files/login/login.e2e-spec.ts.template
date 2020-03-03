@@ -52,14 +52,15 @@ describe('login-logout tests', () => {
     await loginPage.loginBtn.click();
 
     expect(await headerPage.loginMenu.isPresent()).toBeFalsy();
-    expect(await headerPage.appMenu.isDisplayed()).toBeTruthy();
-    expect(await headerPage.accountMenu.isDisplayed()).toBeTruthy();
 
     const notificationPage = new NotificationPage();
     expect(await notificationPage.notifications.count()).toEqual(1);
     expect(await notificationPage.notifications.first().getText()).toEqual(
       'Welcome admin'
     );
+
+    expect(await headerPage.appMenu.isDisplayed()).toBeTruthy();
+    expect(await headerPage.accountMenu.isDisplayed()).toBeTruthy();
   });
 
   it('should logout the logged in user', async () => {
@@ -79,7 +80,8 @@ describe('login-logout tests', () => {
       .manage()
       .logs()
       .get(logging.Type.BROWSER);
-    expect(logs).not.toContain(
+    expect(logs.filter(log => !log.message.includes('/api/authentication - Failed to load resource: the server responded with a status of 401 (Unauthorized)')
+    )).not.toContain(
       jasmine.objectContaining({
         level: logging.Level.SEVERE
       } as logging.Entry)
