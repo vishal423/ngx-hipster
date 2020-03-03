@@ -70,7 +70,7 @@ jobs:
       - name: Run e2e tests
         run: |
           docker login docker.pkg.github.com --username ${{ secrets.USERNAME }} --password ${{ secrets.REGISTRY_PASSWORD }}
-          docker run -p 8080:8080 docker.pkg.github.com/vishal423/ngx-hipster/ngx-hipster-sample-api -d
+          docker run -d -p 8080:8080 docker.pkg.github.com/vishal423/ngx-hipster/ngx-hipster-sample-api
           timeout 180 bash -c 'while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:8080/api/authenticate)" != "200" ]]; do sleep 5; done' || false
           cd $HOME/test-app/sample-app
           export PATH="$(yarn global bin):$PATH"
