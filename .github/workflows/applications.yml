@@ -1,7 +1,7 @@
 name: Sample applications
 on: [push]
 jobs:
-  build:
+  app-build:
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -73,3 +73,21 @@ jobs:
           ng build --aot
         env:
           CI: true
+  api-build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+        java-version: [11.x]
+        app-type: ['reactive']
+    steps:
+      - uses: actions/setup-java@v1
+        with:
+          java-version: ${{ matrix.java-version }}
+      - name: Compile
+        run: $GITHUB_WORKSPACE/demo/ngx-hipster-sample-api/mvnw -ntp clean compile
+      - name: Unit tests
+        run: $GITHUB_WORKSPACE/demo/ngx-hipster-sample-api/mvnw -ntp test
+      - name: Build local docker image
+        run: $GITHUB_WORKSPACE/demo/ngx-hipster-sample-api/mvnw -ntp jib:dockerBuild
