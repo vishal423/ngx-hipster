@@ -1,4 +1,4 @@
-import { browser, by, element, ExpectedConditions } from 'protractor';
+import { browser, by, element } from 'protractor';
 
 export class HeaderPage {
   private root = element(by.css('app-header'));
@@ -12,9 +12,9 @@ export class HeaderPage {
     return browser.get(browser.baseUrl) as Promise<any>;
   }
 
-  async getTitleText() {
-    const title = this.root.element(by.css('.logo + span'));
-    await browser.wait(ExpectedConditions.visibilityOf(title), 2000);
-    return title.getText() as Promise<string>;
+  getTitleText() {
+    return this.root.element(by.css('.logo + span')).getText() as Promise<
+      string
+    >;
   }
 }

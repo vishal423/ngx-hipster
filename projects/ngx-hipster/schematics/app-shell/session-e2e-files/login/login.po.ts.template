@@ -1,17 +1,17 @@
-import { by, element, browser, ExpectedConditions } from 'protractor';
+import { by, element } from 'protractor';
 
 export class LoginPage {
-  private root = element(by.css('.body app-login'));
+  private root = element(by.css('.body <%= prefix %>-login'));
 
   username = this.root.element(by.css('input[formcontrolname="username"]'));
   password = this.root.element(by.css('input[formcontrolname="password"]'));
 
   loginBtn = this.root.element(by.css('mat-card-actions button'));
 
-  async getPageTitleText() {
-    const title = this.root.element(by.css('mat-card-title'));
-    await browser.wait(ExpectedConditions.visibilityOf(title), 2000);
-    return title.getText() as Promise<string>;
+  getPageTitleText() {
+    return this.root.element(by.css('mat-card-title')).getText() as Promise<
+      string
+    >;
   }
 
   getErrorMessage() {
