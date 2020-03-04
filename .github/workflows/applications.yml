@@ -51,6 +51,7 @@ jobs:
         run: |
           sudo apt update
           sudo apt install google-chrome-stable
+      - run: sudo apt install xvfb
       - name: Build ngx-hipster library and include schematics
         run: |
           export PATH="$(yarn global bin):$PATH"
@@ -103,7 +104,7 @@ jobs:
           timeout 180 bash -c 'while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:8080/api/authenticate)" != "200" ]]; do sleep 5; done' || false
           cd $HOME/test-app/sample-app
           export PATH="$(yarn global bin):$PATH"
-          ng e2e
+          xvfb-run --auto-servernum ng e2e
         env:
           CI: true
       - name: Create AOT build of generated application
