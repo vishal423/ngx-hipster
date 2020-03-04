@@ -1,4 +1,4 @@
-import { by, element } from 'protractor';
+import { by, element, browser, ExpectedConditions } from 'protractor';
 
 export class LoginPage {
   private root = element(by.css('.body app-login'));
@@ -8,10 +8,10 @@ export class LoginPage {
 
   loginBtn = this.root.element(by.css('mat-card-actions button'));
 
-  getPageTitleText() {
-    return this.root.element(by.css('mat-card-title')).getText() as Promise<
-      string
-    >;
+  async getPageTitleText() {
+    const title = this.root.element(by.css('mat-card-title'));
+    await browser.wait(ExpectedConditions.visibilityOf(title), 2000);
+    return title.getText() as Promise<string>;
   }
 
   getErrorMessage() {
