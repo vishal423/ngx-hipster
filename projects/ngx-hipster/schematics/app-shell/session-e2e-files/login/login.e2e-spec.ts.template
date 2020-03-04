@@ -14,7 +14,7 @@ describe('login-logout tests', () => {
   });
 
   it('should not allow login with invalid credentials', async () => {
-    headerPage.navigateTo();
+    await headerPage.navigateTo();
     expect(await headerPage.loginMenu.isDisplayed()).toBeTruthy();
 
     await headerPage.loginMenu.click();
@@ -36,7 +36,7 @@ describe('login-logout tests', () => {
   });
 
   it('should allow login with valid credentials', async () => {
-    headerPage.navigateTo();
+    await headerPage.navigateTo();
     expect(await headerPage.loginMenu.isDisplayed()).toBeTruthy();
 
     await headerPage.loginMenu.click();

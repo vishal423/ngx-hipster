@@ -16,7 +16,7 @@ describe('workspace-project App', () => {
   });
 
   it('should display ngx-hipster application landing page', async () => {
-    headerPage.navigateTo();
+    await headerPage.navigateTo();
     expect(await headerPage.getTitleText()).toEqual('Angular Hipster');
     expect(await headerPage.loginMenu.isDisplayed()).toBeTruthy();
     expect(await homePage.getWelcomeText()).toEqual('home works!');
