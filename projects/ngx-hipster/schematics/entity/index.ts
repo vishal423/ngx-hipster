@@ -357,7 +357,7 @@ function addSidenavLinkInE2EPageObject(
 
   const change = new InsertChange(
     normalize(`${filePath}`),
-    source.getEnd() - 1,
+    source.getEnd() - 2,
     `${strings.camelize(
       entity.name
     )}Menu = this.root.element(by.css('a[routerLink="/${pluralize(
