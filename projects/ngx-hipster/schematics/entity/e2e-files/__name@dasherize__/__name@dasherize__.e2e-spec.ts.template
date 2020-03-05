@@ -2,14 +2,14 @@ import { browser, logging } from 'protractor';
 
 import { HeaderPage } from '../header.po';
 import { LoginPage } from '../login/login.po';
-import { MovieListPage } from './movie-list.po';
+import { <%= classify(name) %>ListPage } from './<%= dasherize(name) %>-list.po';
 import { SidenavPage } from '../sidenav.po';
 
-describe('movie tests', () => {
+describe('<%= classify(name) %> tests', () => {
   let headerPage: HeaderPage;
   let loginPage: LoginPage;
   let sidenavPage: SidenavPage;
-  let listPage: MovieListPage;
+  let listPage: <%= classify(name) %>ListPage;
 
   beforeAll(async () => {
     headerPage = new HeaderPage();
@@ -50,12 +50,12 @@ describe('movie tests', () => {
   beforeEach(() => {
     headerPage = new HeaderPage();
     sidenavPage = new SidenavPage();
-    listPage = new MovieListPage();
+    listPage = new <%= classify(name) %>ListPage();
   });
 
   beforeEach(async () => {
     await headerPage.appMenu.click();
-    await sidenavPage.movieMenu.click();
+    await sidenavPage.<%= camelize(name) %>Menu.click();
   });
 
   afterEach(async () => {
@@ -70,31 +70,12 @@ describe('movie tests', () => {
     );
   });
 
-  it('should display the movies list page', async () => {
-    expect(await listPage.getPageTitleText()).toEqual('Movies');
+  it('should display the <%= pluralizepluralize(dasherize(name)) %> list page', async () => {
+    expect(await listPage.getPageTitleText()).toEqual('<%= pluralizepluralize(classify(name)) %>');
 
     expect(await listPage.createBtn.isEnabled()).toBeTruthy();
 
     expect(await listPage.table.noRecords.isDisplayed()).toBeTruthy();
-    expect(await listPage.table.noRecords.getText()).toEqual(
-      'No records found'
-    );
-
-    // expect(await listPage.table.columns.count()).toEqual(4);
-    // expect(await listPage.table.getColumnHeadersText()).toEqual([
-    //   'Title',
-    //   'Director',
-    //   'Release Date',
-    //   ''
-    // ]);
-
-    // const actualRecordsCount = await listPage.table.records.count();
-    // expect(actualRecordsCount).toEqual(initialCount);
-
-    // const actionsMenu = listPage.table.getActionsBtn(actualRecordsCount - 1);
-    // await actionsMenu.click();
-    // expect(await listPage.editBtn.isEnabled()).toBeTruthy();
-    // expect(await listPage.deleteBtn.isEnabled()).toBeTruthy();
-    // await listPage.overlay.click();
+    expect(await listPage.table.noRecords.getText()).toEqual('No records found');
   });
 });

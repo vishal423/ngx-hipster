@@ -11,6 +11,7 @@ import {
   SchematicContext
 } from '@angular-devkit/schematics';
 import { normalize, strings } from '@angular-devkit/core';
+import { InsertChange } from '@schematics/angular/utility/change';
 import * as ts from '@schematics/angular/third_party/github.com/Microsoft/TypeScript/lib/typescript';
 
 import { getProject, pluralize } from '../utils/utils';
@@ -49,6 +50,8 @@ export function entity(options: Schema): Rule {
       );
     }
 
+    const e2eSourcePath = normalize(`${project.root}/e2e/src`);
+
     if (!entity.primaryField) {
       entity.primaryField = 'id';
     }
@@ -75,6 +78,13 @@ export function entity(options: Schema): Rule {
       tree,
       context,
       normalize(`${sourcePath}/layout/sidenav/sidenav.component.html`),
+      entity
+    );
+
+    addSidenavLinkInE2EPageObject(
+      tree,
+      context,
+      normalize(`${e2eSourcePath}/sidenav.po.ts`),
       entity
     );
 
@@ -177,8 +187,21 @@ export function entity(options: Schema): Rule {
       move(normalize(sourcePath))
     ]);
 
+    const e2eTemplateSource = apply(url('./e2e-files'), [
+      applyTemplates({
+        dot: '.',
+        ...strings,
+        pluralize,
+        entity,
+        prefix,
+        name: entity.name
+      }),
+      move(e2eSourcePath)
+    ]);
+
     return chain([
       mergeWith(templateSource),
+      mergeWith(e2eTemplateSource),
       applyPrettierOnFile({
         path: normalize(`${sourcePath}/app-routing.module.ts`)
       }),
@@ -302,6 +325,47 @@ function addSidenavLink(
   );
 
   tree.commitUpdate(recordedChange);
+}
+
+function addSidenavLinkInE2EPageObject(
+  tree: Tree,
+  context: SchematicContext,
+  filePath: string,
+  entity: any
+) {
+  const buffer = tree.read(filePath);
+
+  if (!buffer) {
+    throw new SchematicsException(`Could not read file ${filePath}`);
+  }
+
+  const sidenavContent = buffer.toString('utf-8');
+
+  if (sidenavContent.indexOf(`${strings.camelize(entity.name)}Menu`) !== -1) {
+    context.logger.info(
+      `${strings.camelize(entity.name)} route menu already exists.`
+    );
+    return;
+  }
+
+  const source = ts.createSourceFile(
+    normalize(`${filePath}`),
+    sidenavContent,
+    ts.ScriptTarget.Latest,
+    true
+  );
+
+  const change = new InsertChange(
+    normalize(`${filePath}`),
+    source.getEnd(),
+    `${strings.camelize(
+      entity.name
+    )}Menu = this.root.element(by.css('a[routerLink="/${pluralize(
+      strings.dasherize(name)
+    )}"]'));`
+  );
+
+  applyChanges(tree, [change], normalize(`${filePath}`));
 }
 
 function handleUnknownPrimaryField(entity: Entity) {
