@@ -1,4 +1,4 @@
-package io.github.vishal423.ngxhipster.account;
+package io.github.vishal423.ngxhipster.common;
 
 public class ResourceNotFoundException extends RuntimeException {
   public ResourceNotFoundException(String notFoundMessage) {

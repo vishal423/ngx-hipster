@@ -1,5 +1,6 @@
 package io.github.vishal423.ngxhipster.account;
 
+import io.github.vishal423.ngxhipster.common.ResourceNotFoundException;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
