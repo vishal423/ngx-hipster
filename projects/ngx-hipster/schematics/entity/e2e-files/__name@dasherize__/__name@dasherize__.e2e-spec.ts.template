@@ -70,8 +70,8 @@ describe('<%= classify(name) %> tests', () => {
     );
   });
 
-  it('should display the <%= pluralizepluralize(dasherize(name)) %> list page', async () => {
-    expect(await listPage.getPageTitleText()).toEqual('<%= pluralizepluralize(classify(name)) %>');
+  it('should display the <%= pluralize(dasherize(name)) %> list page', async () => {
+    expect(await listPage.getPageTitleText()).toEqual('<%= pluralize(classify(name)) %>');
 
     expect(await listPage.createBtn.isEnabled()).toBeTruthy();
 

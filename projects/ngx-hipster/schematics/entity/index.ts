@@ -331,7 +331,7 @@ function addSidenavLinkInE2EPageObject(
   tree: Tree,
   context: SchematicContext,
   filePath: string,
-  entity: any
+  entity: Entity
 ) {
   const buffer = tree.read(filePath);
 
@@ -357,11 +357,11 @@ function addSidenavLinkInE2EPageObject(
 
   const change = new InsertChange(
     normalize(`${filePath}`),
-    source.getEnd(),
+    source.getEnd() - 1,
     `${strings.camelize(
       entity.name
     )}Menu = this.root.element(by.css('a[routerLink="/${pluralize(
-      strings.dasherize(name)
+      strings.dasherize(entity.name)
     )}"]'));`
   );
 

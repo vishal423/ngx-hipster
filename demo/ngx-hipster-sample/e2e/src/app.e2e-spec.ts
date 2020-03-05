@@ -4,7 +4,7 @@ import { HeaderPage } from './header.po';
 import { HomePage } from './home.po';
 import { FooterPage } from './footer.po';
 
-describe('workspace-project App', () => {
+describe('application layout tests', () => {
   let headerPage: HeaderPage;
   let homePage: HomePage;
   let footerPage: FooterPage;

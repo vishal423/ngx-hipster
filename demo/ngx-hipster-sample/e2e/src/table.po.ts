@@ -10,13 +10,13 @@ export class TablePage {
   noRecords: ElementFinder;
 
   constructor(root: ElementFinder) {
+    this.noRecords = root.element(by.css('mat-card-content .table-overlay'));
     this.tableRoot = root.element(by.css('table'));
     this.headRoot = this.tableRoot.element(by.css('thead'));
     this.bodyRoot = this.tableRoot.element(by.css('tbody'));
 
     this.columns = this.headRoot.all(by.css('tr th'));
     this.records = this.bodyRoot.all(by.css('tr'));
-    this.noRecords = root.element(by.css('mat-card-content .table-overlay'));
   }
 
   getColumnHeadersText(): Promise<string[]> {

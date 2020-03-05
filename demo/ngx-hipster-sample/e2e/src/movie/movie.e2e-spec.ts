@@ -5,7 +5,7 @@ import { LoginPage } from '../login/login.po';
 import { MovieListPage } from './movie-list.po';
 import { SidenavPage } from '../sidenav.po';
 
-describe('movie tests', () => {
+describe('Movie tests', () => {
   let headerPage: HeaderPage;
   let loginPage: LoginPage;
   let sidenavPage: SidenavPage;
@@ -79,22 +79,5 @@ describe('movie tests', () => {
     expect(await listPage.table.noRecords.getText()).toEqual(
       'No records found'
     );
-
-    // expect(await listPage.table.columns.count()).toEqual(4);
-    // expect(await listPage.table.getColumnHeadersText()).toEqual([
-    //   'Title',
-    //   'Director',
-    //   'Release Date',
-    //   ''
-    // ]);
-
-    // const actualRecordsCount = await listPage.table.records.count();
-    // expect(actualRecordsCount).toEqual(initialCount);
-
-    // const actionsMenu = listPage.table.getActionsBtn(actualRecordsCount - 1);
-    // await actionsMenu.click();
-    // expect(await listPage.editBtn.isEnabled()).toBeTruthy();
-    // expect(await listPage.deleteBtn.isEnabled()).toBeTruthy();
-    // await listPage.overlay.click();
   });
 });
