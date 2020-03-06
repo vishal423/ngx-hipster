@@ -12,6 +12,7 @@ import {
 import { experimental, normalize } from '@angular-devkit/core';
 import { Schema } from './schema';
 import { getJson } from '../utils/utils';
+import { applyPrettierOnFile } from '../utils/prettier-util';
 
 export function proxy(options: Schema): Rule {
   return (tree: Tree) => {
@@ -49,6 +50,14 @@ export function proxy(options: Schema): Rule {
       move(normalize(path))
     ]);
 
-    return chain([mergeWith(templateSource)]);
+    return chain([
+      mergeWith(templateSource),
+      applyPrettierOnFile({
+        path: normalize(`angular.json`)
+      }),
+      applyPrettierOnFile({
+        path: normalize(`proxy.conf.js`)
+      })
+    ]);
   };
 }

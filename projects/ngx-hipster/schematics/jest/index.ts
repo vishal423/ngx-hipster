@@ -16,6 +16,7 @@ import { updateTsConfigToSupportJest } from './tsconfig-util';
 import { Schema } from './schema';
 import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
 import { normalize } from '@angular-devkit/core';
+import { applyPrettierOnFile } from '../utils/prettier-util';
 
 export function jest(options: Schema): Rule {
   return (tree: Tree, context: SchematicContext) => {
@@ -68,7 +69,12 @@ export function jest(options: Schema): Rule {
 
       context.addTask(new NodePackageInstallTask());
 
-      return chain([mergeWith(templateSource)]);
+      return chain([
+        mergeWith(templateSource),
+        applyPrettierOnFile({
+          path: normalize(`tsconfig.spec.json`)
+        })
+      ]);
     }
 
     return tree;

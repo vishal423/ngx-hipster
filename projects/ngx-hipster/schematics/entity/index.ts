@@ -216,6 +216,9 @@ export function entity(options: Schema): Rule {
       }),
       applyPrettier({
         path: normalize(`${e2eSourcePath}/${strings.dasherize(entity.name)}`)
+      }),
+      applyPrettierOnFile({
+        path: normalize(`${e2eSourcePath}/sidenav.po.ts`)
       })
     ]);
   };

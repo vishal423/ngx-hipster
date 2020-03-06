@@ -16,6 +16,7 @@ import { normalize } from '@angular-devkit/core';
 import { getProject } from '../utils/utils';
 import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
 import { updateTsLintConfigurations } from './tslint-util';
+import { applyPrettierOnFile } from '../utils/prettier-util';
 
 export function prettier(options: Schema): Rule {
   return (tree: Tree, context: SchematicContext) => {
@@ -42,6 +43,11 @@ export function prettier(options: Schema): Rule {
 
     context.addTask(new NodePackageInstallTask());
 
-    return chain([mergeWith(templateSource)]);
+    return chain([
+      mergeWith(templateSource),
+      applyPrettierOnFile({
+        path: normalize(`tslint.json`)
+      })
+    ]);
   };
 }

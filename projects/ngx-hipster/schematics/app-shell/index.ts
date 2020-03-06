@@ -15,6 +15,7 @@ import { getBasePath, getProject } from '../utils/utils';
 import { Schema } from './schema';
 import { addTsConfigOption } from '../jest/tsconfig-util';
 import { addTslintRuleConfig } from '../prettier/tslint-util';
+import { applyPrettier, applyPrettierOnFile } from '../utils/prettier-util';
 
 export function appShell(options: Schema): Rule {
   return (tree: Tree) => {
@@ -114,6 +115,22 @@ export function appShell(options: Schema): Rule {
       templateRules.push(mergeWith(sessionAuthenticationTemplateSource));
       templateRules.push(mergeWith(e2eTemplateSource));
     }
+
+    templateRules.push(
+      applyPrettier({
+        path: normalize(`${project.sourceRoot}`)
+      })
+    );
+    templateRules.push(
+      applyPrettier({
+        path: normalize(`${e2eSourcePath}`)
+      })
+    );
+    templateRules.push(
+      applyPrettierOnFile({
+        path: normalize(`tsconfig.json`)
+      })
+    );
 
     return chain(templateRules);
   };

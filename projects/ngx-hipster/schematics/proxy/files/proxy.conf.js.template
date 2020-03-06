@@ -1,8 +1,8 @@
 const PROXY_CONFIG = [
   {
-      context: ['<%= proxyPath %>'],
-      target: '<%= serverUrl %>',
-      secure: false
+    context: ['<%= proxyPath %>'],
+    target: '<%= serverUrl %>',
+    secure: false
   }
 ];
 
