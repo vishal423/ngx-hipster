@@ -2,8 +2,8 @@ import { by, element, ElementFinder } from 'protractor';
 import { OverlayPage } from '../overlay.po';
 import { TablePage } from '../table.po';
 
-export class MovieListPage {
-  private root: ElementFinder = element(by.css('.body app-movie-list'));
+export class <%= classify(name) %>ListPage {
+  private root: ElementFinder = element(by.css('.body <%= prefix %>-<%= dasherize(name) %>-list'));
   private overlayPage = new OverlayPage();
 
   overlay = this.overlayPage.overlay;
