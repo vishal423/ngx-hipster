@@ -4,12 +4,15 @@ import { HeaderPage } from '../header.po';
 import { LoginPage } from '../login/login.po';
 import { MovieListPage } from './movie-list.po';
 import { SidenavPage } from '../sidenav.po';
+import { MovieDetailPage } from './movie-detail.po';
 
-describe('Movie tests', () => {
+fdescribe('Movie tests', () => {
   let headerPage: HeaderPage;
   let loginPage: LoginPage;
   let sidenavPage: SidenavPage;
   let listPage: MovieListPage;
+  let detailPage: MovieDetailPage;
+  let initialCount: number;
 
   beforeAll(async () => {
     headerPage = new HeaderPage();
@@ -51,6 +54,7 @@ describe('Movie tests', () => {
     headerPage = new HeaderPage();
     sidenavPage = new SidenavPage();
     listPage = new MovieListPage();
+    detailPage = new MovieDetailPage();
   });
 
   beforeEach(async () => {
@@ -79,5 +83,64 @@ describe('Movie tests', () => {
     expect(await listPage.table.noRecords.getText()).toEqual(
       'No records found'
     );
+    initialCount = 0;
+  });
+
+  it('should create a new movie', async () => {
+    await listPage.createBtn.click();
+
+    expect(await detailPage.title.getText()).toEqual('movie');
+    expect(await detailPage.subTitle.getText()).toEqual('Creates a new movie.');
+    expect(await detailPage.cancelBtn.isEnabled()).toBeTruthy();
+    expect(await detailPage.saveBtn.isEnabled()).toBeFalsy();
+
+    expect(await detailPage.titleLabel.getText()).toEqual('Title');
+    await detailPage.titleInput.sendKeys('movie title');
+
+    expect(await detailPage.plotLabel.getText()).toEqual('Plot');
+    await detailPage.plotTextarea.sendKeys(
+      'movie plot movie plotmovie plotmovie plotmovie plotmovie plotmovie plotmovie plotmovie plotmovie plotmovie plotmovie plotmovie plotmovie plotmovie plotmovie plotmovie plotmovie plot'
+    );
+
+    await detailPage.ratedRadioOptions.first().click();
+
+    expect(await detailPage.genresLabel.getText()).toEqual('Genres');
+    await detailPage.genresSelect.click();
+    await detailPage.genresSelectOptions.first().click();
+    await detailPage.overlay.click();
+
+    expect(await detailPage.directorLabel.getText()).toEqual('Director');
+    await detailPage.directorSelect.click();
+    await detailPage.directorSelectOptions.last().click();
+
+    expect(await detailPage.writerLabel.getText()).toEqual('Writer');
+    await detailPage.writerInput.sendKeys('ge');
+    await detailPage.writerAutocomplete.first().click();
+
+    expect(await detailPage.releaseDateLabel.getText()).toEqual('Release Date');
+    await detailPage.releaseDate.sendKeys('3/12/1965');
+    await detailPage.releaseDatePicker.click();
+    await detailPage.overlay.click();
+
+    expect(await detailPage.saveBtn.isEnabled()).toBeTruthy();
+    await detailPage.saveBtn.click();
+
+    expect(await listPage.table.columns.count()).toEqual(4);
+    expect(await listPage.table.getColumnHeadersText()).toEqual([
+      'Title',
+      'Director',
+      'Release Date',
+      ''
+    ]);
+
+    const actualRecordsCount = await listPage.table.records.count();
+    expect(actualRecordsCount).toEqual(initialCount + 1);
+
+    const actionsMenu = listPage.table.getActionsBtn(actualRecordsCount - 1);
+    console.log(actionsMenu);
+    await actionsMenu.click();
+    expect(await listPage.editBtn.isEnabled()).toBeTruthy();
+    expect(await listPage.deleteBtn.isEnabled()).toBeTruthy();
+    await listPage.overlay.click();
   });
 });

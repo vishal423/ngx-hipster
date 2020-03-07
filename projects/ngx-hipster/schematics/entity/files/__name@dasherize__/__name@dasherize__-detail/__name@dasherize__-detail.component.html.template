@@ -8,7 +8,7 @@
       mode="indeterminate"
     >
     </mat-progress-spinner>
-    <mat-card-title><%= name %></mat-card-title>
+    <mat-card-title><%= classify(name) %></mat-card-title>
     <mat-card-subtitle>{{
       <%= camelize(name) %>?.<%= primaryKey %>
         ? 'Update an existing <%= name %>.'
@@ -62,7 +62,7 @@
           [matDatepicker]="<%= camelize(field.name + 'Picker') %>"
         />
         <mat-datepicker-toggle matSuffix color="accent" [for]="<%= camelize(field.name + 'Picker') %>"></mat-datepicker-toggle>
-        <mat-datepicker color="accent" #<%= camelize(field.name + 'Picker') %>></mat-datepicker><% 
+        <mat-datepicker color="accent" #<%= camelize(field.name + 'Picker') %>></mat-datepicker><%
         } %>
         <mat-error><hip-ngx-error [control]="form.get('<%= field.name %>')" label="<%= field.label %>"></hip-ngx-error></mat-error>
       </mat-form-field><%

@@ -1,0 +1,72 @@
+import { by, element, ElementFinder } from 'protractor';
+import { OverlayPage } from '../overlay.po';
+
+export class <%= classify(name) %>DetailPage {
+  private root: ElementFinder = element(by.css('.body <%= prefix %>-<%= dasherize(name) %>-detail'));
+  private actions: ElementFinder = this.root.element(
+    by.css('mat-card-actions')
+  );
+  private overlayPage = new OverlayPage();
+  overlay = this.overlayPage.overlay;
+
+  title = this.root.element(by.css('.mat-card-title'));
+  subTitle = this.root.element(by.css('.mat-card-subtitle'));
+  cancelBtn = this.actions.element(by.css('button:first-child'));
+  saveBtn = this.actions.element(by.css('button:last-child'));
+
+<%
+  const visibleFields = entity.fields.filter(field => entity.pageOptions.edit.hideFields.includes(field.name) === false);
+  for (let field of visibleFields) {
+    if(field.controlType === 'text') {
+%>
+  <%= field.name %> = this.root.element(by.css('input[formcontrolname="<%= field.name %>"]'));
+  <%= field.name %>Label = this.root.element(
+    by.css('input[formcontrolname="<%= field.name %>"]+span mat-label')
+  );
+<%
+    } else if(field.controlType === 'textarea') {
+%>
+  <%= field.name %> = this.root.element(by.css('textarea[formcontrolname="<%= field.name %>"]'));
+  <%= field.name %>Label = this.root.element(
+    by.css('textarea[formcontrolname="<%= field.name %>"]+span mat-label')
+  );
+<%
+    } else if(field.controlType === 'radio') {
+%>
+  <%= field.name %> = this.root
+    .element(by.css('mat-radio-group[formcontrolname="<%= field.name %>"]'))
+    .all(by.css('mat-radio-button'));
+<%
+    } else if(field.controlType === 'select') {
+%>
+  <%= field.name %> = this.root.element(
+    by.css('mat-select[formcontrolname="<%= field.name %>"]')
+  );
+
+  <%= field.name %>Options = this.overlayPage.checkboxOptions;
+  <%= field.name %>Label = this.root.element(
+    by.css('mat-select[formcontrolname="<%= field.name %>"]+span mat-label')
+  );
+<%
+    } else if(field.controlType === 'autocomplete') {
+%>
+  <%= field.name %> = this.root.element(by.css('input[formcontrolname="<%= field.name %>"]'));
+  <%= field.name %>Autocomplete = this.overlayPage.options;
+  <%= field.name %>Label = this.root.element(
+    by.css('input[formcontrolname="<%= field.name %>"]+mat-autocomplete+span mat-label')
+  );
+<%
+    } else if(field.controlType === 'date') {
+%>
+  <%= field.name %> = this.root.element(
+    by.css('input[formcontrolname="<%= field.name %>"]')
+  );
+  <%= field.name %>Picker = this.root.element(by.css('mat-datepicker-toggle button'));
+  <%= field.name %>Label = this.root.element(
+    by.css('input[formcontrolname="<%= field.name %>"]+mat-datepicker+span mat-label')
+  );
+<%
+    }
+  }
+%>
+}

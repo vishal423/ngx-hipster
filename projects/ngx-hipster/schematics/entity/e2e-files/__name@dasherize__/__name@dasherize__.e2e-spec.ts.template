@@ -4,12 +4,15 @@ import { HeaderPage } from '../header.po';
 import { LoginPage } from '../login/login.po';
 import { <%= classify(name) %>ListPage } from './<%= dasherize(name) %>-list.po';
 import { SidenavPage } from '../sidenav.po';
+import { <%= classify(name) %>DetailPage } from './<%= dasherize(name) %>-detail.po';
 
 describe('<%= classify(name) %> tests', () => {
   let headerPage: HeaderPage;
   let loginPage: LoginPage;
   let sidenavPage: SidenavPage;
   let listPage: <%= classify(name) %>ListPage;
+  let detailPage: <%= classify(name) %>DetailPage;
+  let initialCount: number;
 
   beforeAll(async () => {
     headerPage = new HeaderPage();
@@ -51,6 +54,7 @@ describe('<%= classify(name) %> tests', () => {
     headerPage = new HeaderPage();
     sidenavPage = new SidenavPage();
     listPage = new <%= classify(name) %>ListPage();
+    detailPage = new <%= classify(name) %>DetailPage();
   });
 
   beforeEach(async () => {
@@ -77,5 +81,81 @@ describe('<%= classify(name) %> tests', () => {
 
     expect(await listPage.table.noRecords.isDisplayed()).toBeTruthy();
     expect(await listPage.table.noRecords.getText()).toEqual('No records found');
+    initialCount = 0;
+  });
+
+  it('should create a new <%= dasherize(name) %>', async () => {
+    await listPage.createBtn.click();
+
+    expect(await detailPage.title.getText()).toEqual('<%= classify(name) %>');
+    expect(await detailPage.subTitle.getText()).toEqual('Creates a new <%= name %>.');
+    expect(await detailPage.cancelBtn.isEnabled()).toBeTruthy();
+    expect(await detailPage.saveBtn.isEnabled()).toBeFalsy();
+
+<%
+  const visibleFields = entity.fields.filter(field =>
+    entity.pageOptions.edit.hideFields.includes(field.name) === false);
+  for (let field of visibleFields) {
+    if(field.controlType === 'text') {
+%>
+    expect(await detailPage.<%= field.name %>Label.getText()).toEqual('<%= field.label %>');
+    await detailPage.<%= field.name %>.sendKeys('Lorem Ipsum');
+<%
+    } else if(field.controlType === 'textarea') {
+%>
+    expect(await detailPage.<%= field.name %>Label.getText()).toEqual('<%= field.label %>');
+    await detailPage.<%= field.name %>.sendKeys(
+      'Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum'
+    );
+<%
+    } else if(field.controlType === 'radio') {
+%>
+    await detailPage.<%= field.name %>.first().click();
+<%
+    } else if(field.controlType === 'select') {
+%>
+    expect(await detailPage.<%= field.name %>Label.getText()).toEqual('<%= field.label %>');
+    await detailPage.<%= field.name %>.click();
+
+    <% if(field.multiple) { %>
+    await detailPage.<%= field.name %>Options.first().click();
+    await detailPage.overlay.click();
+    <% } else { %>
+    await detailPage.directorSelectOptions.last().click();
+    <% } %>
+<%
+    } else if(field.controlType === 'autocomplete') {
+%>
+    expect(await detailPage.<%= field.name %>Label.getText()).toEqual('<%= field.label %>');
+    await detailPage.<%= field.name %>.sendKeys('ge');
+    await detailPage.<%= field.name %>Autocomplete.first().click();
+<%
+    } else if(field.controlType === 'date') {
+%>
+    expect(await detailPage.<%= field.name %>Label.getText()).toEqual('<%= field.label %>');
+    await detailPage.<%= field.name %>.sendKeys('3/12/1965');
+    await detailPage.<%= field.name %>Picker.click();
+    await detailPage.overlay.click();
+<%
+    }
+  }
+%>
+    expect(await detailPage.saveBtn.isEnabled()).toBeTruthy();
+    await detailPage.saveBtn.click();
+
+    expect(await listPage.table.columns.count()).toEqual(<%= entity.pageOptions.list.displayFields.length + 1 %>);
+    expect(await listPage.table.getColumnHeadersText()).toEqual([
+      <% for (let colName of entity.pageOptions.list.displayFields) {%>'<%= colName %>', <% } %>''
+    ]);
+
+    const actualRecordsCount = await listPage.table.records.count();
+    expect(actualRecordsCount).toEqual(initialCount + 1);
+
+    const actionsMenu = listPage.table.getActionsBtn(actualRecordsCount - 1);
+
+    await actionsMenu.click();
+    expect(await listPage.editBtn.isEnabled()).toBeTruthy();
+    expect(await listPage.deleteBtn.isEnabled()).toBeTruthy();
+    await listPage.overlay.click();
   });
 });
