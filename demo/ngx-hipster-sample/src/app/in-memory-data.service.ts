@@ -14,6 +14,7 @@ export class InMemoryDataService implements InMemoryDbService {
   createDb() {
     const authentication = {};
     const logout: any = [];
+    const authenticate = {};
 
     const account = {
       login: 'admin',
@@ -125,7 +126,7 @@ export class InMemoryDataService implements InMemoryDbService {
           'Ten years after initially meeting, Anakin Skywalker shares a forbidden romance with Padmé, while Obi-Wan investigates an assassination attempt on the Senator and discovers a secret clone army crafted for the Jedi.'
       }
     ];
-    return { authentication, logout, account, movies };
+    return { authentication, logout, account, authenticate, movies };
   }
 
   parseRequestUrl(url: string, utils: RequestInfoUtilities): ParsedRequestUrl {
@@ -149,6 +150,14 @@ export class InMemoryDataService implements InMemoryDbService {
     const collectionName = reqInfo.collectionName;
     if (collectionName === 'account') {
       return this.getUserInfo(reqInfo);
+    } else if (collectionName === 'authenticate') {
+      return this.finishOptions(
+        {
+          body: {},
+          status: STATUS.OK
+        },
+        reqInfo
+      );
     }
     return undefined; // let the default GET handle all others
   }

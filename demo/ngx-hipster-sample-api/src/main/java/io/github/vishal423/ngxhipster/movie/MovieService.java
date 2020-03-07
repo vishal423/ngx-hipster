@@ -24,4 +24,19 @@ public class MovieService {
     return repository.findById(movieId).map(movieMapper::mapToDto)
       .switchIfEmpty(Mono.error(new ResourceNotFoundException("Movie not found")));
   }
+
+  public Mono<MovieDto> createMovie(Mono<MovieDto> movieDto) {
+
+    return movieDto
+      .map(movieMapper::mapFromDto)
+      .flatMap(repository::save)
+      .map(movieMapper::mapToDto);
+  }
+
+  public Mono<MovieDto> updateMovie(Mono<MovieDto> movieDto) {
+    return movieDto
+      .map(movieMapper::mapFromDto)
+      .flatMap(repository::save)
+      .map(movieMapper::mapToDto);
+  }
 }

@@ -17,7 +17,10 @@ class MovieRouter {
         .GET("",
           handler::getMovies)
         .GET("/{id}",
-          handler::getMovieById))
+          handler::getMovieById)
+        .POST("", handler::createMovie)
+        .PUT("", handler::updateMovie)
+      )
       .build();
   }
 }

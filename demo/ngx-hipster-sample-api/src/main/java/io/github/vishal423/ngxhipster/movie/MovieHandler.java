@@ -23,4 +23,15 @@ class MovieHandler {
     return ServerResponse.ok()
       .body(service.getMovieById(request.pathVariable("id")), MovieDto.class);
   }
+
+  Mono<ServerResponse> createMovie(ServerRequest request) {
+
+    return ServerResponse.ok()
+      .body(service.createMovie(request.bodyToMono(MovieDto.class)), MovieDto.class);
+  }
+
+  Mono<ServerResponse> updateMovie(ServerRequest request) {
+    return ServerResponse.ok()
+      .body(service.updateMovie(request.bodyToMono(MovieDto.class)), MovieDto.class);
+  }
 }

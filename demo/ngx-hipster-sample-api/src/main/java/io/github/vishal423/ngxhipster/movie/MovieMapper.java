@@ -6,5 +6,7 @@ import org.mapstruct.Mapper;
 interface MovieMapper {
 
   MovieDto mapToDto(Movie model);
+
+  Movie mapFromDto(MovieDto movieDto);
 }
 
