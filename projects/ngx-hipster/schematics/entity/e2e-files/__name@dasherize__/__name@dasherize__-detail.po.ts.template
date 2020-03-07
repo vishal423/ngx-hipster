@@ -9,8 +9,8 @@ export class <%= classify(name) %>DetailPage {
   private overlayPage = new OverlayPage();
   overlay = this.overlayPage.overlay;
 
-  title = this.root.element(by.css('.mat-card-title'));
-  subTitle = this.root.element(by.css('.mat-card-subtitle'));
+  pageTitle = this.root.element(by.css('.mat-card-title'));
+  pageSubTitle = this.root.element(by.css('.mat-card-subtitle'));
   cancelBtn = this.actions.element(by.css('button:first-child'));
   saveBtn = this.actions.element(by.css('button:last-child'));
 
@@ -42,11 +42,10 @@ export class <%= classify(name) %>DetailPage {
   <%= field.name %> = this.root.element(
     by.css('mat-select[formcontrolname="<%= field.name %>"]')
   );
-
-  <%= field.name %>Options = this.overlayPage.checkboxOptions;
   <%= field.name %>Label = this.root.element(
     by.css('mat-select[formcontrolname="<%= field.name %>"]+span mat-label')
   );
+  <%= field.name %>Options = this.overlayPage.checkboxOptions;
 <%
     } else if(field.controlType === 'autocomplete') {
 %>

@@ -87,8 +87,8 @@ describe('<%= classify(name) %> tests', () => {
   it('should create a new <%= dasherize(name) %>', async () => {
     await listPage.createBtn.click();
 
-    expect(await detailPage.title.getText()).toEqual('<%= classify(name) %>');
-    expect(await detailPage.subTitle.getText()).toEqual('Creates a new <%= name %>.');
+    expect(await detailPage.pageTitle.getText()).toEqual('<%= classify(name) %>');
+    expect(await detailPage.pageSubTitle.getText()).toEqual('Creates a new <%= name %>.');
     expect(await detailPage.cancelBtn.isEnabled()).toBeTruthy();
     expect(await detailPage.saveBtn.isEnabled()).toBeFalsy();
 
@@ -121,7 +121,7 @@ describe('<%= classify(name) %> tests', () => {
     await detailPage.<%= field.name %>Options.first().click();
     await detailPage.overlay.click();
     <% } else { %>
-    await detailPage.directorSelectOptions.last().click();
+    await detailPage.directorOptions.last().click();
     <% } %>
 <%
     } else if(field.controlType === 'autocomplete') {
@@ -144,9 +144,6 @@ describe('<%= classify(name) %> tests', () => {
     await detailPage.saveBtn.click();
 
     expect(await listPage.table.columns.count()).toEqual(<%= entity.pageOptions.list.displayFields.length + 1 %>);
-    expect(await listPage.table.getColumnHeadersText()).toEqual([
-      <% for (let colName of entity.pageOptions.list.displayFields) {%>'<%= colName %>', <% } %>''
-    ]);
 
     const actualRecordsCount = await listPage.table.records.count();
     expect(actualRecordsCount).toEqual(initialCount + 1);

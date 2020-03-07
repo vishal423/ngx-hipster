@@ -9,43 +9,40 @@ export class MovieDetailPage {
   private overlayPage = new OverlayPage();
   overlay = this.overlayPage.overlay;
 
-  title = this.root.element(by.css('.mat-card-title'));
-  subTitle = this.root.element(by.css('.mat-card-subtitle'));
+  pageTitle = this.root.element(by.css('.mat-card-title'));
+  pageSubTitle = this.root.element(by.css('.mat-card-subtitle'));
   cancelBtn = this.actions.element(by.css('button:first-child'));
   saveBtn = this.actions.element(by.css('button:last-child'));
 
-  titleInput = this.root.element(by.css('input[formcontrolname="title"]'));
+  title = this.root.element(by.css('input[formcontrolname="title"]'));
   titleLabel = this.root.element(
     by.css('input[formcontrolname="title"]+span mat-label')
   );
 
-  plotTextarea = this.root.element(by.css('textarea[formcontrolname="plot"]'));
+  plot = this.root.element(by.css('textarea[formcontrolname="plot"]'));
   plotLabel = this.root.element(
     by.css('textarea[formcontrolname="plot"]+span mat-label')
   );
 
-  ratedRadioOptions = this.root
+  rated = this.root
     .element(by.css('mat-radio-group[formcontrolname="rated"]'))
     .all(by.css('mat-radio-button'));
 
-  genresSelect = this.root.element(
-    by.css('mat-select[formcontrolname="genres"]')
-  );
-
-  genresSelectOptions = this.overlayPage.checkboxOptions;
+  genres = this.root.element(by.css('mat-select[formcontrolname="genres"]'));
   genresLabel = this.root.element(
     by.css('mat-select[formcontrolname="genres"]+span mat-label')
   );
+  genresOptions = this.overlayPage.checkboxOptions;
 
-  directorSelect = this.root.element(
+  director = this.root.element(
     by.css('mat-select[formcontrolname="director"]')
   );
-  directorSelectOptions = this.overlayPage.options;
   directorLabel = this.root.element(
     by.css('mat-select[formcontrolname="director"]+span mat-label')
   );
+  directorOptions = this.overlayPage.checkboxOptions;
 
-  writerInput = this.root.element(by.css('input[formcontrolname="writer"]'));
+  writer = this.root.element(by.css('input[formcontrolname="writer"]'));
   writerAutocomplete = this.overlayPage.options;
   writerLabel = this.root.element(
     by.css('input[formcontrolname="writer"]+mat-autocomplete+span mat-label')
