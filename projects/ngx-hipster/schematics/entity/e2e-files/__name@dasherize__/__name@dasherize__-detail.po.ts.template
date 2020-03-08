@@ -45,7 +45,11 @@ export class <%= classify(name) %>DetailPage {
   <%= field.name %>Label = this.root.element(
     by.css('mat-select[formcontrolname="<%= field.name %>"]+span mat-label')
   );
+  <% if(field.multiple) { %>
   <%= field.name %>Options = this.overlayPage.checkboxOptions;
+  <% } else { %>
+  <%= field.name %>Options = this.overlayPage.options;
+  <% } %>
 <%
     } else if(field.controlType === 'autocomplete') {
 %>
