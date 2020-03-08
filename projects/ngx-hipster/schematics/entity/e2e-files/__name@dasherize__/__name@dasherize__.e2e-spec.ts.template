@@ -134,8 +134,6 @@ describe('<%= classify(name) %> tests', () => {
 %>
     expect(await detailPage.<%= field.name %>Label.getText()).toEqual('<%= field.label %>');
     await detailPage.<%= field.name %>.sendKeys('3/12/1965');
-    await detailPage.<%= field.name %>Picker.click();
-    await detailPage.overlay.click();
 <%
     }
   }
