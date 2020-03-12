@@ -19,16 +19,17 @@ import org.springframework.security.web.server.util.matcher.ServerWebExchangeMat
 import reactor.core.publisher.Mono;
 
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 @EnableWebFluxSecurity
 public class SecurityConfig {
 
   private final Environment environment;
-  private final ReactiveClientRegistrationRepository clientRegistrationRepository;
+  private final Optional<ReactiveClientRegistrationRepository> clientRegistrationRepository;
   private final ObjectMapper objectMapper;
 
-  public SecurityConfig(Environment environment, ReactiveClientRegistrationRepository clientRegistrationRepository, ObjectMapper objectMapper) {
+  public SecurityConfig(Environment environment, Optional<ReactiveClientRegistrationRepository> clientRegistrationRepository, ObjectMapper objectMapper) {
     this.environment = environment;
     this.clientRegistrationRepository = clientRegistrationRepository;
     this.objectMapper = objectMapper;
@@ -81,7 +82,7 @@ public class SecurityConfig {
   }
 
   private ServerLogoutSuccessHandler oidcLogoutSuccessHandler() {
-    return new OidcLogoutSuccessHandler(clientRegistrationRepository, objectMapper);
+    return new OidcLogoutSuccessHandler(clientRegistrationRepository.get(), objectMapper);
   }
 
   private void configureBasicAuth(ServerHttpSecurity http){
