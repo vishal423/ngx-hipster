@@ -1,0 +1,12 @@
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          oidc:
+            client-id:
+            client-secret:
+        provider:
+          oidc:
+            issuer-uri:
+            userNameAttribute: preferred_username

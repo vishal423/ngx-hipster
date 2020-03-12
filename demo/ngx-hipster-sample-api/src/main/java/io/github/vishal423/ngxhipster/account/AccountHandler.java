@@ -2,11 +2,10 @@ package io.github.vishal423.ngxhipster.account;
 
 import io.github.vishal423.ngxhipster.common.ResourceNotFoundException;
 import org.springframework.http.MediaType;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.ReactiveSecurityContextHolder;
 import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
@@ -30,15 +29,12 @@ public class AccountHandler {
       .contentType(MediaType.APPLICATION_JSON)
       .body(ReactiveSecurityContextHolder.getContext()
         .map(SecurityContext::getAuthentication)
-        .filter(UsernamePasswordAuthenticationToken.class::isInstance)
-        .map(UsernamePasswordAuthenticationToken.class::cast)
-        .map(UsernamePasswordAuthenticationToken::getPrincipal)
-        .filter(User.class::isInstance)
-        .map(User.class::cast)
-        .map(user ->
+        .filter(AbstractAuthenticationToken.class::isInstance)
+        .map(AbstractAuthenticationToken.class::cast)
+        .map(authenticationToken ->
           new UserDto(
-            user.getUsername(), user.getUsername(),
-            user.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toSet())))
+            authenticationToken.getName(), authenticationToken.getName(),
+            authenticationToken.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toSet())))
         .switchIfEmpty(Mono.error(new ResourceNotFoundException("User could not be found"))), UserDto.class);
   }
 }
