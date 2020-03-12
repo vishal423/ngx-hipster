@@ -75,7 +75,7 @@ jobs:
           ng g ngx-hipster:jest --configureJest=true
           ng g ngx-hipster:prettier
           ng g ngx-hipster:proxy-confirm --configureProxy=false
-          if [[ ${{ matrix.app-type }} -eq "oidc" ]]; then ng g ngx-hipster:proxy --serverUrl=http://localhost:8080 --proxyPath=/api,/oauth2,/login/oauth2 ; else ng g ngx-hipster:proxy --serverUrl=http://localhost:8080 --proxyPath=/api ; fi
+          if [[ ${{ matrix.app-type }} == "oidc" ]]; then ng g ngx-hipster:proxy --serverUrl=http://localhost:8080 --proxyPath=/api,/oauth2,/login/oauth2 ; else ng g ngx-hipster:proxy --serverUrl=http://localhost:8080 --proxyPath=/api ; fi
           ng g ngx-hipster:app-shell --authenticationType=${{ matrix.app-type }}
           ng g ngx-hipster:material-layout
       - name: Generate entity create, update and list layouts
@@ -101,7 +101,7 @@ jobs:
       - name: Run e2e tests
         run: |
           docker login docker.pkg.github.com --username ${{ secrets.USERNAME }} --password ${{ secrets.REGISTRY_PASSWORD }}
-          docker run -d -p 8080:8080 docker.pkg.github.com/vishal423/ngx-hipster/ngx-hipster-sample-api
+          if [[ ${{ matrix.app-type }} == "oidc" ]]; then docker run -d -p 8080:8080 -e SPRING_PROFILES_ACTIVE=oidc -e SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_OIDC_ISSUERURI=${{ secrets.OKTA_ISSUER_URI }} -e SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_OIDC_CLIENTSECRET=${{ secrets.OKTA_CLIENT_SECRET }} -e SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_OIDC_CLIENTID=${{ secrets.OKTA_CLIENT_ID }} docker.pkg.github.com/vishal423/ngx-hipster/ngx-hipster-sample-api ; else docker run -d -p 8080:8080 docker.pkg.github.com/vishal423/ngx-hipster/ngx-hipster-sample-api ; fi
           timeout 180 bash -c 'while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:8080/api/authenticate)" != "200" ]]; do sleep 5; done' || false
           cd $HOME/test-app/sample-app
           export PATH="$(yarn global bin):$PATH"
