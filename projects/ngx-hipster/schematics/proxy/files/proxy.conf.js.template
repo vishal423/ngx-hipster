@@ -1,6 +1,6 @@
 const PROXY_CONFIG = [
   {
-    context: ['<%= proxyPath %>'],
+    context: [ <% for(let proxyVar of  proxyPaths) { %> '<%= proxyVar %>',<% } %>],
     target: '<%= serverUrl %>',
     secure: false
   }

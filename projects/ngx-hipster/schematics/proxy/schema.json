@@ -19,7 +19,7 @@
     },
     "proxyPath": {
       "type": "string",
-      "description": "Context path to proxy",
+      "description": "Context path to proxy. Specify multiple as comma separated.",
       "default": "/api",
       "x-prompt": "Provide relative context path that should be used to proxy"
     }

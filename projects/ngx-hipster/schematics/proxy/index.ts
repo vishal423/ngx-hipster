@@ -45,8 +45,10 @@ export function proxy(options: Schema): Rule {
 
     tree.overwrite('angular.json', JSON.stringify(workspace, null, 2));
 
+    const proxyPaths: string[] = options.proxyPath.split(',');
+
     const templateSource = apply(url('./files'), [
-      applyTemplates({ ...options }),
+      applyTemplates({ ...options, proxyPaths }),
       move(normalize(path))
     ]);
 
