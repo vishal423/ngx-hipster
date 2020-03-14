@@ -105,7 +105,7 @@ jobs:
           timeout 180 bash -c 'while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:8080/api/authenticate)" != "200" ]]; do sleep 5; done' || false
           cd $HOME/test-app/sample-app
           export PATH="$(yarn global bin):$PATH"
-          xvfb-run --auto-servernum ng e2e
+          if [[ ${{ matrix.app-type }} == "oidc" ]]; then xvfb-run --auto-servernum E2E_USERNAME=${{ secrets.OKTA_E2E_USERNAME }} E2E_PASSWORD=${{ secrets.OKTA_E2E_PASSWORD }} ng e2e ; else xvfb-run --auto-servernum  ng e2e ; fi
         env:
           CI: true
       - name: Create AOT build of generated application
