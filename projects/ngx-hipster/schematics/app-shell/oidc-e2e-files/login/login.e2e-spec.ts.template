@@ -27,8 +27,8 @@ describe('login-logout tests', () => {
 
     expect(await loginPage.loginBtn.isDisplayed()).toBeTruthy();
 
-    await loginPage.username.sendKeys(process.env.E2E_USERNAME as string | 'admin');
-    await loginPage.password.sendKeys(process.env.E2E_PASSWORD as string | 'admin');
+    await loginPage.username.sendKeys(process.env.E2E_USERNAME as string || 'admin');
+    await loginPage.password.sendKeys(process.env.E2E_PASSWORD as string || 'admin');
     await loginPage.loginBtn.click();
 
     await browser.wait(ExpectedConditions.invisibilityOf(loginPage.loginBtn), 10000);
