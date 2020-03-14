@@ -6,7 +6,7 @@ export class LoginPage {
   password = element(by.name('password'));
   loginBtn = element(by.css('input[type=submit]'));
 
-  async login(username: string, password: string): Promise<void> {
+  async login(username: string = process.env.E2E_USERNAME as string, password: string = process.env.E2E_PASSWORD as string): Promise<void> {
     try {
       await browser.waitForAngularEnabled(false);
       await browser.wait(ExpectedConditions.visibilityOf(this.loginBtn), 10000);

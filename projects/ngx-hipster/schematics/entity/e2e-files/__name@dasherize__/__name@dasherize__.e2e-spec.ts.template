@@ -23,16 +23,7 @@ describe('<%= classify(name) %> tests', () => {
     expect(await headerPage.loginMenu.isDisplayed()).toBeTruthy();
 
     await headerPage.loginMenu.click();
-
-    expect(await loginPage.getPageTitleText()).toEqual('Sign In');
-    expect(await loginPage.loginBtn.isEnabled()).toBeFalsy();
-
-    await loginPage.username.sendKeys('admin');
-    await loginPage.password.sendKeys('admin');
-
-    expect(await loginPage.loginBtn.isEnabled()).toBeTruthy();
-
-    await loginPage.loginBtn.click();
+    await loginPage.login();
 
     expect(await headerPage.loginMenu.isPresent()).toBeFalsy();
     expect(await headerPage.appMenu.isDisplayed()).toBeTruthy();
