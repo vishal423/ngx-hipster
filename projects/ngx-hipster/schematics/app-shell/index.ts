@@ -116,6 +116,19 @@ export function appShell(options: Schema): Rule {
       templateRules.push(mergeWith(e2eTemplateSource));
     }
 
+    if (options.authenticationType === 'oidc') {
+      const e2eTemplateSource = apply(url('./oidc-e2e-files'), [
+        applyTemplates({
+          dot: '.',
+          prefix,
+          ...strings
+        }),
+        move(e2eSourcePath)
+      ]);
+
+      templateRules.push(mergeWith(e2eTemplateSource));
+    }
+
     templateRules.push(
       applyPrettier({
         path: normalize(`${project.sourceRoot}`)
