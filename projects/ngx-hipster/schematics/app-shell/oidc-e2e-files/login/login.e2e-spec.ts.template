@@ -1,7 +1,7 @@
-import { browser, logging } from 'protractor';
+import { browser, logging, ExpectedConditions } from 'protractor';
 
-import { HeaderPage } from './po/header.po';
-import { LoginPage } from './po/login.po';
+import { HeaderPage } from '../header.po';
+import { LoginPage } from './login.po';
 
 describe('login-logout tests', () => {
   let headerPage: HeaderPage;
@@ -12,43 +12,29 @@ describe('login-logout tests', () => {
     loginPage = new LoginPage();
   });
 
-  it('should not allow login with invalid credentials', async () => {
-    headerPage.navigateTo();
-    expect(await headerPage.loginMenu.isDisplayed()).toBeTruthy();
-
-    await headerPage.loginMenu.click();
-
-    expect(await loginPage.getPageTitleText()).toEqual('Sign In');
-    expect(await loginPage.loginBtn.isEnabled()).toBeFalsy();
-
-    await loginPage.username.sendKeys('admin');
-    await loginPage.password.sendKeys('invalid');
-
-    expect(await loginPage.loginBtn.isEnabled()).toBeTruthy();
-
-    await loginPage.loginBtn.click();
-
-    expect(await headerPage.loginMenu.isPresent()).toBeTruthy();
-    expect(await loginPage.getErrorMessage()).toEqual(
-      'Invalid username or password.'
-    );
+  afterEach(async () => {
+    await browser.waitForAngularEnabled(true);
   });
 
   it('should allow login with valid credentials', async () => {
-    headerPage.navigateTo();
+    await headerPage.navigateTo();
     expect(await headerPage.loginMenu.isDisplayed()).toBeTruthy();
 
     await headerPage.loginMenu.click();
 
-    expect(await loginPage.getPageTitleText()).toEqual('Sign In');
-    expect(await loginPage.loginBtn.isEnabled()).toBeFalsy();
+    await browser.waitForAngularEnabled(false);
+    await browser.wait(ExpectedConditions.visibilityOf(loginPage.loginBtn), 10000);
 
-    await loginPage.username.sendKeys('admin');
-    await loginPage.password.sendKeys('admin');
+    expect(await loginPage.loginBtn.isDisplayed()).toBeTruthy();
 
-    expect(await loginPage.loginBtn.isEnabled()).toBeTruthy();
-
+    await loginPage.username.sendKeys(process.env.E2E_USERNAME as string);
+    await loginPage.password.sendKeys(process.env.E2E_PASSWORD as string);
     await loginPage.loginBtn.click();
+
+    await browser.wait(ExpectedConditions.invisibilityOf(loginPage.loginBtn), 10000);
+
+    expect(await loginPage.loginBtn.isPresent()).toBeFalsy();
+    await browser.waitForAngularEnabled(true);
 
     expect(await headerPage.loginMenu.isPresent()).toBeFalsy();
     expect(await headerPage.appMenu.isDisplayed()).toBeTruthy();

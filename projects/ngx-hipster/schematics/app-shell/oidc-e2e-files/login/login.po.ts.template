@@ -1,22 +1,22 @@
-import { by, element } from 'protractor';
+import { by, element, browser, ExpectedConditions } from 'protractor';
 
 export class LoginPage {
-  private root = element(by.css('.body <%= prefix %>-login'));
 
-  username = this.root.element(by.css('input[formcontrolname="username"]'));
-  password = this.root.element(by.css('input[formcontrolname="password"]'));
+  username = element(by.name('username'));
+  password = element(by.name('password'));
+  loginBtn = element(by.css('input[type=submit]'));
 
-  loginBtn = this.root.element(by.css('mat-card-actions button'));
+  async login(username: string, password: string): Promise<void> {
+    try {
+      await browser.waitForAngularEnabled(false);
+      await browser.wait(ExpectedConditions.visibilityOf(this.loginBtn), 10000);
+      await this.username.sendKeys(username);
+      await this.password.sendKeys(password);
+      await this.loginBtn.click();
 
-  getPageTitleText() {
-    return this.root.element(by.css('mat-card-title')).getText() as Promise<
-      string
-    >;
-  }
-
-  getErrorMessage() {
-    return this.root
-      .element(by.css('.mat-card-title+.mat-error'))
-      .getText() as Promise<string>;
+      await browser.wait(ExpectedConditions.invisibilityOf(this.loginBtn), 10000);
+    } finally {
+      await browser.waitForAngularEnabled(true);
+    }
   }
 }
