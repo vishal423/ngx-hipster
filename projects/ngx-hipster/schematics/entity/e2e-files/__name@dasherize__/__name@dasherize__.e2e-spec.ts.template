@@ -5,6 +5,7 @@ import { LoginPage } from '../login/login.po';
 import { <%= classify(name) %>ListPage } from './<%= dasherize(name) %>-list.po';
 import { SidenavPage } from '../sidenav.po';
 import { <%= classify(name) %>DetailPage } from './<%= dasherize(name) %>-detail.po';
+import { <%= classify(name) %>DeletePage } from './<%= dasherize(name) %>-delete.po';
 
 describe('<%= classify(name) %> tests', () => {
   let headerPage: HeaderPage;
@@ -12,6 +13,7 @@ describe('<%= classify(name) %> tests', () => {
   let sidenavPage: SidenavPage;
   let listPage: <%= classify(name) %>ListPage;
   let detailPage: <%= classify(name) %>DetailPage;
+  let deletePage: <%= classify(name) %>DeletePage;
   let initialCount: number;
 
   beforeAll(async () => {
@@ -46,6 +48,7 @@ describe('<%= classify(name) %> tests', () => {
     sidenavPage = new SidenavPage();
     listPage = new <%= classify(name) %>ListPage();
     detailPage = new <%= classify(name) %>DetailPage();
+    deletePage = new <%= classify(name) %>DeletePage();
   });
 
   beforeEach(async () => {
@@ -70,9 +73,22 @@ describe('<%= classify(name) %> tests', () => {
 
     expect(await listPage.createBtn.isEnabled()).toBeTruthy();
 
-    expect(await listPage.table.noRecords.isDisplayed()).toBeTruthy();
-    expect(await listPage.table.noRecords.getText()).toEqual('No records found');
-    initialCount = 0;
+    if(await listPage.table.noRecords.isPresent()) {
+      expect(await listPage.table.noRecords.isDisplayed()).toBeTruthy();
+      expect(await listPage.table.noRecords.getText()).toEqual(
+        'No records found'
+      );
+      initialCount = 0;
+    } else {
+      initialCount = await listPage.table.records.count();
+      expect(await listPage.table.columns.count()).toEqual(<%= entity.pageOptions.list.displayFields.length + 1 %>);
+
+      const actionsMenu = listPage.table.getActionsBtn(initialCount - 1);
+      await actionsMenu.click();
+      expect(await listPage.editBtn.isEnabled()).toBeTruthy();
+      expect(await listPage.deleteBtn.isEnabled()).toBeTruthy();
+      await listPage.overlay.click();
+    }
   });
 
   it('should create a new <%= dasherize(name) %>', async () => {
@@ -132,16 +148,34 @@ describe('<%= classify(name) %> tests', () => {
     expect(await detailPage.saveBtn.isEnabled()).toBeTruthy();
     await detailPage.saveBtn.click();
 
-    expect(await listPage.table.columns.count()).toEqual(<%= entity.pageOptions.list.displayFields.length + 1 %>);
-
     const actualRecordsCount = await listPage.table.records.count();
+    expect(await listPage.table.columns.count()).toEqual(<%= entity.pageOptions.list.displayFields.length + 1 %>);
     expect(actualRecordsCount).toEqual(initialCount + 1);
+  });
 
-    const actionsMenu = listPage.table.getActionsBtn(actualRecordsCount - 1);
+  it('should delete a <%= dasherize(name) %>', async () => {
+
+    const lastRecordIndex = await listPage.table.records.count() -1;
+    const actionsMenu = listPage.table.getActionsBtn(lastRecordIndex);
 
     await actionsMenu.click();
-    expect(await listPage.editBtn.isEnabled()).toBeTruthy();
     expect(await listPage.deleteBtn.isEnabled()).toBeTruthy();
-    await listPage.overlay.click();
+    await listPage.deleteBtn.click();
+
+    expect(await deletePage.title.getText()).toEqual('Delete <%= dasherize(name) %>');
+
+    expect(await deletePage.noBtn.isEnabled()).toBeTruthy();
+    expect(await deletePage.yesBtn.isEnabled()).toBeTruthy();
+    await deletePage.yesBtn.click();
+
+    if (initialCount == 0) {
+      expect(await listPage.table.noRecords.isDisplayed()).toBeTruthy();
+      expect(await listPage.table.noRecords.getText()).toEqual(
+        'No records found'
+      );
+    } else {
+      const afterPageRecords = await listPage.table.records.count();
+      expect(afterPageRecords).toEqual(initialCount);
+    }
   });
 });
