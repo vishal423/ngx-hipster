@@ -168,7 +168,7 @@ describe('<%= classify(name) %> tests', () => {
     expect(await deletePage.yesBtn.isEnabled()).toBeTruthy();
     await deletePage.yesBtn.click();
 
-    if (initialCount == 0) {
+    if (initialCount === 0) {
       expect(await listPage.table.noRecords.isDisplayed()).toBeTruthy();
       expect(await listPage.table.noRecords.getText()).toEqual(
         'No records found'
