@@ -16,10 +16,10 @@ class MovieRouter {
       .path("/api/movies", builder -> builder
         .GET("",
           handler::getMovies)
-        .GET("/{id}",
-          handler::getMovieById)
+        .GET("/{id}",handler::getMovieById)
+        .DELETE("/{id}",handler::deleteMovieById)
         .POST("", handler::createMovie)
-        .PUT("", handler::updateMovie)
+        .PUT("/{id}", handler::updateMovie)
       )
       .build();
   }

@@ -39,4 +39,8 @@ public class MovieService {
       .flatMap(repository::save)
       .map(movieMapper::mapToDto);
   }
+
+  public Mono<Void> deleteMovieById(String movieId) {
+    return repository.deleteById(movieId);
+  }
 }

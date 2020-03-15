@@ -34,4 +34,9 @@ class MovieHandler {
     return ServerResponse.ok()
       .body(service.updateMovie(request.bodyToMono(MovieDto.class)), MovieDto.class);
   }
+
+  Mono<ServerResponse> deleteMovieById(ServerRequest request) {
+    return service.deleteMovieById(request.pathVariable("id"))
+    .then(ServerResponse.noContent().build());
+  }
 }
