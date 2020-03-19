@@ -27,9 +27,9 @@ export function materialLayout(options: Schema): Rule {
     const pkgOptions = { ...options, path: `${project.root}` };
 
     // add  dependencies
-    addDependency(tree, '@angular/cdk', '9.0.0', pkgOptions);
-    addDependency(tree, '@angular/material', '9.0.0', pkgOptions);
-    addDependency(tree, '@angular/animations', '9.0.0', pkgOptions);
+    addDependency(tree, '@angular/cdk', '9.1.3', pkgOptions);
+    addDependency(tree, '@angular/material', '9.1.3', pkgOptions);
+    addDependency(tree, '@angular/animations', '9.0.7', pkgOptions);
 
     context.addTask(new NodePackageInstallTask());
 
