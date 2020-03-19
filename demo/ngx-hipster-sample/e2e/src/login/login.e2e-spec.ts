@@ -22,7 +22,9 @@ describe('login-logout tests', () => {
     expect(await loginPage.getPageTitleText()).toEqual('Sign In');
     expect(await loginPage.loginBtn.isEnabled()).toBeFalsy();
 
-    await loginPage.username.sendKeys('admin');
+    await loginPage.username.sendKeys(
+      (process.env.E2E_USERNAME as string) || 'admin'
+    );
     await loginPage.password.sendKeys('invalid');
 
     expect(await loginPage.loginBtn.isEnabled()).toBeTruthy();
@@ -44,8 +46,12 @@ describe('login-logout tests', () => {
     expect(await loginPage.getPageTitleText()).toEqual('Sign In');
     expect(await loginPage.loginBtn.isEnabled()).toBeFalsy();
 
-    await loginPage.username.sendKeys('admin');
-    await loginPage.password.sendKeys('admin');
+    await loginPage.username.sendKeys(
+      (process.env.E2E_USERNAME as string) || 'admin'
+    );
+    await loginPage.password.sendKeys(
+      (process.env.E2E_PASSWORD as string) || 'admin'
+    );
 
     expect(await loginPage.loginBtn.isEnabled()).toBeTruthy();
 

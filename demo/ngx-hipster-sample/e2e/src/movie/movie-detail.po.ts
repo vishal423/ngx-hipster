@@ -32,6 +32,7 @@ export class MovieDetailPage {
   genresLabel = this.root.element(
     by.css('mat-select[formcontrolname="genres"]+span mat-label')
   );
+
   genresOptions = this.overlayPage.checkboxOptions;
 
   director = this.root.element(
@@ -40,7 +41,8 @@ export class MovieDetailPage {
   directorLabel = this.root.element(
     by.css('mat-select[formcontrolname="director"]+span mat-label')
   );
-  directorOptions = this.overlayPage.checkboxOptions;
+
+  directorOptions = this.overlayPage.options;
 
   writer = this.root.element(by.css('input[formcontrolname="writer"]'));
   writerAutocomplete = this.overlayPage.options;

@@ -59,12 +59,17 @@ export class AuthenticationService {
   }
 
   fetchUserInfoWhenAuthenticated(): Observable<User | undefined> {
-    return this.http.get<string>('api/authenticate').pipe(
-      flatMap(username =>
-        username ? this.fetchUserInfo() : this.handleUnauthenticatedUser()
-      ),
-      catchError(() => this.handleUnauthenticatedUser())
-    );
+    return this.http
+      .get<string>('api/authenticate', {
+        headers: { 'Content-Type': 'text/plain' },
+        responseType: 'text' as 'json'
+      })
+      .pipe(
+        flatMap(username =>
+          username ? this.fetchUserInfo() : this.handleUnauthenticatedUser()
+        ),
+        catchError(() => this.handleUnauthenticatedUser())
+      );
   }
 
   private handleUnauthenticatedUser(): Observable<undefined> {

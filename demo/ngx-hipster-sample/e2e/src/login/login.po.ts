@@ -19,4 +19,13 @@ export class LoginPage {
       .element(by.css('.mat-card-title+.mat-error'))
       .getText() as Promise<string>;
   }
+
+  async login(
+    username: string = (process.env.E2E_USERNAME as string) || 'admin',
+    password: string = (process.env.E2E_PASSWORD as string) || 'admin'
+  ): Promise<void> {
+    await this.username.sendKeys(username);
+    await this.password.sendKeys(password);
+    await this.loginBtn.click();
+  }
 }
