@@ -34,7 +34,7 @@ export function jest(options: Schema): Rule {
 
       addDevDependency(tree, 'jest', '25.1.0', pkgOptions);
       addDevDependency(tree, '@types/jest', '25.1.2', pkgOptions);
-      addDevDependency(tree, 'jest-preset-angular', '8.0.0', pkgOptions);
+      addDevDependency(tree, 'jest-preset-angular', '8.1.2', pkgOptions);
 
       addScript(tree, 'test', 'jest --config src/jest.conf.js', pkgOptions);
       addScript(
