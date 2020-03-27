@@ -52,7 +52,7 @@ export class AuthenticationService {
         return timer(1);
       })
     );
-  };
+  }
   <% } %>
 
   logout(): Observable<any> {
