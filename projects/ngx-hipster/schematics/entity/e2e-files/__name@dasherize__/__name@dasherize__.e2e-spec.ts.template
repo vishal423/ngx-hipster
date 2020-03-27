@@ -106,14 +106,12 @@ describe('<%= classify(name) %> tests', () => {
     if(field.controlType === 'text') {
 %>
     expect(await detailPage.<%= field.name %>Label.getText()).toEqual('<%= field.label %>');
-    await detailPage.<%= field.name %>.sendKeys('Lorem Ipsum');
+    await detailPage.<%= field.name %>.sendKeys('<%= generateCreateTestData(field.dataType, field.validation) %>');
 <%
     } else if(field.controlType === 'textarea') {
 %>
     expect(await detailPage.<%= field.name %>Label.getText()).toEqual('<%= field.label %>');
-    await detailPage.<%= field.name %>.sendKeys(
-      'Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum'
-    );
+    await detailPage.<%= field.name %>.sendKeys('<%= generateCreateTestData(field.dataType, field.validation) %>');
 <%
     } else if(field.controlType === 'radio') {
 %>
@@ -140,7 +138,7 @@ describe('<%= classify(name) %> tests', () => {
     } else if(field.controlType === 'date') {
 %>
     expect(await detailPage.<%= field.name %>Label.getText()).toEqual('<%= field.label %>');
-    await detailPage.<%= field.name %>.sendKeys('3/12/1965');
+    await detailPage.<%= field.name %>.sendKeys('<%= generateCreateTestData(field.dataType, field.validation) %>');
 <%
     }
   }

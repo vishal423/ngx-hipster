@@ -14,7 +14,12 @@ import { normalize, strings } from '@angular-devkit/core';
 import { InsertChange } from '@schematics/angular/utility/change';
 import * as ts from '@schematics/angular/third_party/github.com/Microsoft/TypeScript/lib/typescript';
 
-import { getProject, pluralize } from '../utils/utils';
+import {
+  generateCreateTestData,
+  generateUpdateTestData,
+  getProject,
+  pluralize
+} from '../utils/utils';
 import { Schema } from './schema';
 import { Entity, Field } from './entity';
 import {
@@ -194,7 +199,9 @@ export function entity(options: Schema): Rule {
         pluralize,
         entity,
         prefix,
-        name: entity.name
+        name: entity.name,
+        generateCreateTestData,
+        generateUpdateTestData
       }),
       move(e2eSourcePath)
     ]);

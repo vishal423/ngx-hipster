@@ -1,6 +1,7 @@
 import { SchematicsException, Tree } from '@angular-devkit/schematics';
 import { getWorkspace } from '@schematics/angular/utility/config';
 import { experimental } from '@angular-devkit/core';
+import { Validation } from '../entity/entity';
 
 export function updateJsonInTree(
   tree: Tree,
@@ -109,4 +110,70 @@ export function pluralize(name: string) {
   }
 
   return 's';
+}
+
+export function generateCreateTestData(
+  dataType: string,
+  validation: Validation
+) {
+  return generateTestData(dataType, validation, true);
+}
+
+export function generateUpdateTestData(
+  dataType: string,
+  validation: Validation
+) {
+  return generateTestData(dataType, validation, false);
+}
+
+function generateTestData(
+  dataType: string,
+  validation: Validation,
+  createFlow: boolean
+) {
+  switch (dataType) {
+    case 'string':
+      return generateString(
+        validation.minlength,
+        validation.maxlength,
+        createFlow
+      );
+      break;
+    case 'date':
+      return createFlow ? '3/12/1965' : '3/12/1975';
+  }
+}
+
+function generateString(
+  min: number = 11,
+  max: number = Number.MAX_SAFE_INTEGER,
+  createFlow: boolean
+) {
+  const baseString = createFlow ? 'Lorem Ipsum' : 'Ipsum Lorem';
+
+  if (min <= baseString.length) {
+    if (max > baseString.length) {
+      return baseString;
+    }
+    return baseString.slice(0, min);
+  } else if (min > baseString.length) {
+    const str: string[] = [];
+    for (let i = 0; i <= min; i = i + baseString.length + 1) {
+      str.push(baseString);
+    }
+
+    let resultStr = str.join(' ');
+
+    if (min > resultStr.length) {
+      resultStr += baseString.slice(0, min - resultStr.length);
+    }
+
+    if (resultStr.length > max) {
+      resultStr = resultStr.slice(0, max);
+    }
+
+    return resultStr;
+  }
+
+  return baseString;
 }
