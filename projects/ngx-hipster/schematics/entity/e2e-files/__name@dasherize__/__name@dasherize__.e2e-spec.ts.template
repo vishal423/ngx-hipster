@@ -132,7 +132,8 @@ describe('<%= classify(name) %> tests', () => {
     } else if(field.controlType === 'autocomplete') {
 %>
     expect(await detailPage.<%= field.name %>Label.getText()).toEqual('<%= field.label %>');
-    // await detailPage.<%= field.name %>.sendKeys('ge');
+    await detailPage.<%= field.name %>.sendKeys('xyz');
+    await detailPage.<%= field.name %>.sendKeys('');
     await detailPage.<%= field.name %>Autocomplete.first().click();
 <%
     } else if(field.controlType === 'date') {
@@ -198,7 +199,8 @@ describe('<%= classify(name) %> tests', () => {
     } else if(field.controlType === 'autocomplete') {
 %>
     expect(await detailPage.<%= field.name %>Label.getText()).toEqual('<%= field.label %>');
-    // await detailPage.<%= field.name %>.sendKeys('ge');
+    await detailPage.<%= field.name %>.sendKeys('xyz');
+    await detailPage.<%= field.name %>.sendKeys('');
     await detailPage.<%= field.name %>Autocomplete.last().click();
 <%
     } else if(field.controlType === 'date') {
