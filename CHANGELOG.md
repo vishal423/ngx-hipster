@@ -4,6 +4,20 @@ All notable changes to the "ngx-hipster" project will be documented in this file
 
 ## [Unreleased]
 
+### Added
+
+- Generate `e2e` tests to verify the application layout and login support (`Session` and `OIDC`).
+- Generate `e2e` tests to verify the entity `Create`, `List`, `Update` and `Delete` flows.
+- GitHub actions to verify the generated code against real world application.
+- Sample Spring boot application used in the e2e testing.
+
+### Changed
+
+- Support angular `v9.1`.
+- Support comma separated proxy paths in the `proxy` schematic.
+- Upgraded `jest`, `prettier`, `husky`, `angular material` library dependencies.
+- Upgrade demo application.
+
 ## [0.6.0] - 2020-02-08
 
 ### Changed

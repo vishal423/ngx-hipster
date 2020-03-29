@@ -12,9 +12,13 @@ Demo application uses angular in-memory-api to intercept all back-end api calls.
 
 This guide assumes that you have already created a new angular cli application with `SCSS` styles.
 
+```bash
+ng new sample-angular-app --interactive=false --prefix=app --style=scss --routing=true
+```
+
 # Usage
 
-Install `ngx-hipster` dependency in your project. Default `ng-add` schematic will prompt to configure your application with recommended setup.
+Install `ngx-hipster` dependency in your project. Default `ng-add` schematic will prompt to configure your application with the recommended setup.
 
 ```bash
 ng add ngx-hipster
