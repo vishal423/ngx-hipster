@@ -7,7 +7,7 @@ import {
   Rule,
   SchematicContext,
   Tree,
-  url
+  url,
 } from '@angular-devkit/schematics';
 import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
 import { normalize } from '@angular-devkit/core';
@@ -17,7 +17,7 @@ import { getProject } from '../utils/utils';
 import { addDependency } from '../utils/package-util';
 import {
   addAnimationsModuleImport,
-  addMaterialAppStyles
+  addMaterialAppStyles,
 } from './material-setup';
 import { addMaterialIconsAndFonts } from './index-html';
 
@@ -27,9 +27,9 @@ export function materialLayout(options: Schema): Rule {
     const pkgOptions = { ...options, path: `${project.root}` };
 
     // add  dependencies
-    addDependency(tree, '@angular/cdk', '9.1.3', pkgOptions);
-    addDependency(tree, '@angular/material', '9.1.3', pkgOptions);
-    addDependency(tree, '@angular/animations', '9.0.7', pkgOptions);
+    addDependency(tree, '@angular/cdk', '9.2.0', pkgOptions);
+    addDependency(tree, '@angular/material', '9.2.0', pkgOptions);
+    addDependency(tree, '@angular/animations', '9.1.0', pkgOptions);
 
     context.addTask(new NodePackageInstallTask());
 
@@ -37,14 +37,14 @@ export function materialLayout(options: Schema): Rule {
 
     const templateSource = apply(url('./files'), [
       applyTemplates({}),
-      move(normalize(srcPath))
+      move(normalize(srcPath)),
     ]);
 
     return chain([
       addAnimationsModuleImport(options),
       addMaterialIconsAndFonts(options),
       addMaterialAppStyles(options),
-      mergeWith(templateSource)
+      mergeWith(templateSource),
     ]);
   };
 }

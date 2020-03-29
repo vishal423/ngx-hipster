@@ -7,7 +7,7 @@ import {
   Rule,
   SchematicContext,
   Tree,
-  url
+  url,
 } from '@angular-devkit/schematics';
 
 import { getPackageManager, getProject } from '../utils/utils';
@@ -32,8 +32,8 @@ export function jest(options: Schema): Rule {
         packageManager !== 'yarn' ? `${packageManager} run ` : packageManager;
       const scriptParamPrefix = packageManager !== 'yarn' ? `--` : '';
 
-      addDevDependency(tree, 'jest', '25.1.0', pkgOptions);
-      addDevDependency(tree, '@types/jest', '25.1.2', pkgOptions);
+      addDevDependency(tree, 'jest', '25.2.3', pkgOptions);
+      addDevDependency(tree, '@types/jest', '25.1.4', pkgOptions);
       addDevDependency(tree, 'jest-preset-angular', '8.1.2', pkgOptions);
 
       addScript(tree, 'test', 'jest --config src/jest.conf.js', pkgOptions);
@@ -64,7 +64,7 @@ export function jest(options: Schema): Rule {
 
       const templateSource = apply(url('./files'), [
         applyTemplates({ dot: '.' }),
-        move(normalize(templatePath))
+        move(normalize(templatePath)),
       ]);
 
       context.addTask(new NodePackageInstallTask());
@@ -72,8 +72,8 @@ export function jest(options: Schema): Rule {
       return chain([
         mergeWith(templateSource),
         applyPrettierOnFile({
-          path: normalize(`tsconfig.spec.json`)
-        })
+          path: normalize(`tsconfig.spec.json`),
+        }),
       ]);
     }
 

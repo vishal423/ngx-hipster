@@ -7,7 +7,7 @@ import {
   Rule,
   SchematicContext,
   Tree,
-  url
+  url,
 } from '@angular-devkit/schematics';
 import { addDevDependency } from '../utils/package-util';
 import { Schema } from './schema';
@@ -26,8 +26,8 @@ export function prettier(options: Schema): Rule {
 
     const pkgOptions = { ...options, path };
     // add  dependencies
-    addDevDependency(tree, 'husky', '4.2.1', pkgOptions);
-    addDevDependency(tree, 'prettier', '1.19.1', pkgOptions);
+    addDevDependency(tree, 'husky', '4.2.3', pkgOptions);
+    addDevDependency(tree, 'prettier', '2.0.2', pkgOptions);
     addDevDependency(tree, 'pretty-quick', '2.0.1', pkgOptions);
     addDevDependency(tree, 'tslint-config-prettier', '1.18.0', pkgOptions);
 
@@ -38,7 +38,7 @@ export function prettier(options: Schema): Rule {
 
     const templateSource = apply(url('./files'), [
       applyTemplates({ dot: '.' }),
-      move(normalize(path))
+      move(normalize(path)),
     ]);
 
     context.addTask(new NodePackageInstallTask());
@@ -46,8 +46,8 @@ export function prettier(options: Schema): Rule {
     return chain([
       mergeWith(templateSource),
       applyPrettierOnFile({
-        path: normalize(`tslint.json`)
-      })
+        path: normalize(`tslint.json`),
+      }),
     ]);
   };
 }
