@@ -31,7 +31,7 @@ import {
 import { applyPrettier, applyPrettierOnFile } from '../utils/prettier-util';
 import { getHtmlChildElementByTagName } from '../utils/html-util';
 
-export function entity(options: Schema): Rule {
+export function entitySchematic(options: Schema): Rule {
   return (tree: Tree, context: SchematicContext) => {
     const entityJson = tree.read(options.entityJson);
 

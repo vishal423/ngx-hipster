@@ -103,7 +103,7 @@ export function appShell(options: Schema): Rule {
         [applyTemplates({ dot: '.', prefix, ...strings }), move(sourcePath)]
       );
 
-      const e2eTemplateSource = apply(url('./session-e2e-files'), [
+      const e2eSessionTemplateSource = apply(url('./session-e2e-files'), [
         applyTemplates({
           dot: '.',
           prefix,
@@ -113,11 +113,11 @@ export function appShell(options: Schema): Rule {
       ]);
 
       templateRules.push(mergeWith(sessionAuthenticationTemplateSource));
-      templateRules.push(mergeWith(e2eTemplateSource));
+      templateRules.push(mergeWith(e2eSessionTemplateSource));
     }
 
     if (options.authenticationType === 'oidc') {
-      const e2eTemplateSource = apply(url('./oidc-e2e-files'), [
+      const e2eOidcTemplateSource = apply(url('./oidc-e2e-files'), [
         applyTemplates({
           dot: '.',
           prefix,
@@ -126,7 +126,7 @@ export function appShell(options: Schema): Rule {
         move(e2eSourcePath)
       ]);
 
-      templateRules.push(mergeWith(e2eTemplateSource));
+      templateRules.push(mergeWith(e2eOidcTemplateSource));
     }
 
     templateRules.push(

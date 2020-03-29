@@ -97,7 +97,7 @@ export function pluralize(name: string) {
       }
       return name + 's';
     }
-  } else if (name.length == 1) {
+  } else if (name.length === 1) {
     const tempStr = name.substring(name.length - 1).toLowerCase();
     if (
       ['s', 'z', 'x'].findIndex(

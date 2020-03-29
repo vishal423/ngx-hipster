@@ -7,7 +7,7 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./ngx-error.component.css']
 })
 export class NgxErrorComponent {
-  @Input() label: string = 'Field';
+  @Input() label = 'Field';
   @Input() control: FormControl | null;
 
   isInvalidControl() {

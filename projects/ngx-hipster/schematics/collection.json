@@ -38,7 +38,7 @@
     },
     "entity": {
       "description": "Scaffolds entity CRUD",
-      "factory": "./entity/index#entity",
+      "factory": "./entity/index#entitySchematic",
       "schema": "./entity/schema.json"
     }
   }
