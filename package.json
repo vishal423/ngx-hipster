@@ -45,7 +45,7 @@
     "@types/node": "^12.11.1",
     "@types/parse5": "^5.0.2",
     "codelyzer": "^5.1.2",
-    "husky": "3.0.9",
+    "husky": "4.2.3",
     "jasmine-core": "~3.5.0",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~4.4.1",
