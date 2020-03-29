@@ -6,7 +6,7 @@ import { MovieResolver } from './movie.resolver';
 describe('MovieResolveService', () => {
   beforeEach(() =>
     TestBed.configureTestingModule({
-      imports: [HttpClientModule]
+      imports: [HttpClientModule],
     })
   );
 

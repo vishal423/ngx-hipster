@@ -6,7 +6,7 @@ import { map } from 'rxjs/operators';
 import { Movie } from './movie';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class MovieService {
   private resourceUrl = 'api/movies';

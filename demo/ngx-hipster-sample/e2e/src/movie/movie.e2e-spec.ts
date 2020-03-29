@@ -57,13 +57,10 @@ describe('Movie tests', () => {
   });
 
   afterEach(async () => {
-    const logs = await browser
-      .manage()
-      .logs()
-      .get(logging.Type.BROWSER);
+    const logs = await browser.manage().logs().get(logging.Type.BROWSER);
     expect(logs).not.toContain(
       jasmine.objectContaining({
-        level: logging.Level.SEVERE
+        level: logging.Level.SEVERE,
       } as logging.Entry)
     );
   });
@@ -106,7 +103,7 @@ describe('Movie tests', () => {
 
     expect(await detailPage.plotLabel.getText()).toEqual('Plot');
     await detailPage.plot.sendKeys(
-      'Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum'
+      'Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum'
     );
 
     await detailPage.rated.first().click();
@@ -123,11 +120,70 @@ describe('Movie tests', () => {
     await detailPage.directorOptions.last().click();
 
     expect(await detailPage.writerLabel.getText()).toEqual('Writer');
-    await detailPage.writer.sendKeys('ge');
+    await detailPage.writer.sendKeys('');
     await detailPage.writerAutocomplete.first().click();
 
     expect(await detailPage.releaseDateLabel.getText()).toEqual('Release Date');
     await detailPage.releaseDate.sendKeys('3/12/1965');
+
+    expect(await detailPage.saveBtn.isEnabled()).toBeTruthy();
+    await detailPage.saveBtn.click();
+
+    const actualRecordsCount = await listPage.table.records.count();
+    expect(await listPage.table.columns.count()).toEqual(4);
+    expect(actualRecordsCount).toEqual(initialCount + 1);
+  });
+
+  it('should update movie', async () => {
+    const lastRecordIndex = (await listPage.table.records.count()) - 1;
+    const actionsMenu = listPage.table.getActionsBtn(lastRecordIndex);
+
+    await actionsMenu.click();
+    expect(await listPage.editBtn.isEnabled()).toBeTruthy();
+    await listPage.editBtn.click();
+
+    expect(await detailPage.pageTitle.getText()).toEqual('Movie');
+    expect(await detailPage.pageSubTitle.getText()).toEqual(
+      'Update an existing movie.'
+    );
+    expect(await detailPage.cancelBtn.isEnabled()).toBeTruthy();
+    expect(await detailPage.saveBtn.isEnabled()).toBeTruthy();
+
+    expect(await detailPage.titleLabel.getText()).toEqual('Title');
+    expect(await detailPage.title.getAttribute('value')).toEqual('Lorem Ipsum');
+    await detailPage.title.clear();
+    await detailPage.title.sendKeys('Ipsum Lorem');
+
+    expect(await detailPage.plotLabel.getText()).toEqual('Plot');
+    expect(await detailPage.plot.getAttribute('value')).toEqual(
+      'Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum'
+    );
+    await detailPage.plot.clear();
+    await detailPage.plot.sendKeys(
+      'Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem'
+    );
+
+    await detailPage.rated.last().click();
+
+    expect(await detailPage.genresLabel.getText()).toEqual('Genres');
+    await detailPage.genres.click();
+
+    await detailPage.genresOptions.last().click();
+    await detailPage.overlay.click();
+
+    expect(await detailPage.directorLabel.getText()).toEqual('Director');
+    await detailPage.director.click();
+
+    await detailPage.directorOptions.last().click();
+
+    expect(await detailPage.writerLabel.getText()).toEqual('Writer');
+    await detailPage.writer.sendKeys('');
+    await detailPage.writerAutocomplete.last().click();
+
+    expect(await detailPage.releaseDateLabel.getText()).toEqual('Release Date');
+    expect(await detailPage.releaseDate.getAttribute('value')).toEqual(
+      '3/12/1965'
+    );
 
     expect(await detailPage.saveBtn.isEnabled()).toBeTruthy();
     await detailPage.saveBtn.click();

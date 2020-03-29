@@ -4,14 +4,14 @@ import {
   ActivatedRouteSnapshot,
   RouterStateSnapshot,
   Router,
-  CanActivateChild
+  CanActivateChild,
 } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { take, map } from 'rxjs/operators';
 import { AuthenticationService } from './authentication.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthenticatedUserGuard implements CanActivate, CanActivateChild {
   constructor(

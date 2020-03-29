@@ -6,7 +6,7 @@ import { MovieService } from './movie.service';
 describe('MovieService', () => {
   beforeEach(() =>
     TestBed.configureTestingModule({
-      imports: [HttpClientModule]
+      imports: [HttpClientModule],
     })
   );
 

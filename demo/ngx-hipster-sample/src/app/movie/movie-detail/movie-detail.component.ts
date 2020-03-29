@@ -13,7 +13,7 @@ import { Movie } from '../movie';
   selector: 'app-movie-detail',
   templateUrl: './movie-detail.component.html',
   styleUrls: ['./movie-detail.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MovieDetailComponent implements OnInit {
   movie: Movie;
@@ -21,17 +21,17 @@ export class MovieDetailComponent implements OnInit {
   isSaveOrUpdateInProgress = false;
   ratedOptions: KeyValue<string, string>[] = [
     { key: 'PG', value: 'PG' },
-    { key: 'PG-13', value: 'PG - 13' }
+    { key: 'PG-13', value: 'PG - 13' },
   ];
   genresOptions: KeyValue<string, string>[] = [
     { key: 'Adventure', value: 'Adventure' },
     { key: 'Action', value: 'Action' },
-    { key: 'Fantasy', value: 'Fantasy' }
+    { key: 'Fantasy', value: 'Fantasy' },
   ];
   directorOptions: KeyValue<string, string>[] = [
     { key: 'George Lucas', value: 'George Lucas' },
     { key: 'Irvin Kershner', value: 'Irvin Kershner' },
-    { key: 'Richard Marquand', value: 'Richard Marquand' }
+    { key: 'Richard Marquand', value: 'Richard Marquand' },
   ];
   writerOptions: KeyValue<string, string>[] = [
     { key: 'George Lucas', value: 'George Lucas' },
@@ -45,7 +45,7 @@ export class MovieDetailComponent implements OnInit {
     { key: 'Harve Bennett', value: 'Harve Bennett' },
     { key: 'Jack B. Sowards', value: 'Jack B. Sowards' },
     { key: 'Jonathan Hales', value: 'Jonathan Hales' },
-    { key: 'Alex Kurtzman', value: 'Alex Kurtzman' }
+    { key: 'Alex Kurtzman', value: 'Alex Kurtzman' },
   ];
   filteredWriterOptions: Observable<KeyValue<string, string>[]>;
   error: string | undefined = undefined;
@@ -97,7 +97,7 @@ export class MovieDetailComponent implements OnInit {
             'Internal Server Error'
           : 'Internal Server Error';
       },
-      complete: () => (this.isSaveOrUpdateInProgress = false)
+      complete: () => (this.isSaveOrUpdateInProgress = false),
     });
   }
 

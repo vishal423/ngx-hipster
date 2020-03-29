@@ -8,7 +8,7 @@ describe('AnonymousUserGuard', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [AnonymousUserGuard],
-      imports: [HttpClientModule, RouterTestingModule]
+      imports: [HttpClientModule, RouterTestingModule],
     });
   });
 

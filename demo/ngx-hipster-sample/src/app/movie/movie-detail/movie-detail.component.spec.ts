@@ -27,8 +27,8 @@ describe('MovieDetailComponent', () => {
         RouterTestingModule,
         HttpClientModule,
         MaterialModule,
-        ReactiveFormsModule
-      ]
+        ReactiveFormsModule,
+      ],
     }).compileComponents();
   }));
 

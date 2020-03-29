@@ -22,7 +22,7 @@ import { InMemoryDataService } from './in-memory-data.service';
     SidenavComponent,
     HomeComponent,
     AppComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,13 +34,13 @@ import { InMemoryDataService } from './in-memory-data.service';
     environment.standalone
       ? HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, {
           delay: 100,
-          passThruUnknownUrl: true
+          passThruUnknownUrl: true,
         })
-      : []
+      : [],
   ],
   providers: [
-    { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 2000 } }
+    { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 2000 } },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

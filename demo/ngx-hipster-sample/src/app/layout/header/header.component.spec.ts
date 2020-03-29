@@ -17,8 +17,8 @@ describe('HeaderComponent', () => {
         MaterialModule,
         NoopAnimationsModule,
         HttpClientModule,
-        RouterTestingModule
-      ]
+        RouterTestingModule,
+      ],
     }).compileComponents();
   }));
 

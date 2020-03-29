@@ -12,21 +12,21 @@ const routes: Routes = [
   {
     path: 'login',
     canActivate: [AnonymousUserGuard],
-    loadChildren: () => import('./login/login.module').then(m => m.LoginModule)
+    loadChildren: () => import('./login/login.module').then(m => m.LoginModule),
   },
   {
     path: 'movies',
     canActivateChild: [AuthenticatedUserGuard],
-    loadChildren: () => import('./movie/movie.module').then(m => m.MovieModule)
+    loadChildren: () => import('./movie/movie.module').then(m => m.MovieModule),
   },
   {
     path: '**',
-    component: PageNotFoundComponent
-  }
+    component: PageNotFoundComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload' })],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule {}

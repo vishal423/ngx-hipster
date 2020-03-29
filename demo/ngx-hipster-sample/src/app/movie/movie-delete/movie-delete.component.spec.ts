@@ -13,7 +13,7 @@ describe('MovieDeleteComponent', () => {
     TestBed.configureTestingModule({
       declarations: [MovieDeleteComponent],
       imports: [NoopAnimationsModule, MaterialModule],
-      providers: [{ provide: MAT_DIALOG_DATA, useValue: {} }]
+      providers: [{ provide: MAT_DIALOG_DATA, useValue: {} }],
     }).compileComponents();
   }));
 

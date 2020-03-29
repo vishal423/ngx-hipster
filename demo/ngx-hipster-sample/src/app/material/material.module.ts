@@ -17,7 +17,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import {
   ShowOnDirtyErrorStateMatcher,
   ErrorStateMatcher,
-  MatNativeDateModule
+  MatNativeDateModule,
 } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
@@ -49,10 +49,10 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     MatTooltipModule,
     MatAutocompleteModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
   ],
   providers: [
-    { provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher }
-  ]
+    { provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher },
+  ],
 })
 export class MaterialModule {}

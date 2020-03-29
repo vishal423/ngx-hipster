@@ -82,10 +82,7 @@ describe('login-logout tests', () => {
 
   afterEach(async () => {
     // Assert that there are no errors emitted from the browser
-    const logs = await browser
-      .manage()
-      .logs()
-      .get(logging.Type.BROWSER);
+    const logs = await browser.manage().logs().get(logging.Type.BROWSER);
     expect(
       logs.filter(
         log =>
@@ -95,7 +92,7 @@ describe('login-logout tests', () => {
       )
     ).not.toContain(
       jasmine.objectContaining({
-        level: logging.Level.SEVERE
+        level: logging.Level.SEVERE,
       } as logging.Entry)
     );
   });

@@ -19,9 +19,9 @@ describe('AppComponent', () => {
         RouterTestingModule,
         NoopAnimationsModule,
         MaterialModule,
-        HttpClientModule
+        HttpClientModule,
       ],
-      declarations: [AppComponent, HeaderStubComponent, SidenavStubComponent]
+      declarations: [AppComponent, HeaderStubComponent, SidenavStubComponent],
     }).compileComponents();
   }));
 

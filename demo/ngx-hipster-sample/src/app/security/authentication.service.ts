@@ -8,12 +8,12 @@ import {
   retryWhen,
   switchMap,
   tap,
-  flatMap
+  flatMap,
 } from 'rxjs/operators';
 import { User } from './user';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthenticationService {
   private principalCache$: ReplaySubject<User> = new ReplaySubject(1);
@@ -62,7 +62,7 @@ export class AuthenticationService {
     return this.http
       .get<string>('api/authenticate', {
         headers: { 'Content-Type': 'text/plain' },
-        responseType: 'text' as 'json'
+        responseType: 'text' as 'json',
       })
       .pipe(
         flatMap(username =>

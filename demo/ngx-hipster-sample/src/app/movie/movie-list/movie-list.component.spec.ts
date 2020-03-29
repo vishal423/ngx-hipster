@@ -17,8 +17,8 @@ describe('MovieListComponent', () => {
         MaterialModule,
         NoopAnimationsModule,
         HttpClientModule,
-        RouterTestingModule
-      ]
+        RouterTestingModule,
+      ],
     }).compileComponents();
   }));
 

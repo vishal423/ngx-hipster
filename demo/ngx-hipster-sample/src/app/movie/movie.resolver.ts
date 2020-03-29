@@ -6,7 +6,7 @@ import { Movie } from './movie';
 import { MovieService } from './movie.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class MovieResolver implements Resolve<Movie | undefined> {
   constructor(private service: MovieService) {}

@@ -21,9 +21,9 @@ describe('LoginComponent', () => {
         MaterialModule,
         ReactiveFormsModule,
         HttpClientModule,
-        RouterTestingModule
+        RouterTestingModule,
       ],
-      providers: [FormBuilder, MatSnackBar]
+      providers: [FormBuilder, MatSnackBar],
     }).compileComponents();
   }));
 

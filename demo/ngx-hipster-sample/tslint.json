@@ -46,9 +46,6 @@
     "no-var-requires": false,
     "object-literal-sort-keys": false,
     "ordered-imports": false,
-    "semicolon": {
-      "options": ["always"]
-    },
     "space-before-function-paren": {
       "options": {
         "anonymous": "never",

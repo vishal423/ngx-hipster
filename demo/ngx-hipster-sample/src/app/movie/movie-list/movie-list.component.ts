@@ -10,7 +10,7 @@ import { Movie } from '../movie';
   selector: 'app-movie-list',
   templateUrl: './movie-list.component.html',
   styleUrls: ['./movie-list.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MovieListComponent implements OnInit {
   displayedColumns = ['title', 'director', 'releaseDate', 'formActions'];
@@ -28,7 +28,7 @@ export class MovieListComponent implements OnInit {
 
   delete(id: number, movie: Movie) {
     const dialogRef = this.dialog.open(MovieDeleteComponent, {
-      data: movie
+      data: movie,
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -37,7 +37,7 @@ export class MovieListComponent implements OnInit {
         this.movieService.delete(id).subscribe({
           next: () => this.router.navigate(['/movies']),
           error: () => (this.showLoader = false),
-          complete: () => (this.showLoader = false)
+          complete: () => (this.showLoader = false),
         });
       }
     });

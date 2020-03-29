@@ -4,7 +4,7 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Movie } from '../movie';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class MovieFormService {
   constructor(private formBuilder: FormBuilder) {}
@@ -15,19 +15,19 @@ export class MovieFormService {
       title: this.formBuilder.control(movie.title, [
         Validators.required,
         Validators.minLength(2),
-        Validators.maxLength(200)
+        Validators.maxLength(200),
       ]),
       plot: this.formBuilder.control(movie.plot, [
         Validators.minLength(100),
-        Validators.maxLength(1000)
+        Validators.maxLength(1000),
       ]),
       rated: this.formBuilder.control(movie.rated, []),
       genres: this.formBuilder.control(movie.genres, [Validators.required]),
       director: this.formBuilder.control(movie.director, [Validators.required]),
       writer: this.formBuilder.control(movie.writer, [Validators.required]),
       releaseDate: this.formBuilder.control(movie.releaseDate, [
-        Validators.required
-      ])
+        Validators.required,
+      ]),
     });
   }
 
@@ -40,7 +40,7 @@ export class MovieFormService {
       genres: formGroup.get('genres')!.value,
       director: formGroup.get('director')!.value,
       writer: formGroup.get('writer')!.value,
-      releaseDate: formGroup.get('releaseDate')!.value
+      releaseDate: formGroup.get('releaseDate')!.value,
     };
   }
 }

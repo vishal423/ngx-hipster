@@ -5,7 +5,7 @@ import {
   RequestInfo,
   ResponseOptions,
   STATUS,
-  getStatusText
+  getStatusText,
 } from 'angular-in-memory-web-api';
 
 export class InMemoryDataService implements InMemoryDbService {
@@ -19,7 +19,7 @@ export class InMemoryDataService implements InMemoryDbService {
     const account = {
       login: 'admin',
       firstName: 'NGX-admin',
-      authorities: []
+      authorities: [],
     };
 
     const movies = [
@@ -35,10 +35,10 @@ export class InMemoryDataService implements InMemoryDbService {
           'Mark Hamill',
           'Harrison Ford',
           'Carrie Fisher',
-          'Peter Cushing'
+          'Peter Cushing',
         ],
         plot:
-          "Luke Skywalker joins forces with a Jedi Knight, a cocky pilot, a wookiee and two droids to save the universe from the Empire's world-destroying battle-station, while also attempting to rescue Princess Leia from the evil Darth Vader."
+          "Luke Skywalker joins forces with a Jedi Knight, a cocky pilot, a wookiee and two droids to save the universe from the Empire's world-destroying battle-station, while also attempting to rescue Princess Leia from the evil Darth Vader.",
       },
       {
         id: 2,
@@ -52,10 +52,10 @@ export class InMemoryDataService implements InMemoryDbService {
           'Mark Hamill',
           'Harrison Ford',
           'Carrie Fisher',
-          'Billy Dee Williams'
+          'Billy Dee Williams',
         ],
         plot:
-          'After the rebels have been brutally overpowered by the Empire on their newly established base, Luke Skywalker takes advanced Jedi training with Master Yoda, while his friends are pursued by Darth Vader as part of his plan to capture Luke.'
+          'After the rebels have been brutally overpowered by the Empire on their newly established base, Luke Skywalker takes advanced Jedi training with Master Yoda, while his friends are pursued by Darth Vader as part of his plan to capture Luke.',
       },
       {
         id: 3,
@@ -69,10 +69,10 @@ export class InMemoryDataService implements InMemoryDbService {
           'Mark Hamill',
           'Harrison Ford',
           'Carrie Fisher',
-          'Billy Dee Williams'
+          'Billy Dee Williams',
         ],
         plot:
-          'After rescuing Han Solo from the palace of Jabba the Hutt, the rebels attempt to destroy the second Death Star, while Luke struggles to make Vader return from the dark side of the Force.'
+          'After rescuing Han Solo from the palace of Jabba the Hutt, the rebels attempt to destroy the second Death Star, while Luke struggles to make Vader return from the dark side of the Force.',
       },
       {
         id: 4,
@@ -86,10 +86,10 @@ export class InMemoryDataService implements InMemoryDbService {
           'Liam Neeson',
           'Ewan McGregor',
           'Natalie Portman',
-          'Jake Lloyd'
+          'Jake Lloyd',
         ],
         plot:
-          'Two Jedi Knights escape a hostile blockade to find allies and come across a young boy who may bring balance to the Force, but the long dormant Sith resurface to reclaim their old glory.'
+          'Two Jedi Knights escape a hostile blockade to find allies and come across a young boy who may bring balance to the Force, but the long dormant Sith resurface to reclaim their old glory.',
       },
       {
         id: 5,
@@ -103,10 +103,10 @@ export class InMemoryDataService implements InMemoryDbService {
           'Ewan McGregor',
           'Natalie Portman',
           'Hayden Christensen',
-          'Ian McDiarmid'
+          'Ian McDiarmid',
         ],
         plot:
-          'Three years after the onset of the Clone Wars; the noble Jedi Knights are spread out across the galaxy leading a massive clone army in the war against the Separatists. After Chancellor ...'
+          'Three years after the onset of the Clone Wars; the noble Jedi Knights are spread out across the galaxy leading a massive clone army in the war against the Separatists. After Chancellor ...',
       },
       {
         id: 6,
@@ -120,11 +120,11 @@ export class InMemoryDataService implements InMemoryDbService {
           'Ewan McGregor',
           'Natalie Portman',
           'Hayden Christensen',
-          'Christopher Lee'
+          'Christopher Lee',
         ],
         plot:
-          'Ten years after initially meeting, Anakin Skywalker shares a forbidden romance with Padmé, while Obi-Wan investigates an assassination attempt on the Senator and discovers a secret clone army crafted for the Jedi.'
-      }
+          'Ten years after initially meeting, Anakin Skywalker shares a forbidden romance with Padmé, while Obi-Wan investigates an assassination attempt on the Senator and discovers a secret clone army crafted for the Jedi.',
+      },
     ];
     return { authentication, logout, account, authenticate, movies };
   }
@@ -154,7 +154,7 @@ export class InMemoryDataService implements InMemoryDbService {
       return this.finishOptions(
         {
           body: {},
-          status: STATUS.OK
+          status: STATUS.OK,
         },
         reqInfo
       );
@@ -178,11 +178,11 @@ export class InMemoryDataService implements InMemoryDbService {
       const options: ResponseOptions = data
         ? {
             body: data,
-            status: STATUS.OK
+            status: STATUS.OK,
           }
         : {
             body: { error: `Invalid username or password` },
-            status: STATUS.NOT_FOUND
+            status: STATUS.NOT_FOUND,
           };
       return this.finishOptions(options, reqInfo);
     });
@@ -194,7 +194,7 @@ export class InMemoryDataService implements InMemoryDbService {
 
       const options: ResponseOptions = {
         body: {},
-        status: STATUS.OK
+        status: STATUS.OK,
       };
       return this.finishOptions(options, reqInfo);
     });
@@ -207,11 +207,11 @@ export class InMemoryDataService implements InMemoryDbService {
       const options: ResponseOptions = data
         ? {
             body: data,
-            status: STATUS.OK
+            status: STATUS.OK,
           }
         : {
             body: { error: `` },
-            status: STATUS.UNAUTHORIZED
+            status: STATUS.UNAUTHORIZED,
           };
       return this.finishOptions(options, reqInfo);
     });

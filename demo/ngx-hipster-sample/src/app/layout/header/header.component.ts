@@ -2,7 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   Output,
-  EventEmitter
+  EventEmitter,
 } from '@angular/core';
 import { AuthenticationService } from 'src/app/security/authentication.service';
 import {
@@ -10,7 +10,7 @@ import {
   NavigationStart,
   NavigationEnd,
   NavigationCancel,
-  NavigationError
+  NavigationError,
 } from '@angular/router';
 import { map, filter } from 'rxjs/operators';
 
@@ -18,7 +18,7 @@ import { map, filter } from 'rxjs/operators';
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent {
   @Output() toggleSidenav = new EventEmitter();

@@ -10,22 +10,22 @@ export const movieRoutes: Route[] = [
     path: 'new',
     component: MovieDetailComponent,
     resolve: {
-      movie: MovieResolver
-    }
+      movie: MovieResolver,
+    },
   },
   {
     path: ':id/edit',
     component: MovieDetailComponent,
     resolve: {
-      movie: MovieResolver
-    }
+      movie: MovieResolver,
+    },
   },
   {
     path: '',
     component: MovieListComponent,
     resolve: {
-      movies: MovieListResolver
+      movies: MovieListResolver,
     },
-    runGuardsAndResolvers: 'always'
-  }
+    runGuardsAndResolvers: 'always',
+  },
 ];

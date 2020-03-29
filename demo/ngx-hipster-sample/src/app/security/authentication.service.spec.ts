@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 describe('AuthenticationService', () => {
   beforeEach(() =>
     TestBed.configureTestingModule({
-      imports: [HttpClientModule]
+      imports: [HttpClientModule],
     })
   );
 

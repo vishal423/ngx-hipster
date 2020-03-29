@@ -2,13 +2,13 @@ import {
   ChangeDetectorRef,
   ChangeDetectionStrategy,
   Component,
-  OnDestroy
+  OnDestroy,
 } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
   FormGroup,
-  Validators
+  Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -22,7 +22,7 @@ import { User } from '../security/user';
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginComponent implements OnDestroy {
   loginForm: FormGroup;
@@ -38,7 +38,7 @@ export class LoginComponent implements OnDestroy {
   ) {
     this.loginForm = formBuilder.group({
       username: formBuilder.control('', [Validators.required]),
-      password: formBuilder.control('', [Validators.required])
+      password: formBuilder.control('', [Validators.required]),
     });
     this.loginError = false;
   }
@@ -67,7 +67,7 @@ export class LoginComponent implements OnDestroy {
         error: (err: any) => {
           this.loginError = true;
           this.ref.detectChanges();
-        }
+        },
       });
   }
 

@@ -13,7 +13,7 @@ import { NgxHipsterModule } from 'ngx-hipster';
     RouterModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgxHipsterModule
-  ]
+    NgxHipsterModule,
+  ],
 })
 export class SharedModule {}

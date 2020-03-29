@@ -12,7 +12,7 @@ describe('SidenavComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [SidenavComponent],
-      imports: [MaterialModule, NoopAnimationsModule, RouterTestingModule]
+      imports: [MaterialModule, NoopAnimationsModule, RouterTestingModule],
     }).compileComponents();
   }));
 

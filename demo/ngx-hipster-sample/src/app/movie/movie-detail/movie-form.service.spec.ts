@@ -6,7 +6,7 @@ import { MovieFormService } from './movie-form.service';
 describe('MovieFormService', () => {
   beforeEach(() =>
     TestBed.configureTestingModule({
-      providers: [FormBuilder]
+      providers: [FormBuilder],
     })
   );
 

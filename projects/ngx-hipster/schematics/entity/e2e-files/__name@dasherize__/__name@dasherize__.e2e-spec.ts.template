@@ -132,7 +132,6 @@ describe('<%= classify(name) %> tests', () => {
     } else if(field.controlType === 'autocomplete') {
 %>
     expect(await detailPage.<%= field.name %>Label.getText()).toEqual('<%= field.label %>');
-    await detailPage.<%= field.name %>.sendKeys('xyz');
     await detailPage.<%= field.name %>.sendKeys('');
     await detailPage.<%= field.name %>Autocomplete.first().click();
 <%
@@ -172,12 +171,14 @@ describe('<%= classify(name) %> tests', () => {
 %>
     expect(await detailPage.<%= field.name %>Label.getText()).toEqual('<%= field.label %>');
     expect(await detailPage.<%= field.name %>.getAttribute('value')).toEqual('<%= generateCreateTestData(field.dataType, field.validation) %>');
+    await detailPage.<%= field.name %>.clear();
     await detailPage.<%= field.name %>.sendKeys('<%= generateUpdateTestData(field.dataType, field.validation) %>');
 <%
     } else if(field.controlType === 'textarea') {
 %>
     expect(await detailPage.<%= field.name %>Label.getText()).toEqual('<%= field.label %>');
     expect(await detailPage.<%= field.name %>.getAttribute('value')).toEqual('<%= generateCreateTestData(field.dataType, field.validation) %>');
+    await detailPage.<%= field.name %>.clear();
     await detailPage.<%= field.name %>.sendKeys('<%= generateUpdateTestData(field.dataType, field.validation) %>');
 <%
     } else if(field.controlType === 'radio') {
@@ -199,7 +200,6 @@ describe('<%= classify(name) %> tests', () => {
     } else if(field.controlType === 'autocomplete') {
 %>
     expect(await detailPage.<%= field.name %>Label.getText()).toEqual('<%= field.label %>');
-    await detailPage.<%= field.name %>.sendKeys('xyz');
     await detailPage.<%= field.name %>.sendKeys('');
     await detailPage.<%= field.name %>Autocomplete.last().click();
 <%
@@ -207,7 +207,6 @@ describe('<%= classify(name) %> tests', () => {
 %>
     expect(await detailPage.<%= field.name %>Label.getText()).toEqual('<%= field.label %>');
     expect(await detailPage.<%= field.name %>.getAttribute('value')).toEqual('<%= generateCreateTestData(field.dataType, field.validation) %>');
-    await detailPage.<%= field.name %>.sendKeys('<%= generateUpdateTestData(field.dataType, field.validation) %>');
 <%
     }
   }
