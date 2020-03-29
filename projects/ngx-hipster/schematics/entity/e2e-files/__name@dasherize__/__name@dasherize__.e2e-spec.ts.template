@@ -132,13 +132,82 @@ describe('<%= classify(name) %> tests', () => {
     } else if(field.controlType === 'autocomplete') {
 %>
     expect(await detailPage.<%= field.name %>Label.getText()).toEqual('<%= field.label %>');
-    await detailPage.<%= field.name %>.sendKeys('ge');
+    // await detailPage.<%= field.name %>.sendKeys('ge');
     await detailPage.<%= field.name %>Autocomplete.first().click();
 <%
     } else if(field.controlType === 'date') {
 %>
     expect(await detailPage.<%= field.name %>Label.getText()).toEqual('<%= field.label %>');
     await detailPage.<%= field.name %>.sendKeys('<%= generateCreateTestData(field.dataType, field.validation) %>');
+<%
+    }
+  }
+%>
+    expect(await detailPage.saveBtn.isEnabled()).toBeTruthy();
+    await detailPage.saveBtn.click();
+
+    const actualRecordsCount = await listPage.table.records.count();
+    expect(await listPage.table.columns.count()).toEqual(<%= entity.pageOptions.list.displayFields.length + 1 %>);
+    expect(actualRecordsCount).toEqual(initialCount + 1);
+  });
+
+  it('should update <%= dasherize(name) %>', async () => {
+
+    const lastRecordIndex = await listPage.table.records.count() -1;
+    const actionsMenu = listPage.table.getActionsBtn(lastRecordIndex);
+
+    await actionsMenu.click();
+    expect(await listPage.editBtn.isEnabled()).toBeTruthy();
+    await listPage.editBtn.click();
+
+    expect(await detailPage.pageTitle.getText()).toEqual('<%= classify(name) %>');
+    expect(await detailPage.pageSubTitle.getText()).toEqual('Update an existing <%= name %>.');
+    expect(await detailPage.cancelBtn.isEnabled()).toBeTruthy();
+    expect(await detailPage.saveBtn.isEnabled()).toBeTruthy();
+
+<%
+  const visibleFields = entity.fields.filter(field =>
+    entity.pageOptions.edit.hideFields.includes(field.name) === false);
+  for (let field of visibleFields) {
+    if(field.controlType === 'text') {
+%>
+    expect(await detailPage.<%= field.name %>Label.getText()).toEqual('<%= field.label %>');
+    expect(await detailPage.<%= field.name %>.getAttribute('value')).toEqual('<%= generateCreateTestData(field.dataType, field.validation) %>');
+    await detailPage.<%= field.name %>.sendKeys('<%= generateUpdateTestData(field.dataType, field.validation) %>');
+<%
+    } else if(field.controlType === 'textarea') {
+%>
+    expect(await detailPage.<%= field.name %>Label.getText()).toEqual('<%= field.label %>');
+    expect(await detailPage.<%= field.name %>.getAttribute('value')).toEqual('<%= generateCreateTestData(field.dataType, field.validation) %>');
+    await detailPage.<%= field.name %>.sendKeys('<%= generateUpdateTestData(field.dataType, field.validation) %>');
+<%
+    } else if(field.controlType === 'radio') {
+%>
+    await detailPage.<%= field.name %>.last().click();
+<%
+    } else if(field.controlType === 'select') {
+%>
+    expect(await detailPage.<%= field.name %>Label.getText()).toEqual('<%= field.label %>');
+    await detailPage.<%= field.name %>.click();
+
+    <% if(field.multiple) { %>
+    await detailPage.<%= field.name %>Options.last().click();
+    await detailPage.overlay.click();
+    <% } else { %>
+    await detailPage.directorOptions.last().click();
+    <% } %>
+<%
+    } else if(field.controlType === 'autocomplete') {
+%>
+    expect(await detailPage.<%= field.name %>Label.getText()).toEqual('<%= field.label %>');
+    // await detailPage.<%= field.name %>.sendKeys('ge');
+    await detailPage.<%= field.name %>Autocomplete.last().click();
+<%
+    } else if(field.controlType === 'date') {
+%>
+    expect(await detailPage.<%= field.name %>Label.getText()).toEqual('<%= field.label %>');
+    expect(await detailPage.<%= field.name %>.getAttribute('value')).toEqual('<%= generateCreateTestData(field.dataType, field.validation) %>');
+    await detailPage.<%= field.name %>.sendKeys('<%= generateUpdateTestData(field.dataType, field.validation) %>');
 <%
     }
   }
