@@ -91,6 +91,9 @@ describe('<%= classify(name) %> tests', () => {
     }
   });
 
+<% const visibleFields = entity.fields.filter(field =>
+    entity.pageOptions.edit.hideFields.includes(field.name) === false); %>
+
   it('should create a new <%= dasherize(name) %>', async () => {
     await listPage.createBtn.click();
 
@@ -99,10 +102,7 @@ describe('<%= classify(name) %> tests', () => {
     expect(await detailPage.cancelBtn.isEnabled()).toBeTruthy();
     expect(await detailPage.saveBtn.isEnabled()).toBeFalsy();
 
-<%
-  const visibleFields = entity.fields.filter(field =>
-    entity.pageOptions.edit.hideFields.includes(field.name) === false);
-  for (let field of visibleFields) {
+<% for (let field of visibleFields) {
     if(field.controlType === 'text') {
 %>
     expect(await detailPage.<%= field.name %>Label.getText()).toEqual('<%= field.label %>');
@@ -166,8 +166,6 @@ describe('<%= classify(name) %> tests', () => {
     expect(await detailPage.saveBtn.isEnabled()).toBeTruthy();
 
 <%
-  const visibleFields = entity.fields.filter(field =>
-    entity.pageOptions.edit.hideFields.includes(field.name) === false);
   for (let field of visibleFields) {
     if(field.controlType === 'text') {
 %>
