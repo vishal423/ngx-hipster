@@ -35,6 +35,10 @@ export function updateTsLintConfigurations(
     delete json.rules['object-literal-key-quotes'];
   }
 
+  if (json.rules.semicolon) {
+    delete json.rules.semicolon;
+  }
+
   return updateJsonInTree(tree, 'tslint.json', json, options);
 }
 
