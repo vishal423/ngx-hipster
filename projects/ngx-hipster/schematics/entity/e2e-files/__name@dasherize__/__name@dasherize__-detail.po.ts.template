@@ -7,7 +7,6 @@ export class <%= classify(name) %>DetailPage {
     by.css('mat-card-actions')
   );
   private overlayPage = new OverlayPage();
-  overlay = this.overlayPage.overlay;
 
   pageTitle = this.root.element(by.css('.mat-card-title'));
   pageSubTitle = this.root.element(by.css('.mat-card-subtitle'));
@@ -54,7 +53,7 @@ export class <%= classify(name) %>DetailPage {
     } else if(field.controlType === 'autocomplete') {
 %>
   <%= field.name %> = this.root.element(by.css('input[formcontrolname="<%= field.name %>"]'));
-  <%= field.name %>Autocomplete = this.overlayPage.options;
+  <%= field.name %>Autocomplete = this.overlayPage.textOptions;
   <%= field.name %>Label = this.root.element(
     by.css('input[formcontrolname="<%= field.name %>"]+mat-autocomplete+span mat-label')
   );
@@ -72,4 +71,8 @@ export class <%= classify(name) %>DetailPage {
     }
   }
 %>
+
+  async selectAnOption(selector: ElementFinder) {
+    await this.overlayPage.selectAnOption(selector);
+  }
 }

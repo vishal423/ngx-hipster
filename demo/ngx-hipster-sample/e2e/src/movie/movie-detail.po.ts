@@ -7,7 +7,6 @@ export class MovieDetailPage {
     by.css('mat-card-actions')
   );
   private overlayPage = new OverlayPage();
-  overlay = this.overlayPage.overlay;
 
   pageTitle = this.root.element(by.css('.mat-card-title'));
   pageSubTitle = this.root.element(by.css('.mat-card-subtitle'));
@@ -45,7 +44,7 @@ export class MovieDetailPage {
   directorOptions = this.overlayPage.options;
 
   writer = this.root.element(by.css('input[formcontrolname="writer"]'));
-  writerAutocomplete = this.overlayPage.options;
+  writerAutocomplete = this.overlayPage.textOptions;
   writerLabel = this.root.element(
     by.css('input[formcontrolname="writer"]+mat-autocomplete+span mat-label')
   );
@@ -57,4 +56,8 @@ export class MovieDetailPage {
   releaseDateLabel = this.root.element(
     by.css('input[formcontrolname="releaseDate"]+mat-datepicker+span mat-label')
   );
+
+  async selectAnOption(selector: ElementFinder) {
+    await this.overlayPage.selectAnOption(selector);
+  }
 }
