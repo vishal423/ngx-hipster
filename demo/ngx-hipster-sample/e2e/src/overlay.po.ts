@@ -6,7 +6,6 @@ export class OverlayPage {
   overlayContainer = this.overlay.element(by.css('.cdk-overlay-pane'));
 
   options = this.overlayContainer.all(by.css('mat-option'));
-
   textOptions = this.overlayContainer.all(by.css('.mat-option-text'));
   checkboxOptions = this.overlayContainer.all(
     by.css('mat-option mat-pseudo-checkbox')

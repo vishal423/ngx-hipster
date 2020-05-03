@@ -1,12 +1,12 @@
 import { browser, logging } from 'protractor';
 
+import { waitAndClick } from '../util';
 import { HeaderPage } from '../header.po';
 import { LoginPage } from '../login/login.po';
 import { MovieListPage } from './movie-list.po';
 import { SidenavPage } from '../sidenav.po';
 import { MovieDetailPage } from './movie-detail.po';
 import { MovieDeletePage } from './movie-delete.po';
-import { waitAndClick } from '../util';
 
 describe('Movie tests', () => {
   let headerPage: HeaderPage;
