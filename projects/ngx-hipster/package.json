@@ -24,12 +24,12 @@
     "postbuild": "yarn copy:schemas && yarn copy:files && yarn copy:collection && yarn copy:prettier"
   },
   "peerDependencies": {
-    "@angular/common": "^9.1.0",
-    "@angular/core": "^9.1.0"
+    "@angular/common": "^9.1.4",
+    "@angular/core": "^9.1.4"
   },
   "dependencies": {
     "parse5": "^5.0.2",
-    "prettier": "^2.0.2"
+    "prettier": "^2.0.5"
   },
   "devDependencies": {
     "@types/parse5": "^5.0.2"
