@@ -4,6 +4,8 @@ All notable changes to the "ngx-hipster" project will be documented in this file
 
 ## [Unreleased]
 
+## [0.7.0] - 2020-05-03
+
 ### Added
 
 - Generate `e2e` tests to verify the application layout and login support (`Session` and `OIDC`).
